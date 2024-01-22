@@ -19,7 +19,7 @@ satisfy (
 
 #La femme qui porte un t-shirt blanc est à côté de la femme qui aime le vin Italien
 satisfy (
-    imply(shirt[3] == i, (wine[4] == +1) | (wine[4] == i-1)) for i in range(5)
+    imply(shirt[3] == i, (wine[4] == i+1) | (wine[4] == i-1)) for i in range(5)
 )
 
 #Mme Miller se situe entre Mme Davis et Mme Brown

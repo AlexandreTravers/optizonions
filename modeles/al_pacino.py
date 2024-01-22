@@ -72,8 +72,7 @@ if solve(sols=ALL) :
     print("Number of solutions: ", n_solutions())
 
 if solve(sols=ALL) is SAT:
-    for i in range(n_solutions()): 
-        print(f" Heure : {values(time, sols=i)}")
-        print(f" Jour : {values(day, sols=i)}")
-        print(f" Film : {values(film, sols=i)}")
+    print(f" Heure : {values(time)}")
+    print(f" Jour : {values(day)}")
+    print(f" Film : {values(film)}")
 

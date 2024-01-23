@@ -71,7 +71,7 @@ satisfy (
 if solve(sols=ALL) :
     print("Number of solutions: ", n_solutions())
 
-if solve(sols=ALL) is SAT:
+if solve() is SAT:
     print(f" Heure : {values(time)}")
     print(f" Jour : {values(day)}")
     print(f" Film : {values(film)}")

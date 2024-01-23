@@ -5,7 +5,7 @@ def al_pacinoCon(datas):
     time = VarArray(size = 5, dom=range(5))
     day = VarArray(size = 5, dom=range(5))
     film = VarArray(size = 5, dom=range(5))
-    matrice = [name, time, day, film]
+    matrice = [name, film, day, time]
 
     #contraintes globales
     satisfy(
@@ -30,18 +30,20 @@ def al_pacinoCon(datas):
         ((film[0] == day[0]) & (film[4] == day[4])) | ((film[0] == day[4]) & (film[4] == day[0]))
     )
 
-    for dataRow in range(len(datas)):
-        for dataColumn in range(len(datas[dataRow])):
-            for matrixRow in range(len(datas[dataRow][dataColumn])):
-                for matrixColumn in range(len(datas[dataRow][dataColumn][matrixRow])):
-                    if(datas[dataRow][dataColumn][matrixRow][matrixColumn] == -1):
-                        satisfy(
-                            matrice[dataRow][matrixRow] != matrice[dataColumn][matrixColumn]
+    count = 0
+    for i in range (3):
+        for j in range (i+1,4):           
+            for matrixRow in range(len(datas[count])):
+                for matrixColumn in range(len(datas[count][matrixRow])):                    
+                    if datas[count][matrixRow][matrixColumn] == -1 :
+                        satisfy (
+                            matrice[i][matrixRow] != matrice[j][matrixColumn]
                         )
-                    elif(datas[dataRow][dataColumn][matrixRow][matrixColumn] == 1):
-                        satisfy(
-                            matrice[dataRow][matrixRow] == matrice[dataColumn][matrixColumn]
+                    if datas[count][matrixRow][matrixColumn] == 1 :
+                        satisfy (
+                            matrice[i][matrixRow] == matrice[j][matrixColumn]
                         )
+            count += 1
 
     if solve() is SAT:
         return True

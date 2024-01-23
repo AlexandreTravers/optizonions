@@ -1,4 +1,4 @@
-from optizonions.modeles.al_pacinoPackage.contrainte1 import al_pacinoCon
+from al_pacinoPackage.contrainte1 import al_pacinoCon
 
 """
 matrix = [[[-1, 1, 0],
@@ -57,8 +57,11 @@ matrix = [[[-1, 1, -1, -1, -1],
           [-1, -1, -1, 1, -1],
           [-1, -1, -1, -1, 1]]]
 
-datas = [[matrix[0], matrix[1], matrix[2]], [matrix[3], matrix[4]], [matrix[5]]]
+def transposée (matrix) :
+    resultat = list(zip(*matrix))
+    return resultat
 
+datas = [matrix[0], matrix[1], matrix[2],transposée(matrix[5]), transposée(matrix[3]),transposée(matrix[4])]
 print(al_pacinoCon(datas))
 
 #print(al_pacinoCon(matrix))

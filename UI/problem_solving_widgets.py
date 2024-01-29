@@ -25,11 +25,13 @@ class Grid(QWidget):
         self.parent = parent
         
         grid_layout = QGridLayout()
-
+        self.grids = []
         pb1 = ProblemGrid(self, contraintes[0], contraintes[1])
         pb2 = ProblemGrid(self, contraintes[0], contraintes[2], has_left_grid = True)
         pb3 = ProblemGrid(self, contraintes[3], contraintes[1], has_top_grid = True)
-        
+        self.grids.append(pb1)
+        self.grids.append(pb2)
+        self.grids.append(pb3)
         grid_layout.addWidget(pb1, 0, 0)
         grid_layout.addWidget(pb2, 0, 1)
         grid_layout.addWidget(pb3, 1, 0)
@@ -41,19 +43,34 @@ class Grid(QWidget):
         self.indices_widget = IndicesWidget(self, indices)
         grid_layout.addWidget(self.indices_widget, 3, 2)
 
-
+        self.check_button = CheckButton(self)
+        grid_layout.addWidget(self.check_button, 4, 2)
 
         self.setLayout(grid_layout)
 
     def updatePosLabel(self, row, col):
         self.pos_label.setText(f"({row},{col})")
+
+    def allGridsToMatrix(self):
+        print("CHECK SOLUTION\n\n")
+        grids = []
+        for g in self.grids:
+            grids.append(g.toMatrix())
+        print("FIN DE CHECK SOLUTION\n\n")
+
+        return grids
         
+
 
 class ProblemGrid(QWidget):
     def __init__(self, parent, contrainte1, contrainte2, has_left_grid = False, has_top_grid = False):
         super(ProblemGrid, self).__init__()
         self.parent = parent
         self.buttons = []
+        self.nom_contrainte1 = contrainte1[0]
+        self.nom_contrainte2 = contrainte2[0]
+        self.contrainte1 = contrainte1
+        self.contrainte2 = contrainte2
         self.rows = len(contrainte1)
         self.cols = len(contrainte2)
         self.authorize_simulation = True
@@ -62,12 +79,12 @@ class ProblemGrid(QWidget):
         for j in range(0, len(contrainte1)):
             if not has_left_grid:
                 label_contrainte_1 = QLabel()
-                label_contrainte_1.setText(contrainte1[j])
+                label_contrainte_1.setText(contrainte1[1][j])
                 grid_layout.addWidget(label_contrainte_1, j + 1, 0)
             for k in range(0, len(contrainte2)):
                 if not has_top_grid:
                     label_contrainte_2 = QLabel()
-                    label_contrainte_2.setText(contrainte2[k])
+                    label_contrainte_2.setText(contrainte2[1][k])
                     grid_layout.addWidget(label_contrainte_2, 0, k + 1)
 
                 button = GridButton(self, k + 1, j + 1)
@@ -130,6 +147,8 @@ class ProblemGrid(QWidget):
         self.parent.updatePosLabel(row, col)    
 
     def toMatrix(self):
+        contraintes = (self.nom_contrainte1, self.nom_contrainte2)
+        
         matrix = []
         for i in range(0, self.rows):
             matrix_row = []
@@ -137,11 +156,31 @@ class ProblemGrid(QWidget):
                 matrix_row.append(self.buttons[i * self.cols + j].stateToString())
             matrix.append(matrix_row)
         
-        for m in matrix: 
+        print(f"MATRICE : {self.nom_contrainte1} X {self.nom_contrainte2}")
+        for m in matrix:
             print(f"\n{m}")
-        
-        
 
+        return contraintes, matrix
+        
+        
+class CheckButton(QPushButton):
+    def __init__(self, parent):
+        super(CheckButton, self).__init__()
+        self.parent = parent
+
+        self.setMinimumSize(QSize(192, 48))
+        self.setMaximumSize(QSize(192, 48))
+        
+        self.mousePressEvent = self.checkSolution
+        self.setText("Check solution")
+        self.setStyleSheet(stylesheets.ProblemCreationSpriteSheets().getProblemManagerButton())
+
+    def checkSolution(self, event):
+        grids = self.parent.allGridsToMatrix()
+        """print(f"MATRICE : {self.nom_contrainte1} X {self.nom_contrainte2}")
+        for g in grids:
+            print(f"\n{g}")"""
+        
 
 class GridButton(QPushButton):
     def __init__(self, parent, row, col, round_type = stylesheets.GridButtonType.NORMAL):

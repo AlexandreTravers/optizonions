@@ -14,8 +14,10 @@ class ProblemWindow(QMainWindow):
         self.setStyleSheet("background-color: rgba(240,230,205,255);") 
         self.setWindowTitle("OPTIZONIONS - Des problemes et des solutions")
 
-        contraintes = [["Anglais", "Francais", "Allemand", "Espagnol"], ["A", "B", "C", "D"], 
-                       ["1", "2", "3", "4"], ["Rouge", "Bleu", "Vert", "Jaune"]]
+        
+        
+        contraintes = [("Nationalite", ["Anglais", "Francais", "Allemand", "Espagnol"]), ("Lettre", ["A", "B", "C", "D"]), 
+                       ("Chiffre", ["1", "2", "3", "4"]), ("Couleur", ["Rouge", "Bleu", "Vert", "Jaune"])]
         indices = ["Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
                    "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
                    "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",

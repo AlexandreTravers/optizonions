@@ -46,3 +46,19 @@ class AddvaleurButton(QPushButton):
 
     def addValeur(self, event):
         self.parent.addValeur()
+
+class CheckSolvabiliteButton(QPushButton):
+    def __init__(self, parent):
+        super(CheckSolvabiliteButton, self).__init__()
+        self.parent = parent
+        self.setMinimumSize(192, 48)
+        self.setMaximumSize(192, 48)
+        self.setText("Check solvabilité")
+        self.setStyleSheet(stylesheets.ProblemCreationSpriteSheets().getProblemManagerButton())
+
+        self.mousePressEvent = self.addValeur
+
+    def checkSolvabilite(self, event):
+        self.parent.checkSolvabilite
+
+

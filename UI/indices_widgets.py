@@ -72,6 +72,7 @@ class IndicesDisplay(QWidget):
     def addIndice(self, indice):
         self.scroll_layout.addWidget(indice)
 
+
     def generateIndices(self):
         indices = []
         for i in reversed(range(self.scroll_layout.count())): 
@@ -79,8 +80,9 @@ class IndicesDisplay(QWidget):
         return indices
 
     def reset(self, indices):
-        for i in reversed(range(self.layout.count())): 
-            self.layout.itemAt(i).widget().setParent(None)
+        for i in reversed(range(self.scroll_layout.count())):
+            self.scroll_layout.itemAt(i).widget().setParent(None)
+
         for i in indices:
             self.addIndice(i)
 
@@ -94,15 +96,19 @@ class IndiceManuel(QWidget):
         label.setText(self.indice_text)
         label.setStyleSheet("QLabel{font:15px;}")
 
+        self.contraintesManager = ContraintesManager(self, ["TEST1","TEST2","TEST3","TEST4"])
+        
+
         self.remove_bouton = QPushButton()
-        self.remove_bouton.setMinimumSize(25, 25)
-        self.remove_bouton.setMaximumSize(25, 25)
+        self.remove_bouton.setMinimumSize(30, 30)
+        self.remove_bouton.setMaximumSize(30, 30)
         self.remove_bouton.setText("-")
         self.remove_bouton.setStyleSheet(stylesheets.ProblemCreationSpriteSheets().getProblemManagerButton())
         self.remove_bouton.mousePressEvent = self.removeIndiceManuel
 
-        self.layout.addWidget(label)
         self.layout.addWidget(self.remove_bouton)
+        self.layout.addWidget(label)
+        self.layout.addWidget(self.contraintesManager)
         self.layout.addStretch(1)
         self.setLayout(self.layout)
 
@@ -112,6 +118,102 @@ class IndiceManuel(QWidget):
     def getIndice(self):
         return self.indice_text
         
+class ContraintesManager(QWidget):
+    def __init__(self, parent, champs):
+        super(ContraintesManager, self).__init__()
+        self.parent = parent
+        self.layout = QHBoxLayout()
+        self.champs = champs
+
+        self.contraintes = []
+        self.contraintes.append(Contrainte(self, self.champs))
+        self.layout.addWidget(self.contraintes[0])
+
+        self.setLayout(self.layout)
+
+    def addContrainte(self):
+        self.contraintes.append(Contrainte(self, self.champs))
+        self.layout.addWidget(self.contraintes[len(self.contraintes) - 1])
+
+    def removeContrainte(self, contrainte):
+        for i in range (0, len(self.contraintes) - 1):
+            if contrainte == self.contraintes[i]:
+                del self.contraintes[i + 1]
+                self.layout.itemAt(i + 1).widget().setParent(None)
+
+    def isLastContrainte(self, contrainte):
+        for i in range (0, len(self.contraintes)):
+            if contrainte == self.contraintes[i]:
+                return i == len(self.contraintes) - 1
+
+class Contrainte(QWidget):
+    def __init__(self, parent, champs):
+        super(Contrainte, self).__init__()
+        self.parent = parent
+        self.has_next = False
+        self.layout = QHBoxLayout()
+        self.lvalue = QComboBox()
+        self.lvalue.setStyleSheet(stylesheets.ProblemCreationSpriteSheets().getComboboxStylesheet())
+        self.lvalue.setMinimumHeight(30)
+        self.lvalue.setMaximumHeight(30)
+        self.lvalue.setMinimumWidth(120)
+        self.lvalue.setMaximumWidth(120)
+        self.lvalue.clear()
+        self.lvalue.addItem("?")
+        for c in champs:
+            self.lvalue.addItem(c)
+
+        self.operation = QComboBox()
+        self.operation.setStyleSheet(stylesheets.ProblemCreationSpriteSheets().getComboboxStylesheet())
+        self.operation.setMinimumHeight(30)
+        self.operation.setMaximumHeight(30)
+        self.operation.setMinimumWidth(120)
+        self.operation.setMaximumWidth(120)
+        self.operation.clear()
+        self.operation.addItem("==")
+        self.operation.addItem("!=")
+
+        self.rvalue = QComboBox()
+        self.rvalue.setStyleSheet(stylesheets.ProblemCreationSpriteSheets().getComboboxStylesheet())
+        self.rvalue.setMinimumHeight(30)
+        self.rvalue.setMaximumHeight(30)
+        self.rvalue.setMinimumWidth(120)
+        self.rvalue.setMaximumWidth(120)
+        self.rvalue.clear()
+        self.rvalue.addItem("?")
+        for c in champs:
+            self.rvalue.addItem(c)
+
+        self.layout.addWidget(self.lvalue)
+        self.layout.addWidget(self.operation)
+        self.layout.addWidget(self.rvalue)
+
+        self.add_bouton = QPushButton()
+        self.add_bouton.setMinimumSize(30, 30)
+        self.add_bouton.setMaximumSize(30, 30)
+        self.add_bouton.setText("+")
+        self.add_bouton.setStyleSheet(stylesheets.ProblemCreationSpriteSheets().getProblemManagerButton())
+        self.add_bouton.mousePressEvent = self.addContrainte
+        self.layout.addWidget(self.add_bouton)
+        self.setLayout(self.layout)
+
+
+    def addContrainte(self, event):
+        if not self.has_next:
+            if event.button() == Qt.LeftButton:
+                self.add_bouton.setMinimumSize(50, 30)
+                self.add_bouton.setMaximumSize(50, 30)
+                self.add_bouton.setText("ET")
+                self.parent.addContrainte()
+                self.has_next = True
+        else:
+            if event.button() == Qt.MiddleButton:
+                self.parent.removeContrainte(self)
+                if self.parent.isLastContrainte(self):
+                    self.add_bouton.setMinimumSize(30, 30)
+                    self.add_bouton.setMaximumSize(30, 30)
+                    self.add_bouton.setText("+")
+                    self.has_next = False
 
 class VerbeIndice(QWidget):
     def __init__(self, parent):

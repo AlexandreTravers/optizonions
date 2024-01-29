@@ -52,11 +52,9 @@ class Grid(QWidget):
         self.pos_label.setText(f"({row},{col})")
 
     def allGridsToMatrix(self):
-        print("CHECK SOLUTION\n\n")
         grids = []
         for g in self.grids:
             grids.append(g.toMatrix())
-        print("FIN DE CHECK SOLUTION\n\n")
 
         return grids
         
@@ -176,10 +174,9 @@ class CheckButton(QPushButton):
         self.setStyleSheet(stylesheets.ProblemCreationSpriteSheets().getProblemManagerButton())
 
     def checkSolution(self, event):
+        print("CHECK SOLUTION\n\n")
         grids = self.parent.allGridsToMatrix()
-        """print(f"MATRICE : {self.nom_contrainte1} X {self.nom_contrainte2}")
-        for g in grids:
-            print(f"\n{g}")"""
+        print("CHECK SOLUTION\n\n")
         
 
 class GridButton(QPushButton):

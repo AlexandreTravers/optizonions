@@ -152,6 +152,12 @@ class GridButton(QPushButton):
 
         self.setMinimumSize(QSize(50, 50))
         self.setMaximumSize(QSize(50, 50))
+
+        self.updateTimer = QTimer(self)
+        self.updateTimer.setSingleShot(True)
+        self.updateTimer.timeout.connect(self.handleUpdate)
+        self.pendingState = None
+
     
         layout = QVBoxLayout()
         layout.setAlignment(Qt.AlignCenter)
@@ -167,13 +173,17 @@ class GridButton(QPushButton):
         if obj == self and self.state == State.NONE:
             if event.type() == QtCore.QEvent.HoverEnter:
                 if self.parent.authorize_simulation:
-                    self.simulateState(True)
-                    self.parent.simulateAll(self, True)
+                    self.pendingState = True
+                    self.startTimer()
+                    #self.simulateState(True)
+                    #self.parent.simulateAll(self, True)
                     self.updatePosLabel(self.row, self.col)
 
             elif event.type() == QtCore.QEvent.HoverLeave:
+                self.pendingState = False
+                self.startTimer()
                 self.clear()
-                self.parent.simulateAll(self, False)
+                #self.parent.simulateAll(self, False)
                 self.updatePosLabel(0, 0)
 
         return super(QPushButton, self).eventFilter(obj, event)
@@ -195,6 +205,22 @@ class GridButton(QPushButton):
             text = ""
 
         self.createLabel(text, False)
+
+
+    def startTimer(self):
+        if not self.updateTimer.isActive():
+            self.updateTimer.start(10)  # 100 ms delay
+
+    def handleUpdate(self):
+        if self.pendingState is not None:
+            if self.pendingState:
+                self.simulateState(True)
+                self.parent.simulateAll(self, True)
+            else:
+                self.clear()
+                self.parent.simulateAll(self, False)
+            self.updatePosLabel(self.row, self.col)
+            self.pendingState = None
 
 
     def manualSwitchState(self, state):

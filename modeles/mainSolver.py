@@ -2,27 +2,8 @@ from al_pacinoPackage import contrainte1,contrainte2,contrainte3,contrainte4,con
 from computerPackage import contrainte1 as comc1, contrainte2 as comc2,contrainte3 as comc3, contrainte4 as comc4
 from pycsp3 import *
 
-"""
-matrix = [[[-1, 1, 0],
-          [1, 0, -1],
-          [0, 0, -1]],
-          [[1, -1, -1],
-          [-1, 0, 0],
-          [-1, 0, 0]],
-          [[1, -1, -1],
-          [-1, 0, 0],
-          [-1, 0, 0]],
-          [[1, -1, -1],
-          [-1, 0, 0],
-          [-1, 0, 0]],
-          [[1, -1, -1],
-          [-1, 0, 0],
-          [-1, 0, 0]],
-          [[1, -1, -1],
-          [-1, 0, 0],
-          [-1, 0, 0]]]
-"""
 
+"""
 matrix = [[[-1, 1, -1, -1, -1],
           [-1, -1, -1, 1, -1],
           [-1, -1, 1, -1, -1],
@@ -58,7 +39,7 @@ matrix = [[[-1, 1, -1, -1, -1],
           [-1, 1, -1, -1, -1],
           [-1, -1, -1, 1, -1],
           [-1, -1, -1, -1, 1]]]
-
+"""
 def transposée (matrix) :
     resultat = list(zip(*matrix))
     return resultat

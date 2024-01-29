@@ -101,7 +101,7 @@ class ProblemCreationSpriteSheets():
                 border: 2px solid #DB6A23;
                 border-radius: 8px;
                 padding: 0px;
-                font: bold 24px;
+                font: bold 20px;
             }
             
             QPushButton:hover {

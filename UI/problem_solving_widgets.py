@@ -34,11 +34,13 @@ class Grid(QWidget):
         grid_layout.addWidget(pb2, 0, 1)
         grid_layout.addWidget(pb3, 1, 0)
         
+
         self.pos_label = QLabel()
-        grid_layout.addWidget(self.pos_label, 2,2)
+        grid_layout.addWidget(self.pos_label, 2, 2)
 
         self.indices_widget = IndicesWidget(self, indices)
         grid_layout.addWidget(self.indices_widget, 3, 2)
+
 
 
         self.setLayout(grid_layout)
@@ -54,6 +56,7 @@ class ProblemGrid(QWidget):
         self.buttons = []
         self.rows = len(contrainte1)
         self.cols = len(contrainte2)
+        self.authorize_simulation = True
 
         grid_layout = QGridLayout()
         for j in range(0, len(contrainte1)):
@@ -92,6 +95,7 @@ class ProblemGrid(QWidget):
         self.toMatrix()
                     
     def simulateAll(self, button, state):
+        self.authorize_simulation = False
         for b in self.buttons:
             if (b.row == button.row and not b.col == button.col) or (not b.row == button.row and b.col == button.col) :
                 if state:
@@ -99,6 +103,7 @@ class ProblemGrid(QWidget):
                 else:
                     b.clear()
                     b.resetLabel()
+        self.authorize_simulation = True
 
     def checkRow(self, button):
         for b in self.buttons:
@@ -161,9 +166,10 @@ class GridButton(QPushButton):
     def eventFilter(self, obj, event):
         if obj == self and self.state == State.NONE:
             if event.type() == QtCore.QEvent.HoverEnter:
-                self.simulateState(True)
-                self.parent.simulateAll(self, True)
-                self.updatePosLabel(self.row, self.col)
+                if self.parent.authorize_simulation:
+                    self.simulateState(True)
+                    self.parent.simulateAll(self, True)
+                    self.updatePosLabel(self.row, self.col)
 
             elif event.type() == QtCore.QEvent.HoverLeave:
                 self.clear()
@@ -287,16 +293,23 @@ class IndicesWidget(QWidget):
         self.scroll_layout = QVBoxLayout(self.scroll_content)
         self.scroll_layout.setAlignment(Qt.AlignTop)
         self.scroll_content.setLayout(self.scroll_layout)
+        print(indices)
         for i in indices:
-            for i_ in i:
+            indice = QLabel()
+            indice.setStyleSheet("QLabel{font:16px;}")
+            indice.setText(i)
+            self.scroll_layout.addWidget(indice)            
+            """for i_ in i:
                 if len(i_) > 0:
                     indice = QLabel()
                     indice.setStyleSheet("QLabel{font:16px;}")
                     indice.setText(i_[0])
-                    self.scroll_layout.addWidget(indice)
+                    self.scroll_layout.addWidget(indice)"""
         self.scroll.setWidget(self.scroll_content)
         self.scroll.setStyleSheet(stylesheets.ProblemCreationSpriteSheets().getScrollerStylesheet())
         self.setLayout(self.layout)
+
+
 
 
 class State(Enum):

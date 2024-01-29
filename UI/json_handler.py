@@ -42,10 +42,11 @@ class JsonHandler():
                 "intitule": "principale",
                 "champs": champs_principale
             }
-
-        filename = 'problem_logique.json'
+        
+        return problem
+        """filename = 'problem_logique.json'
         with open(filename, 'w') as file:
-            json.dump(problem, file, indent=4)
+            json.dump(problem, file, indent=4)"""
 
 
     def loadJson(self):

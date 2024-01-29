@@ -3,7 +3,7 @@ from PyQt5 import QtCore, QtGui
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 import sys
-from jsonHandler import JsonHandler
+from json_handler import *
 from enum import Enum
 import stylesheets
 
@@ -70,6 +70,9 @@ class ProblemCreationWidget(QWidget):
         for i in indices:
             print(i)
         self.parent.switchToSolving(contraintes, indices)
+        
+        
+    def exportProblemToJSON(self):
         json_handler = JsonHandler()
         listToJsoned = []
         listToJsonedSecondary = []
@@ -85,7 +88,7 @@ class ProblemCreationWidget(QWidget):
         print("main",listToJsoned)
         print("secondary",listToJsonedSecondary)
 
-        json_handler.createJson(listToJsoned,listToJsonedSecondary)
+        return json_handler.createJson(listToJsoned,listToJsonedSecondary)
 
 
 class QuantityWidget(QWidget):

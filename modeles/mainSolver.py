@@ -1,4 +1,5 @@
 from al_pacinoPackage import contrainte1,contrainte2,contrainte3,contrainte4,contrainte5,contrainte6,contrainte7
+from computerPackage import contrainte1 as comc1, contrainte2 as comc2
 from pycsp3 import *
 
 """
@@ -78,5 +79,3 @@ resultats.append(contrainte6.al_pacinoCon(datas))
 clear()
 resultats.append(contrainte7.al_pacinoCon(datas))
 print(resultats)
-
-#print(al_pacinoCon(matrix))

@@ -3,6 +3,7 @@ from PyQt5 import QtCore, QtGui
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 import sys
+from jsonHandler import JsonHandler
 from enum import Enum
 import stylesheets
 
@@ -69,6 +70,22 @@ class ProblemCreationWidget(QWidget):
         for i in indices:
             print(i)
         self.parent.switchToSolving(contraintes, indices)
+        json_handler = JsonHandler()
+        listToJsoned = []
+        listToJsonedSecondary = []
+        class_name = type(self.entites.entites[0].entite).__name__
+        print(class_name)
+        if isinstance(self.entites.entite_mere, CreationEntiteMere):
+            listToJsoned.append(self.entites.entite_mere)
+        for secEntity in self.entites.entites:
+            if isinstance(secEntity, LayoutedEntiteWidget):
+                print("COUCOU")
+                listToJsonedSecondary.append(secEntity.entite)
+        
+        print("main",listToJsoned)
+        print("secondary",listToJsonedSecondary)
+
+        json_handler.createJson(listToJsoned,listToJsonedSecondary)
 
 
 class QuantityWidget(QWidget):
@@ -426,6 +443,7 @@ class CreationValeurEntiteMere(QWidget):
         self.champ = ChampValeur(self, default_text)
         self.creations_indices = []
         
+        
 
         index_indice = 0
         for e in entites:
@@ -502,6 +520,8 @@ class CreationValeur(QWidget):
         default_text = "Champ" + str(index)
         self.champ = ChampValeur(self, default_text)
         self.creations_indices = []
+
+        self.text_content = str(index)
 
         self.layout.addWidget(self.champ)
         self.setLayout(self.layout)

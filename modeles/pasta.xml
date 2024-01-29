@@ -1,0 +1,47 @@
+<instance format="XCSP3" type="CSP">
+  <variables>
+    <array id="shirt" size="[5]"> 0..4 </array>
+    <array id="name" size="[5]"> 0..4 </array>
+    <array id="surname" size="[5]"> 0..4 </array>
+    <array id="pasta" size="[5]"> 0..4 </array>
+    <array id="wine" size="[5]"> 0..4 </array>
+    <array id="age" size="[5]"> 0..4 </array>
+  </variables>
+  <constraints>
+    <allDifferent> shirt[] </allDifferent>
+    <allDifferent> name[] </allDifferent>
+    <allDifferent> surname[] </allDifferent>
+    <allDifferent> pasta[] </allDifferent>
+    <allDifferent> wine[] </allDifferent>
+    <allDifferent> age[] </allDifferent>
+    <group>
+      <intension> imp(eq(shirt[3],%0),or(eq(wine[4],%1),eq(wine[4],%2))) </intension>
+      <args> 0 1 -1 </args>
+      <args> 1 2 0 </args>
+      <args> 2 3 1 </args>
+      <args> 3 4 2 </args>
+      <args> 4 5 3 </args>
+    </group>
+    <intension> and(lt(surname[1],surname[3]),gt(surname[0],surname[3])) </intension>
+    <intension> eq(age[0],2) </intension>
+    <intension> eq(wine[2],pasta[0]) </intension>
+    <intension> eq(wine[1],0) </intension>
+    <intension> eq(name[0],add(age[1],1)) </intension>
+    <intension> and(gt(shirt[0],surname[1]),lt(shirt[0],name[1])) </intension>
+    <intension> gt(name[1],shirt[2]) </intension>
+    <intension> eq(shirt[4],sub(age[1],1)) </intension>
+    <intension> eq(surname[0],sub(name[2],1)) </intension>
+    <intension> or(eq(sub(name[4],name[3]),1),eq(sub(name[3],name[4]),1)) </intension>
+    <intension> eq(surname[2],4) </intension>
+    <intension> eq(shirt[3],surname[4]) </intension>
+    <intension> and(gt(pasta[1],wine[4]),lt(pasta[1],pasta[3])) </intension>
+    <intension> eq(name[3],sub(age[0],1)) </intension>
+    <intension> eq(age[0],pasta[2]) </intension>
+    <intension> eq(age[2],pasta[1]) </intension>
+    <intension> gt(age[3],shirt[2]) </intension>
+    <intension> lt(shirt[2],wine[0]) </intension>
+    <intension> or(eq(surname[4],sub(age[0],1)),eq(surname[4],add(age[0],1))) </intension>
+    <intension> eq(shirt[0],1) </intension>
+    <intension> and(gt(wine[0],name[4]),lt(wine[0],wine[3])) </intension>
+  </constraints>
+</instance>

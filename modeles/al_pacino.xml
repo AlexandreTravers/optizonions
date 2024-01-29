@@ -1,0 +1,57 @@
+<instance format="XCSP3" type="CSP">
+  <variables>
+    <array id="time" size="[5]"> 0..4 </array>
+    <array id="day" size="[5]"> 0..4 </array>
+    <array id="film" size="[5]"> 0..4 </array>
+    <var id="x0" note="contrainte: les films montrés avant 8h l'ont été a des jours consécutifs"> 0..4 </var>
+    <array id="aux_gb" note="aux_gb[i] is the ith auxiliary variable having been automatically introduced" size="[3]"> 0..4 </array>
+    <var id="x1" note="pareils pour ceux sortis après 8h"> 0..4 </var>
+    <var id="x2"> 0..4 </var>
+    <var id="h" note="contrainte : Un homme et une femme sont aller voir une séance avant 8h mais ce n'était pas en milieu de semaine - Je prend en compte que milieu de semaine c’est mercredi"> 1 2 </var>
+    <var id="f"> 0 3 4 </var>
+  </variables>
+  <constraints>
+    <allDifferent> time[] </allDifferent>
+    <allDifferent> day[] </allDifferent>
+    <allDifferent> film[] </allDifferent>
+    <intension> and(ne(film[0],0),ne(film[4],0)) </intension>
+    <intension> or(and(eq(film[0],day[0]),eq(film[4],day[4])),and(eq(film[0],day[4]),eq(film[4],day[0]))) </intension>
+    <intension> eq(film[1],time[3]) </intension>
+    <intension> imp(eq(time[0],day[0]),and(eq(aux_gb[0],time[1]),eq(abs(x0),1))) </intension>
+    <group>
+      <intension> imp(eq(time[0],%0),and(eq(aux_gb[0],time[1]),eq(dist(x0,%1),1))) </intension>
+      <args> day[1] 1 </args>
+      <args> day[2] 2 </args>
+      <args> day[3] 3 </args>
+      <args> day[4] 4 </args>
+    </group>
+    <element>
+      <list> day[] </list>
+      <index> x0 </index>
+      <value> aux_gb[0] </value>
+    </element>
+    <intension> imp(eq(time[2],day[0]),and(eq(aux_gb[1],time[3]),eq(aux_gb[2],time[4]),lt(sub(abs(x1),abs(x2)),4))) </intension>
+    <group>
+      <intension> imp(eq(time[2],%0),and(eq(aux_gb[1],time[3]),eq(aux_gb[2],time[4]),lt(sub(dist(x1,%1),dist(x2,%1)),4))) </intension>
+      <args> day[1] 1 </args>
+      <args> day[2] 2 </args>
+      <args> day[3] 3 </args>
+      <args> day[4] 4 </args>
+    </group>
+    <group>
+      <element>
+        <list> day[] </list>
+        <index> %0 </index>
+        <value> %1 </value>
+      </element>
+      <args> x1 aux_gb[1] </args>
+      <args> x2 aux_gb[2] </args>
+    </group>
+    <intension> or(and(eq(time[0],h),eq(time[1],f)),and(eq(time[0],f),eq(time[1],h))) </intension>
+    <intension> and(ne(time[0],day[2]),ne(time[1],day[2])) </intension>
+    <intension> and(eq(film[2],2),eq(time[4],2),eq(film[3],time[1])) </intension>
+    <intension> and(ne(day[1],0),ne(day[1],3),ne(day[3],0),ne(day[3],3)) </intension>
+    <intension> eq(film[0],time[2]) </intension>
+    <intension> eq(day[3],time[1]) </intension>
+  </constraints>
+</instance>

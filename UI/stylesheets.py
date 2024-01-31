@@ -74,7 +74,7 @@ class GridButtonStylesheets():
         return self.simulated_label_style_sheet
     
     
-class ProblemCreationSpriteSheets():
+class MainSpritesheets():
     def __init__(self):
         self.text_edit_style_sheet = """
         QTextEdit {

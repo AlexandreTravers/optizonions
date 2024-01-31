@@ -26,9 +26,9 @@ class ProblemCreationWidget(QWidget):
 
 
 
-        self.indices_manuel_creator = IndiceManuelCreator(self)
-        self.layout.addWidget(self.indices_manuel_creator)
-        self.indices_manuels = []
+        self.indice_creator = IndiceCreator(self)
+        self.layout.addWidget(self.indice_creator)
+        self.indices = []
         self.indices_display = IndicesDisplay(self)
         self.layout.addWidget(self.indices_display, 3)
 
@@ -46,22 +46,30 @@ class ProblemCreationWidget(QWidget):
     def addValeur(self):
         self.entites.addValeur()
 
-    def addIndiceManuel(self, indice):
-        indiceManuel = IndiceManuel(self, indice)
-        for i in self.indices_manuels:
-            if i.indice_text == indiceManuel.indice_text:
-                self.indices_manuel_creator.setIndiceValide(False)
+    def getAllValeurs(self):
+        return self.entites.getAllValeurs()
+
+    def addIndice(self, indice):
+        indice = Indice(self, indice, self.getAllValeurs())
+        for i in self.indices:
+            if i.indice_text == indice.indice_text:
+                self.indice_creator.setIndiceValide(False)
                 return
         
-        self.indices_manuel_creator.setIndiceValide(True)
-        self.indices_manuels.append(indiceManuel)
-        self.indices_display.addIndice(self.indices_manuels[len(self.indices_manuels) - 1])
+        self.indice_creator.setIndiceValide(True)
+        self.indices.append(indice)
+        self.indices_display.addIndice(self.indices[len(self.indices) - 1])
     
-    def removeIndiceManuel(self, indice):
-        for i in self.indices_manuels:
+    def updateIndices(self):
+        valeurs = self.entites.getAllValeurs()
+        for i in self.indices:
+            i.updateValeurs(valeurs)
+
+    def removeIndice(self, indice):
+        for i in self.indices:
             if i.indice_text == indice.indice_text:
-                self.indices_manuels.remove(i)
-                self.indices_display.reset(self.indices_manuels)
+                self.indices.remove(i)
+                self.indices_display.reset(self.indices)
                 return
     
     def generateProblem(self):
@@ -148,7 +156,7 @@ class EntiteWidgets(QWidget):
         for entite in self.entites:
             self.scroll_layout.addWidget(entite)
         self.scroll.setWidget(self.scroll_content)
-        self.scroll.setStyleSheet(stylesheets.ProblemCreationSpriteSheets().getScrollerStylesheet())
+        self.scroll.setStyleSheet(stylesheets.MainSpritesheets().getScrollerStylesheet())
         self.setLayout(self.layout)
 
 
@@ -179,8 +187,14 @@ class EntiteWidgets(QWidget):
             index += 1
         
         self.entite_mere.updateValeurs(entite.getValeursText(), index)
-
-
+        self.parent.updateIndices()
+        
+    def getAllValeurs(self):
+        valeurs = []
+        valeurs.extend(self.entite_mere.getValeursText())
+        for e in self.entites:
+            valeurs.extend(e.getValeursText())
+        return valeurs
 
     """##########################"""
     """###### VERBE INDICE ######"""
@@ -205,7 +219,7 @@ class EntiteWidgets(QWidget):
     def generateIndices(self):
         indices = []
         indices.append(self.entite_mere.generateIndices())
-        for im in self.indices_manuels:
+        for im in self.indices:
             indices.append(im)
         return indices
     
@@ -244,9 +258,9 @@ class CreationEntiteMere(QWidget):
         self.entite_nom.setMinimumWidth(150)
         self.entite_nom.setMaximumWidth(150)
         self.entite_nom.setAlignment(Qt.AlignVCenter)
-        self.entite_nom.setStyleSheet(stylesheets.ProblemCreationSpriteSheets().getTextEditStylesheet())
+        self.entite_nom.setStyleSheet(stylesheets.MainSpritesheets().getTextEditStylesheet())
         
-        self.indice = VerbeIndice(self)
+        self.indice = VerbeEntite(self)
 
         self.layout.addWidget(label)
         self.layout.addWidget(self.entite_nom)
@@ -367,9 +381,9 @@ class CreationEntite(QWidget):
         self.entite_nom.setMinimumWidth(150)
         self.entite_nom.setMaximumWidth(150)
         self.entite_nom.setAlignment(Qt.AlignVCenter)
-        self.entite_nom.setStyleSheet(stylesheets.ProblemCreationSpriteSheets().getTextEditStylesheet())
+        self.entite_nom.setStyleSheet(stylesheets.MainSpritesheets().getTextEditStylesheet())
         
-        self.indice = VerbeIndice(self)
+        self.indice = VerbeEntite(self)
 
         self.layout.addWidget(label)
         self.layout.addWidget(self.entite_nom)
@@ -446,16 +460,14 @@ class CreationValeurEntiteMere(QWidget):
         self.champ = ChampValeur(self, default_text)
         self.creations_indices = []
         
-        
-
         index_indice = 0
         for e in entites:
             if e.entiteNom() != self.parent.entiteNom():
                 valeurs = []
                 valeurs.extend(e.getValeursText())
-                creation_indice = CreationIndice(self, index_indice, e.verbe(), valeurs)
+                valeurs_entite_mere = ValeursEntiteMere(self, index_indice, e.verbe(), valeurs)
                 index_indice += 1
-                self.creations_indices.append(creation_indice)
+                self.creations_indices.append(valeurs_entite_mere)
 
         self.layout.addWidget(self.champ)
         for ci in self.creations_indices:
@@ -495,15 +507,15 @@ class CreationValeurEntiteMere(QWidget):
     def addIndice(self, entite, index):
         valeurs = []
         valeurs.extend(entite.getValeursText())
-        creation_indice = CreationIndice(self, index, entite.verbe(), valeurs)
-        self.creations_indices.append(creation_indice)
+        valeurs_entite_mere = ValeursEntiteMere(self, index, entite.verbe(), valeurs)
+        self.creations_indices.append(valeurs_entite_mere)
         self.layout.addWidget(self.creations_indices[len(self.creations_indices) - 1])
 
 
-    def updateIndice(self, verbe_indice, index_indice):
+    def updateIndice(self, verbe_entite, index_indice):
         for ci in self.creations_indices:
             if ci.index_reference == index_indice:
-                ci.updateVerbe(verbe_indice)
+                ci.updateVerbe(verbe_entite)
 
     def generateIndices(self):
         indices = []
@@ -557,7 +569,7 @@ class ChampValeur(QWidget):
         self.valeur_nom.setMinimumWidth(200)
         self.valeur_nom.setMaximumWidth(200)
         self.valeur_nom.setAlignment(Qt.AlignVCenter)
-        self.valeur_nom.setStyleSheet(stylesheets.ProblemCreationSpriteSheets().getTextEditStylesheet())
+        self.valeur_nom.setStyleSheet(stylesheets.MainSpritesheets().getTextEditStylesheet())
         self.valeur_nom.textChanged.connect(self.updateSelfValeur)        
 
         self.layout.addWidget(label)

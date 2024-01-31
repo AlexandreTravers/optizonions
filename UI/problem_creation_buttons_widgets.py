@@ -12,7 +12,7 @@ class GenerateProblemButton(QPushButton):
         self.setMinimumSize(192, 48)
         self.setMaximumSize(192, 48)
         self.setText("Générer problème")
-        self.setStyleSheet(stylesheets.MainSpritesheets().getProblemManagerButton())
+        self.setStyleSheet(stylesheets.MainStylesheets().getProblemButtonStylesheet())
 
         self.mousePressEvent = self.generateProblem
 
@@ -26,7 +26,7 @@ class AddEntiteButton(QPushButton):
         self.setMinimumSize(192, 48)
         self.setMaximumSize(192, 48)
         self.setText("Ajouter entite")
-        self.setStyleSheet(stylesheets.MainSpritesheets().getProblemManagerButton())
+        self.setStyleSheet(stylesheets.MainStylesheets().getProblemButtonStylesheet())
 
         self.mousePressEvent = self.addEntite
 
@@ -40,7 +40,7 @@ class AddvaleurButton(QPushButton):
         self.setMinimumSize(192, 48)
         self.setMaximumSize(192, 48)
         self.setText("Ajouter valeur")
-        self.setStyleSheet(stylesheets.MainSpritesheets().getProblemManagerButton())
+        self.setStyleSheet(stylesheets.MainStylesheets().getProblemButtonStylesheet())
 
         self.mousePressEvent = self.addValeur
 
@@ -54,7 +54,7 @@ class CheckSolvabiliteButton(QPushButton):
         self.setMinimumSize(192, 48)
         self.setMaximumSize(192, 48)
         self.setText("Check solvabilité")
-        self.setStyleSheet(stylesheets.MainSpritesheets().getProblemManagerButton())
+        self.setStyleSheet(stylesheets.MainStylesheets().getProblemButtonStylesheet())
 
         self.mousePressEvent = self.addValeur
 

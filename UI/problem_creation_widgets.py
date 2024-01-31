@@ -156,7 +156,7 @@ class EntiteWidgets(QWidget):
         for entite in self.entites:
             self.scroll_layout.addWidget(entite)
         self.scroll.setWidget(self.scroll_content)
-        self.scroll.setStyleSheet(stylesheets.MainSpritesheets().getScrollerStylesheet())
+        self.scroll.setStyleSheet(stylesheets.MainStylesheets().getScrollerStylesheet())
         self.setLayout(self.layout)
 
 
@@ -258,7 +258,7 @@ class CreationEntiteMere(QWidget):
         self.entite_nom.setMinimumWidth(150)
         self.entite_nom.setMaximumWidth(150)
         self.entite_nom.setAlignment(Qt.AlignVCenter)
-        self.entite_nom.setStyleSheet(stylesheets.MainSpritesheets().getTextEditStylesheet())
+        self.entite_nom.setStyleSheet(stylesheets.MainStylesheets().getTextEditStylesheet())
         
         self.indice = VerbeEntite(self)
 
@@ -381,7 +381,7 @@ class CreationEntite(QWidget):
         self.entite_nom.setMinimumWidth(150)
         self.entite_nom.setMaximumWidth(150)
         self.entite_nom.setAlignment(Qt.AlignVCenter)
-        self.entite_nom.setStyleSheet(stylesheets.MainSpritesheets().getTextEditStylesheet())
+        self.entite_nom.setStyleSheet(stylesheets.MainStylesheets().getTextEditStylesheet())
         
         self.indice = VerbeEntite(self)
 
@@ -569,7 +569,7 @@ class ChampValeur(QWidget):
         self.valeur_nom.setMinimumWidth(200)
         self.valeur_nom.setMaximumWidth(200)
         self.valeur_nom.setAlignment(Qt.AlignVCenter)
-        self.valeur_nom.setStyleSheet(stylesheets.MainSpritesheets().getTextEditStylesheet())
+        self.valeur_nom.setStyleSheet(stylesheets.MainStylesheets().getTextEditStylesheet())
         self.valeur_nom.textChanged.connect(self.updateSelfValeur)        
 
         self.layout.addWidget(label)

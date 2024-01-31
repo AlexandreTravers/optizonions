@@ -366,7 +366,7 @@ class EntiteWidgets(QWidget):
         for entite in self.entites:
             self.scrollLayout.addWidget(entite)
         self.scroll.setWidget(self.scrollContent)
-        self.scroll.setStyleSheet(stylesheets.MainSpritesheets().getScrollerStylsheet())
+        self.scroll.setStyleSheet(stylesheets.MainStylesheets().getScrollerStylsheet())
         self.setLayout(self.layout)
 
     def addEntite(self):
@@ -397,7 +397,7 @@ class CreationEntite(QWidget):
         self.entiteNom.setMinimumWidth(300)
         self.entiteNom.setMaximumWidth(300)
         self.entiteNom.setAlignment(Qt.AlignVCenter)
-        self.entiteNom.setStyleSheet(stylesheets.MainSpritesheets().getTextEditStylesheet())
+        self.entiteNom.setStyleSheet(stylesheets.MainStylesheets().getTextEditStylesheet())
         
         self.layout.addWidget(label)
         self.layout.addWidget(self.entiteNom)
@@ -436,7 +436,7 @@ class CreationValeur(QWidget):
         self.textEdit.setMaximumWidth(400)
         self.textEdit.setAlignment(Qt.AlignVCenter)
 
-        self.textEdit.setStyleSheet(stylesheets.MainSpritesheets().getTextEditStylesheet())
+        self.textEdit.setStyleSheet(stylesheets.MainStylesheets().getTextEditStylesheet())
         self.layout.addWidget(label)
         self.layout.addWidget(self.textEdit)
         self.layout.addStretch(1)
@@ -453,7 +453,7 @@ class AddEntiteButton(QPushButton):
         self.setMinimumSize(256, 64)
         self.setMaximumSize(256, 64)
         self.setText("Ajouter entite")
-        self.setStyleSheet(stylesheets.MainSpritesheets().getProblemManagerButton())
+        self.setStyleSheet(stylesheets.MainStylesheets().getProblemButtonStylesheet())
 
         self.mousePressEvent = self.addEntite
 
@@ -467,7 +467,7 @@ class AddValeurButton(QPushButton):
         self.setMinimumSize(256, 64)
         self.setMaximumSize(256, 64)
         self.setText("Ajouter valeur")
-        self.setStyleSheet(stylesheets.MainSpritesheets().getProblemManagerButton())
+        self.setStyleSheet(stylesheets.MainStylesheets().getProblemButtonStylesheet())
 
         self.mousePressEvent = self.addValeur
 

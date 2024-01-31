@@ -74,7 +74,7 @@ class GridButtonStylesheets():
         return self.simulated_label_style_sheet
     
     
-class MainSpritesheets():
+class MainStylesheets():
     def __init__(self):
         self.text_edit_style_sheet = """
         QTextEdit {
@@ -94,7 +94,7 @@ class MainSpritesheets():
         }
         """
 
-        self.problem_manager_button = """        
+        self.problem_button_style_sheet = """        
         QPushButton {
                 background-color: #DB6A23;
                 color: white;
@@ -186,8 +186,8 @@ class MainSpritesheets():
     def getTextEditStylesheet(self):
         return self.text_edit_style_sheet
 
-    def getProblemManagerButton(self):
-        return self.problem_manager_button
+    def getProblemButtonStylesheet(self):
+        return self.problem_button_style_sheet
     
     def getScrollerStylesheet(self):
         return self.scroller_style_sheet

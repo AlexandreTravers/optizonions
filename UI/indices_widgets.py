@@ -18,14 +18,14 @@ class IndiceCreator(QWidget):
         self.indice.setMinimumWidth(500)
         self.indice.setMaximumWidth(500)
         self.indice.setAlignment(Qt.AlignVCenter)
-        self.indice.setStyleSheet(stylesheets.MainSpritesheets().getTextEditStylesheet())
+        self.indice.setStyleSheet(stylesheets.MainStylesheets().getTextEditStylesheet())
 
         self.add_bouton = QPushButton()
 
         self.add_bouton.setMinimumSize(256, 40)
         self.add_bouton.setMaximumSize(256, 40)
         self.add_bouton.setText("Ajouter indice")
-        self.add_bouton.setStyleSheet(stylesheets.MainSpritesheets().getProblemManagerButton())
+        self.add_bouton.setStyleSheet(stylesheets.MainStylesheets().getProblemButtonStylesheet())
 
         self.add_bouton.mousePressEvent = self.addIndice
 
@@ -65,7 +65,7 @@ class IndicesDisplay(QWidget):
         self.scroll_layout.setAlignment(Qt.AlignTop)
         self.scroll_content.setLayout(self.scroll_layout)
         self.scroll.setWidget(self.scroll_content)
-        self.scroll.setStyleSheet(stylesheets.MainSpritesheets().getScrollerStylesheet())
+        self.scroll.setStyleSheet(stylesheets.MainStylesheets().getScrollerStylesheet())
         
         self.setLayout(self.layout)
 
@@ -102,7 +102,7 @@ class Indice(QWidget):
         self.remove_bouton.setMinimumSize(30, 30)
         self.remove_bouton.setMaximumSize(30, 30)
         self.remove_bouton.setText("-")
-        self.remove_bouton.setStyleSheet(stylesheets.MainSpritesheets().getProblemManagerButton())
+        self.remove_bouton.setStyleSheet(stylesheets.MainStylesheets().getProblemButtonStylesheet())
         self.remove_bouton.mousePressEvent = self.removeIndice
 
         self.layout.addWidget(self.remove_bouton)
@@ -160,7 +160,7 @@ class Contrainte(QWidget):
         self.has_next = False
         self.layout = QHBoxLayout()
         self.lvalue = QComboBox()
-        self.lvalue.setStyleSheet(stylesheets.MainSpritesheets().getComboboxStylesheet())
+        self.lvalue.setStyleSheet(stylesheets.MainStylesheets().getComboboxStylesheet())
         self.lvalue.setMinimumHeight(30)
         self.lvalue.setMaximumHeight(30)
         self.lvalue.setMinimumWidth(120)
@@ -171,7 +171,7 @@ class Contrainte(QWidget):
             self.lvalue.addItem(v)
 
         self.operation = QComboBox()
-        self.operation.setStyleSheet(stylesheets.MainSpritesheets().getComboboxStylesheet())
+        self.operation.setStyleSheet(stylesheets.MainStylesheets().getComboboxStylesheet())
         self.operation.setMinimumHeight(30)
         self.operation.setMaximumHeight(30)
         self.operation.setMinimumWidth(120)
@@ -181,7 +181,7 @@ class Contrainte(QWidget):
         self.operation.addItem("!=")
 
         self.rvalue = QComboBox()
-        self.rvalue.setStyleSheet(stylesheets.MainSpritesheets().getComboboxStylesheet())
+        self.rvalue.setStyleSheet(stylesheets.MainStylesheets().getComboboxStylesheet())
         self.rvalue.setMinimumHeight(30)
         self.rvalue.setMaximumHeight(30)
         self.rvalue.setMinimumWidth(120)
@@ -199,7 +199,7 @@ class Contrainte(QWidget):
         self.add_bouton.setMinimumSize(30, 30)
         self.add_bouton.setMaximumSize(30, 30)
         self.add_bouton.setText("+")
-        self.add_bouton.setStyleSheet(stylesheets.MainSpritesheets().getProblemManagerButton())
+        self.add_bouton.setStyleSheet(stylesheets.MainStylesheets().getProblemButtonStylesheet())
         self.add_bouton.mousePressEvent = self.addContrainte
         self.layout.addWidget(self.add_bouton)
         self.setLayout(self.layout)
@@ -248,7 +248,7 @@ class VerbeEntite(QWidget):
         self.entite_indice.setMinimumWidth(100)
         self.entite_indice.setMaximumWidth(100)
         self.entite_indice.setAlignment(Qt.AlignVCenter)
-        self.entite_indice.setStyleSheet(stylesheets.MainSpritesheets().getTextEditStylesheet())
+        self.entite_indice.setStyleSheet(stylesheets.MainStylesheets().getTextEditStylesheet())
         self.entite_indice.setText("Action")
         self.entite_indice.textChanged.connect(self.modifSelfVerbe)        
         self.layout_indice.addWidget(label_indice)
@@ -274,7 +274,7 @@ class ValeursEntiteMere(QWidget):
         self.label_indice.setText(verbe)
         self.label_indice.setStyleSheet("QLabel{font:16px;}")
         self.entite_indice = QComboBox()
-        self.entite_indice.setStyleSheet(stylesheets.MainSpritesheets().getComboboxStylesheet())
+        self.entite_indice.setStyleSheet(stylesheets.MainStylesheets().getComboboxStylesheet())
         self.entite_indice.setMinimumHeight(30)
         self.entite_indice.setMaximumHeight(30)
         self.entite_indice.setMinimumWidth(120)

@@ -171,7 +171,7 @@ class CheckButton(QPushButton):
         
         self.mousePressEvent = self.checkSolution
         self.setText("Check solution")
-        self.setStyleSheet(stylesheets.MainSpritesheets().getProblemManagerButton())
+        self.setStyleSheet(stylesheets.MainStylesheets().getProblemButtonStylesheet())
 
     def checkSolution(self, event):
         print("CHECK SOLUTION\n\n")
@@ -368,7 +368,7 @@ class IndicesWidget(QWidget):
                     indice.setText(i_[0])
                     self.scroll_layout.addWidget(indice)"""
         self.scroll.setWidget(self.scroll_content)
-        self.scroll.setStyleSheet(stylesheets.MainSpritesheets().getScrollerStylesheet())
+        self.scroll.setStyleSheet(stylesheets.MainStylesheets().getScrollerStylesheet())
         self.setLayout(self.layout)
 
 

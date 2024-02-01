@@ -28,9 +28,9 @@ class ProblemWindow(QMainWindow):
                    "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune"]
         mainWidget = ProblemSolvingWidget(self, contraintes, indices)"""
         #mainWidget = ProblemCreationWidget(self)
-        mainWidget = MainMenu(self)
-        self.mainWidget = mainWidget
-        #self.initProblemCreation()
+        #mainWidget = MainMenu(self)
+        #self.mainWidget = mainWidget
+        self.initProblemCreation()
         container = QWidget()
         container_layout = QHBoxLayout()
         container_layout.addWidget(self.mainWidget)

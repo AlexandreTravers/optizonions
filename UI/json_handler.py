@@ -10,7 +10,7 @@ class JsonHandler():
         self.clicked.connect(self.onClicked)
         '''
 
-    def createJson(self, entities, secondaryEntities):
+    def createJson(self, entities, secondaryEntities, indices):
         problem = {
             "problem": {}
         }
@@ -43,10 +43,26 @@ class JsonHandler():
                 "champs": champs_principale
             }
         
+
+        # Enregistrement des indices
+        indice_list = []
+        for ind in indices:
+            indice_data = {
+                "nomIndice": ind.getIndice(),
+                "contraintes": []
+            }
+            for cont in ind.contraintes_manager.contraintes:
+                contrainte = {
+                    "lvalue": cont.lvalue.currentText(),
+                    "equal": cont.operation.currentText() == "==",
+                    "rvalue": cont.rvalue.currentText()
+                }
+                indice_data["contraintes"].append(contrainte)
+            indice_list.append(indice_data)
+
+        problem["problem"]["indices"] = indice_list
         return problem
-        """filename = 'problem_logique.json'
-        with open(filename, 'w') as file:
-            json.dump(problem, file, indent=4)"""
+      
 
 
     def loadJson(self):

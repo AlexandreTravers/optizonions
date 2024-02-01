@@ -90,13 +90,12 @@ class ProblemCreationWidget(QWidget):
             listToJsoned.append(self.entites.entite_mere)
         for secEntity in self.entites.entites:
             if isinstance(secEntity, LayoutedEntiteWidget):
-                print("COUCOU")
                 listToJsonedSecondary.append(secEntity.entite)
         
         print("main",listToJsoned)
         print("secondary",listToJsonedSecondary)
 
-        return json_handler.createJson(listToJsoned,listToJsonedSecondary)
+        return json_handler.createJson(listToJsoned,listToJsonedSecondary,self.indices)
 
 
 class QuantityWidget(QWidget):

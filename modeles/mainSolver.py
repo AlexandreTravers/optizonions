@@ -44,7 +44,7 @@ class ObjetMatrice:
     def __init__(self, matrice, pb):
         self.matrice = matrice
         self.pb = pb
-        self.result = []
+        self.result = self.main()
 
     def transposée (self,matrix) :
         resultat = list(zip(*matrix))
@@ -142,9 +142,9 @@ class ObjetMatrice:
             resultats.append(contrainte22.pastaCon(datas))
             clear()
         print(resultats)
-        self.result = resultats
+        return resultats
 
-objet = ObjetMatrice([],[])
+
 matrice_exemple = [[[-1, 1, -1, -1, -1],
           [-1, -1, -1, 1, -1],
           [-1, -1, 1, -1, -1],
@@ -182,6 +182,7 @@ matrice_exemple = [[[-1, 1, -1, -1, -1],
           [-1, -1, -1, -1, 1]]]
 
 pb_exemple = 2
+objet = ObjetMatrice(matrice_exemple,pb_exemple)
 objet.setMatrix(matrice_exemple)
 objet.setPb(pb_exemple)
 objet.main()

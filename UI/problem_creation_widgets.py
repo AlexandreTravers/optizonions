@@ -336,7 +336,9 @@ class CreationEntiteMere(QWidget):
         contrainte = []
         for v in self.valeurs:
             contrainte.append(v.getValeur())
-        return contrainte
+
+        set_contrainte = (self.entite_nom , contrainte)
+        return set_contrainte
 
 class LayoutedEntiteWidget(QWidget):
     def __init__(self, parent, valeurs):
@@ -446,7 +448,9 @@ class CreationEntite(QWidget):
         contrainte = []
         for v in self.valeurs:
             contrainte.append(v.getValeur())
-        return contrainte
+        set_contrainte = (self.entite_nom , contrainte)
+        return set_contrainte
+
     
 
 class CreationValeurEntiteMere(QWidget):

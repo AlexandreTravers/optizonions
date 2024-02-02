@@ -30,10 +30,12 @@ class ProblemWindow(QMainWindow):
         #mainWidget = ProblemCreationWidget(self)
         #mainWidget = MainMenu(self)
         #self.mainWidget = mainWidget
+        self.container_layout = QHBoxLayout()
+        self.mainWidget = None
+
         self.initProblemCreation()
         container = QWidget()
-        self.container_layout = QHBoxLayout()
-        self.container_layout.addWidget(self.mainWidget)
+        #self.container_layout.addWidget(self.mainWidget)
         self.container_layout.setAlignment(Qt.AlignTop)
         container.setLayout(self.container_layout)
 
@@ -43,9 +45,9 @@ class ProblemWindow(QMainWindow):
     
     def initProblemCreation(self):
         for i in range(self.container_layout.count()): 
-            self.container_layout.itemAt(i).widget().setParent(None)        
-        
-        self.mainWidget.destroy()
+            self.container_layout.itemAt(i).widget().setParent(None) 
+        if self.mainWidget != None:
+            self.mainWidget.destroy()
         mainWidget = ProblemCreationWidget(self)
         self.mainWidget = mainWidget
 

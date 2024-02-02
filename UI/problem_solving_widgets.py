@@ -67,19 +67,21 @@ class ProblemGrid(QWidget):
         self.buttons = []
         self.nom_contrainte1 = contrainte1[0]
         self.nom_contrainte2 = contrainte2[0]
-        self.contrainte1 = contrainte1
-        self.contrainte2 = contrainte2
-        self.rows = len(contrainte1)
-        self.cols = len(contrainte2)
+        self.contrainte1 = contrainte1[1]
+        self.contrainte2 = contrainte2[1]
+        self.rows = len(self.contrainte1)
+        self.cols = len(self.contrainte2)
+        print(f"ROWS : {self.rows} / COLS : {self.cols}")
+        
         self.authorize_simulation = True
 
         grid_layout = QGridLayout()
-        for j in range(0, len(contrainte1)):
+        for j in range(0, len(self.contrainte1)):
             if not has_left_grid:
                 label_contrainte_1 = QLabel()
                 label_contrainte_1.setText(contrainte1[1][j])
                 grid_layout.addWidget(label_contrainte_1, j + 1, 0)
-            for k in range(0, len(contrainte2)):
+            for k in range(0, len(self.contrainte2)):
                 if not has_top_grid:
                     label_contrainte_2 = QLabel()
                     label_contrainte_2.setText(contrainte2[1][k])

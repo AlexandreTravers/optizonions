@@ -18,7 +18,7 @@ class ProblemWindow(QMainWindow):
 
         
         
-        """contraintes = [("Nationalite", ["Anglais", "Francais", "Allemand", "Espagnol"]), ("Lettre", ["A", "B", "C", "D"]), 
+        contraintes = [("Nationalite", ["Anglais", "Francais", "Allemand", "Espagnol"]), ("Lettre", ["A", "B", "C", "D"]), 
                        ("Chiffre", ["1", "2", "3", "4"]), ("Couleur", ["Rouge", "Bleu", "Vert", "Jaune"])]
         indices = ["Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
                    "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
@@ -26,16 +26,16 @@ class ProblemWindow(QMainWindow):
                    "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
                    "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
                    "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune"]
-        mainWidget = ProblemSolvingWidget(self, contraintes, indices)"""
+        mainWidget = ProblemSolvingWidget(self, contraintes, indices)
         #mainWidget = ProblemCreationWidget(self)
         #mainWidget = MainMenu(self)
-        #self.mainWidget = mainWidget
+        self.mainWidget = mainWidget
         self.container_layout = QHBoxLayout()
-        self.mainWidget = None
+        #self.mainWidget = None
 
-        self.initProblemCreation()
+        #self.initProblemCreation()
         container = QWidget()
-        #self.container_layout.addWidget(self.mainWidget)
+        self.container_layout.addWidget(self.mainWidget)
         self.container_layout.setAlignment(Qt.AlignTop)
         container.setLayout(self.container_layout)
 

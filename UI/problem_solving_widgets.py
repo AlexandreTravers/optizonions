@@ -153,7 +153,7 @@ class ProblemGrid(QWidget):
         for i in range(0, self.rows):
             matrix_row = []
             for j in range(0, self.cols):
-                matrix_row.append(self.buttons[i * self.cols + j].stateToString())
+                matrix_row.append(self.buttons[j * self.rows + i].stateToString())
             matrix.append(matrix_row)
         
         print(f"MATRICE : {self.nom_contrainte1} X {self.nom_contrainte2}")

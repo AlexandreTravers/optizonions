@@ -32,18 +32,21 @@ class ProblemWindow(QMainWindow):
         self.mainWidget = mainWidget
         #self.initProblemCreation()
         container = QWidget()
-        container_layout = QHBoxLayout()
-        container_layout.addWidget(self.mainWidget)
-        container_layout.setAlignment(Qt.AlignTop)
-        container.setLayout(container_layout)
+        self.container_layout = QHBoxLayout()
+        self.container_layout.addWidget(self.mainWidget)
+        self.container_layout.setAlignment(Qt.AlignTop)
+        container.setLayout(self.container_layout)
 
         self.setCentralWidget(container)
 
         self.show()
     
     def initProblemCreation(self):
+        for i in range(self.container_layout.count()): 
+            self.container_layout.itemAt(i).widget().setParent(None)        
+        
+        self.mainWidget.destroy()
         mainWidget = ProblemCreationWidget(self)
-        #mainWidget = MainMenu(self)
         self.mainWidget = mainWidget
 
         # Créer un menu bar
@@ -61,6 +64,8 @@ class ProblemWindow(QMainWindow):
         export_action = HoverableQWidgetAction(self, "Exporter un probleme en JSON", self.exporter)
         self.file_menu.addAction(export_action)
 
+        self.container_layout.addWidget(self.mainWidget)
+
     def importer(self):
         print("Action Importer triggered")
 
@@ -75,7 +80,8 @@ class ProblemWindow(QMainWindow):
 
 
     def switchToSolving(self, contraintes, indices):
-        self.menubar.removeMenu(self.file_menu)
+        self.menubar.destroy()
+        print(contraintes)
         mainWidget = ProblemSolvingWidget(self, contraintes, indices)
         self.mainWidget = mainWidget
 

@@ -25,6 +25,11 @@ class MainMenu(QWidget):
         self.layout.setAlignment(Qt.AlignLeft)
         self.setLayout(self.layout)
 
+    def initProblemCreation(self):
+        self.parent.initProblemCreation()
+
+    def initSolving(self):
+        self.parent.initSolving()
 
 class SplitMenu(QWidget):
     def __init__(self, parent):
@@ -35,9 +40,13 @@ class SplitMenu(QWidget):
         self.layout.addStretch()
         self.layout.addWidget(CustomProblemsMenu(self))
         self.layout.addStretch()
-
         self.setLayout(self.layout)
 
+    def initProblemCreation(self):
+        self.parent.initProblemCreation()
+
+    def initSolving(self):
+        self.parent.initSolving()
 
 class PremadeProblemsMenu(QWidget):
     def __init__(self, parent):
@@ -95,16 +104,19 @@ class CustomProblemsMenu(QWidget):
         menu_label.setStyleSheet("QLabel{font-size:48px}")
         self.layout.addWidget(menu_label)
 
-        custom_problem_creation = CustomProblemButton(self, "Créer problème", self.func)
-        custom_problem_solving = CustomProblemButton(self, "Résoudre problème", self.func)
+        custom_problem_creation = CustomProblemButton(self, "Créer problème", self.initProblemCreation)
+        custom_problem_solving = CustomProblemButton(self, "Résoudre problème", self.initSolving)
 
         self.layout.addWidget(custom_problem_creation)
         self.layout.addWidget(custom_problem_solving)
         self.layout.addStretch(1)
         self.setLayout(self.layout)
 
-    def func(self):
-        i = 1
+    def initProblemCreation(self, event):
+        self.parent.initProblemCreation()
+
+    def initSolving(self, event):
+        self.parent.initSolving()
 
 class CustomProblemButton(QWidget):
     def __init__(self, parent, nom_option, func):

@@ -3,6 +3,7 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from problem_creation_widgets import *
 from problem_solving_widgets import *
+from zebra_solving_widgets import *
 from main_menu_widgets import *
 import json
 
@@ -26,7 +27,8 @@ class ProblemWindow(QMainWindow):
                    "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
                    "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
                    "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune"]
-        mainWidget = ProblemSolvingWidget(self, contraintes, indices)
+        #mainWidget = ProblemSolvingWidget(self, contraintes, indices)
+        mainWidget = ZebraSolvingWidget(self, contraintes, indices)
         #mainWidget = ProblemCreationWidget(self)
         #mainWidget = MainMenu(self)
         self.mainWidget = mainWidget

@@ -65,11 +65,57 @@ class JsonHandler():
       
 
 
-    def loadJson(self):
+    def loadFromFile(self,json_file):
+        with open(json_file, 'r', encoding='utf-8') as file:
+            return json.load(file)
 
-        with open('problem.json', 'r') as file:
-            data = json.load(file)
+    def loadConstraintsFromFile(self, json_file):
+        data = self.loadFromFile(json_file)  # Chargement du fichier JSON
+        problem = data['problem']  # Accéder au dictionnaire sous la clé 'problem'
+        contraintes = []
+        principale_key = None
 
-        for entite_nom, entite_data in data["problem"].items():
-            pass
-        
+        # Identifier la clé de l'entité principale
+        for categorie, details in problem.items():
+            if categorie != "indices" and "intitule" in details and details["intitule"] == "principale":
+                principale_key = categorie
+                break
+
+        # Si une entité principale a été trouvée, la traiter en premier
+        if principale_key:
+            details = problem[principale_key]
+            options = [champ["nom"] for champ in details["champs"].values()]
+            contraintes.append((principale_key, options))
+
+        # Traiter les autres catégories
+        for categorie, details in problem.items():
+            if categorie != "indices" and categorie != principale_key:  # Ignorer les indices et l'entité principale déjà traitée
+                options = list(details.get("champs", {}).values())
+                contraintes.append((categorie, options))
+
+        return contraintes
+
+
+
+
+    def loadCluesFromFiles(self, json_file):
+        data = self.loadFromFile(json_file) 
+        problem = data['problem']  
+        indices = []
+        if "indices" in problem:  # Vérifier si 'indices' existe pour éviter KeyError
+            for indice in problem["indices"]:
+                nomIndice = indice["nomIndice"]
+                '''
+                contraintes = []
+                for contrainte in indice["contraintes"]:
+                    lvalue = contrainte["lvalue"]
+                    equal = contrainte["equal"]
+                    rvalue = contrainte["rvalue"]
+                    relation = "=" if equal else "!="
+                    contraintes.append(f"{lvalue} {relation} {rvalue}")
+                '''
+                #indices.append(f"{nomIndice}: {' & '.join(contraintes)}")
+                indices.append(f"{nomIndice}")
+        else:
+            print("Aucun indice trouvé dans le fichier JSON.")
+        return indices

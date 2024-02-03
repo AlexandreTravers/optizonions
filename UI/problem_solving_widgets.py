@@ -5,6 +5,7 @@ from PyQt5.QtGui import *
 import sys
 from enum import Enum
 import stylesheets
+import state
 
 class ProblemSolvingWidget(QWidget):
     def __init__(self, parent, contraintes, indices):
@@ -96,18 +97,18 @@ class ProblemGrid(QWidget):
 
     
     def setButtonState(self, button, state):
-        if state == State.FALSE or state == State.NONE:
+        if state == state.State.FALSE or state == state.State.NONE:
             for b in self.buttons:
                 if (b.row == button.row and not b.col == button.col) or (not b.row == button.row and b.col == button.col) :
                     b.clear()
-                    b.manualSwitchState(State.NONE)
+                    b.manualSwitchState(state.State.NONE)
 
-        elif state == State.TRUE:
+        elif state == state.State.TRUE:
             self.checkRow(button)
             self.checkCol(button)
             for b in self.buttons:
                 if (b.row == button.row and not b.col == button.col) or (not b.row == button.row and b.col == button.col):
-                    b.manualSwitchState(State.FALSE)
+                    b.manualSwitchState(state.State.FALSE)
 
         self.toMatrix()
                     
@@ -125,7 +126,7 @@ class ProblemGrid(QWidget):
     def checkRow(self, button):
         for b in self.buttons:
             if b.col != button.col and b.row == button.row:
-                if b.state == State.TRUE:
+                if b.state == state.State.TRUE:
                     for b_ in self.buttons:
                         if b_.row != b.row and b_.col == b.col:
                             b_.clear(clear_state=True)
@@ -135,7 +136,7 @@ class ProblemGrid(QWidget):
     def checkCol(self, button):
         for b in self.buttons:
             if b.col == button.col and b.row != button.row:
-                if b.state == State.TRUE:
+                if b.state == state.State.TRUE:
                     for b_ in self.buttons:
                         if b_.row == b.row and b_.col != b.col:
                             b_.clear(clear_state=True)
@@ -199,7 +200,7 @@ class GridButton(QPushButton):
     
         layout = QVBoxLayout()
         layout.setAlignment(Qt.AlignCenter)
-        self.state = State.NONE
+        self.state = state.State.NONE
         self.setLayout(layout)
         self.installEventFilter(self)
         self.setStyleSheet(stylesheets.GridButtonStylesheets().getStylesheetForType(round_type))
@@ -208,7 +209,7 @@ class GridButton(QPushButton):
         
 
     def eventFilter(self, obj, event):
-        if obj == self and self.state == State.NONE:
+        if obj == self and self.state == state.State.NONE:
             if event.type() == QtCore.QEvent.HoverEnter:
                 if self.parent.authorize_simulation:
                     self.pendingState = True
@@ -231,15 +232,15 @@ class GridButton(QPushButton):
         self.clear()
         text = ""
         if event.button() == Qt.LeftButton:
-                self.state = State.TRUE
+                self.state = state.State.TRUE
                 text = "V"
                 self.parent.setButtonState(self, self.state)
         elif event.button() == Qt.RightButton:
-                self.state = State.FALSE
+                self.state = state.State.FALSE
                 text = "X"
                 self.parent.setButtonState(self, self.state)       
         elif event.button() == Qt.MiddleButton:
-            self.state = State.NONE
+            self.state = state.State.NONE
             text = ""
 
         self.createLabel(text, False)
@@ -264,11 +265,11 @@ class GridButton(QPushButton):
     def manualSwitchState(self, state):
         self.clear()
         self.state = state
-        if self.state == State.NONE:
+        if self.state == state.State.NONE:
             return
 
         text = ""
-        if state == State.TRUE:
+        if state == state.State.TRUE:
                 text = "V"
         else:
                 text = "X"
@@ -285,15 +286,15 @@ class GridButton(QPushButton):
 
     def clear(self, clear_state = False):
         if clear_state:
-            self.state = State.NONE
+            self.state = state.State.NONE
 
         for i in reversed(range(self.layout().count())): 
             self.layout().itemAt(i).widget().setParent(None)
 
     def resetLabel(self):
-        if self.state == State.TRUE:
+        if self.state == state.State.TRUE:
             self.createLabel("V", False)
-        if self.state == State.FALSE:
+        if self.state == state.State.FALSE:
             self.createLabel("X", False)
 
     def createLabel(self, text, simulated):
@@ -319,11 +320,11 @@ class GridButton(QPushButton):
         self.parent.updatePosLabel(row, col)
 
     def stateToString(self):
-        if self.state == State.NONE:
+        if self.state == state.State.NONE:
             return "NONE"
-        elif self.state == State.TRUE:
+        elif self.state == state.State.TRUE:
             return "TRUE"
-        elif self.state == State.FALSE:
+        elif self.state == state.State.FALSE:
             return "FALSE"
 
 
@@ -376,10 +377,6 @@ class IndicesWidget(QWidget):
 
 
 
-class State(Enum):
-    NONE = 0
-    TRUE = 1
-    FALSE = 2
 
 
 

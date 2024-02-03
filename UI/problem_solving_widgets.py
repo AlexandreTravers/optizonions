@@ -7,9 +7,9 @@ from enum import Enum
 import stylesheets
 import state
 
-class ProblemSolvingWidget(QWidget):
+class GridSolvingWidget(QWidget):
     def __init__(self, parent, contraintes, indices):
-        super(ProblemSolvingWidget, self).__init__()
+        super(GridSolvingWidget, self).__init__()
 
         self.parent = parent
         self.layout = QVBoxLayout()

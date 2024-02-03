@@ -5,6 +5,7 @@ from problem_creation_widgets import *
 from problem_solving_widgets import *
 from zebra_solving_widgets import *
 from main_menu_widgets import *
+import problem_generator
 import json
 
 class ProblemWindow(QMainWindow):
@@ -37,7 +38,8 @@ class ProblemWindow(QMainWindow):
                    "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
                    "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
                    "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune"]
-        mainWidget = ProblemSolvingWidget(self, contraintes, indices)
+        mainWidget = problem_generator.ProblemGenerator().CreateProblem(self, contraintes, indices)
+        #GridSolvingWidget(self, contraintes, indices)
         #mainWidget = ZebraSolvingWidget(self, contraintes, indices)
         #mainWidget = ProblemCreationWidget(self)
         #mainWidget = MainMenu(self)
@@ -96,7 +98,7 @@ class ProblemWindow(QMainWindow):
     def switchToSolving(self, contraintes, indices):
         self.menubar.destroy()
         print(contraintes)
-        mainWidget = ProblemSolvingWidget(self, contraintes, indices)
+        mainWidget = GridSolvingWidget(self, contraintes, indices)
         self.mainWidget = mainWidget
 
         container = QWidget()

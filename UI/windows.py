@@ -8,6 +8,7 @@ from main_menu_widgets import *
 from json_handler import *
 import problem_generator
 import json
+import os
 
 class ProblemWindow(QMainWindow):
     def __init__(self):
@@ -21,15 +22,15 @@ class ProblemWindow(QMainWindow):
 
         
         
-        #contraintes = [("Prenom", ["Martin", "Alexandre", "Marc", "Louis"]), ("Lettre", ["A", "B", "C", "D"]), 
-        #               ("Chiffre", ["1", "2", "3", "4"]), ("Couleur", ["Rouge", "Bleu", "Vert", "Jaune"]),
-        #               ("Vetement", ["Pull", "Polo", "Jean", "Cargo"]), ("Nationalite", ["EN", "FR", "AL", "ES"])
-        #              ]
+        ##contraintes = [("Prenom", ["Martin", "Alexandre", "Marc", "Louis"]), ("Lettre", ["A", "B", "C", "D"]), 
+        ##               ("Chiffre", ["1", "2", "3", "4"]), ("Couleur", ["Rouge", "Bleu", "Vert", "Jaune"]),
+        ##               ("Vetement", ["Pull", "Polo", "Jean", "Cargo"]), ("Nationalite", ["EN", "FR", "AL", "ES"])
+        ##              ]
         #contraintes = [("Prenom", ["Martin", "Alexandre", "Marc", "Louis"]), ("Lettre", ["A", "B", "C", "D"]), 
         #               ("Chiffre", ["1", "2", "3", "4"]), ("Couleur", ["Rouge", "Bleu", "Vert", "Jaune"]),
         #               ("Vetement", ["Pull", "Polo", "Jean", "Cargo"])]
-        #contraintes = [("Nationalite", ["Anglais", "Francais", "Allemand", "Espagnol"]), ("Lettre", ["A", "B", "C", "D"]), 
-        #               ("Chiffre", ["1", "2", "3", "4"]), ("Couleur", ["Rouge", "Bleu", "Vert", "Jaune"])]
+        contraintes = [("Nationalite", ["Anglais", "Francais", "Allemand", "Espagnol"]), ("Lettre", ["A", "B", "C", "D"]), 
+                       ("Chiffre", ["1", "2", "3", "4"]), ("Couleur", ["Rouge", "Bleu", "Vert", "Jaune"])]
         
         #contraintes = [("Nationalite", ["Anglais", "Francais", "Allemand", "Espagnol"]), ("Lettre", ["A", "B", "C", "D"]), 
         #               ("Chiffre", ["1", "2", "3", "4"])]
@@ -44,11 +45,11 @@ class ProblemWindow(QMainWindow):
         contraintes = jsonH.loadConstraintsFromFile(jsonFile)
         indices = jsonH.loadCluesFromFiles(jsonFile)
 
-        mainWidget = problem_generator.ProblemGenerator().CreateProblem(self, contraintes, indices)
+        #mainWidget = problem_generator.ProblemGenerator().CreateProblem(self, contraintes, indices)
         #GridSolvingWidget(self, contraintes, indices)
         #mainWidget = ZebraSolvingWidget(self, contraintes, indices)
         #mainWidget = ProblemCreationWidget(self)
-        #mainWidget = MainMenu(self)
+        mainWidget = MainMenu(self)
         self.mainWidget = mainWidget
         self.container_layout = QHBoxLayout()
         #self.mainWidget = None
@@ -87,9 +88,46 @@ class ProblemWindow(QMainWindow):
         self.file_menu.addAction(export_action)
 
         self.container_layout.addWidget(self.mainWidget)
+    
+    def initSolving(self):
+        print("Go initSOlving")
+        jsonH = JsonHandler()  
+        jsonFile = self.importer()
+        if jsonFile != "":
+            contraintes = jsonH.loadConstraintsFromFile(jsonFile)
+            indices = jsonH.loadCluesFromFiles(jsonFile)
+            mainWidget = problem_generator.ProblemGenerator().CreateProblem(self, contraintes, indices)
+            self.mainWidget = mainWidget
+            self.container_layout = QHBoxLayout()
+            #self.mainWidget = None
 
+            #self.initProblemCreation()
+            container = QWidget()
+            self.container_layout.addWidget(self.mainWidget)
+            self.container_layout.setAlignment(Qt.AlignTop)
+            container.setLayout(self.container_layout)
+
+            self.setCentralWidget(container)
+
+            self.show()
+        else :
+            print("Pas de fichier trouvé")
+
+        
     def importer(self):
         print("Action Importer triggered")
+        options = QFileDialog.Options()
+        options |= QFileDialog.ReadOnly
+
+        current_dir = os.path.dirname(__file__)
+        parent_dir = os.path.dirname(current_dir)
+        file_name, _ = QFileDialog.getOpenFileName(self, "Sélectionnez un fichier JSON", parent_dir, "JSON Files (*.json);;Tous les fichiers (*)", options=options)
+
+        if file_name:
+            print(f"Chemin du fichier JSON sélectionné : {file_name}")
+            return file_name
+        else:
+            return ""
 
     def exporter(self):
         options = QFileDialog.Options()

@@ -118,14 +118,14 @@ class ProblemGrid(QWidget):
         self.setLayout(grid_layout)
 
     
-    def setButtonState(self, button, state):
-        if state == state.State.FALSE or state == state.State.NONE:
+    def setButtonState(self, button, button_state):
+        if button_state == state.State.FALSE or button_state == state.State.NONE:
             for b in self.buttons:
                 if (b.row == button.row and not b.col == button.col) or (not b.row == button.row and b.col == button.col) :
                     b.clear()
                     b.manualSwitchState(state.State.NONE)
 
-        elif state == state.State.TRUE:
+        elif button_state == state.State.TRUE:
             self.checkRow(button)
             self.checkCol(button)
             for b in self.buttons:
@@ -284,14 +284,14 @@ class GridButton(QPushButton):
             self.pendingState = None
 
 
-    def manualSwitchState(self, state):
+    def manualSwitchState(self, button_state):
         self.clear()
-        self.state = state
+        self.state = button_state
         if self.state == state.State.NONE:
             return
 
         text = ""
-        if state == state.State.TRUE:
+        if button_state == state.State.TRUE:
                 text = "V"
         else:
                 text = "X"

@@ -20,15 +20,15 @@ class ProblemWindow(QMainWindow):
 
         
         
-        contraintes = [("Prenom", ["Martin", "Alexandre", "Marc", "Louis"]), ("Lettre", ["A", "B", "C", "D"]), 
-                       ("Chiffre", ["1", "2", "3", "4"]), ("Couleur", ["Rouge", "Bleu", "Vert", "Jaune"]),
-                       ("Vetement", ["Pull", "Polo", "Jean", "Cargo"]), ("Nationalite", ["EN", "FR", "AL", "ES"])
-                       ]
+        #contraintes = [("Prenom", ["Martin", "Alexandre", "Marc", "Louis"]), ("Lettre", ["A", "B", "C", "D"]), 
+        #               ("Chiffre", ["1", "2", "3", "4"]), ("Couleur", ["Rouge", "Bleu", "Vert", "Jaune"]),
+        #               ("Vetement", ["Pull", "Polo", "Jean", "Cargo"]), ("Nationalite", ["EN", "FR", "AL", "ES"])
+        #               ]
         #contraintes = [("Prenom", ["Martin", "Alexandre", "Marc", "Louis"]), ("Lettre", ["A", "B", "C", "D"]), 
         #               ("Chiffre", ["1", "2", "3", "4"]), ("Couleur", ["Rouge", "Bleu", "Vert", "Jaune"]),
         #               ("Vetement", ["Pull", "Polo", "Jean", "Cargo"])]
-        #contraintes = [("Nationalite", ["Anglais", "Francais", "Allemand", "Espagnol"]), ("Lettre", ["A", "B", "C", "D"]), 
-        #               ("Chiffre", ["1", "2", "3", "4"]), ("Couleur", ["Rouge", "Bleu", "Vert", "Jaune"])]
+        contraintes = [("Nationalite", ["Anglais", "Francais", "Allemand", "Espagnol"]), ("Lettre", ["A", "B", "C", "D"]), 
+                       ("Chiffre", ["1", "2", "3", "4"]), ("Couleur", ["Rouge", "Bleu", "Vert", "Jaune"])]
         
         #contraintes = [("Nationalite", ["Anglais", "Francais", "Allemand", "Espagnol"]), ("Lettre", ["A", "B", "C", "D"]), 
         #               ("Chiffre", ["1", "2", "3", "4"])]

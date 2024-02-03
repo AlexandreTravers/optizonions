@@ -86,9 +86,9 @@ class IndicesDisplay(QWidget):
         for i in indices:
             self.addIndice(i)
 
-class Indice(QWidget):
+class IndiceCreation(QWidget):
     def __init__(self, parent, indice_text, valeurs):
-        super(Indice, self).__init__()
+        super(IndiceCreation, self).__init__()
         self.parent = parent
         self.layout = QHBoxLayout()
         self.indice_text = indice_text
@@ -120,6 +120,18 @@ class Indice(QWidget):
     def updateValeurs(self, valeurs):
         self.contraintes_manager.updateContraintes(valeurs)
         
+class IndiceSolving():
+    def __init__(self, texte, contraintes):
+        self.texte = texte
+        self.contraintes = contraintes
+
+class ContrainteSolving():
+    def __init__(self, lvalue, equals, rvalue):
+        self.lvalue = lvalue
+        self.equals = equals
+        self.rvalue = rvalue
+
+
 class ContraintesManager(QWidget):
     def __init__(self, parent, valeurs):
         super(ContraintesManager, self).__init__()
@@ -128,13 +140,13 @@ class ContraintesManager(QWidget):
         self.valeurs = valeurs
 
         self.contraintes = []
-        self.contraintes.append(Contrainte(self, self.valeurs))
+        self.contraintes.append(ContrainteCreation(self, self.valeurs))
         self.layout.addWidget(self.contraintes[0])
 
         self.setLayout(self.layout)
 
     def addContrainte(self):
-        self.contraintes.append(Contrainte(self, self.valeurs))
+        self.contraintes.append(ContrainteCreation(self, self.valeurs))
         self.layout.addWidget(self.contraintes[len(self.contraintes) - 1])
 
     def removeContrainte(self, contrainte):
@@ -153,9 +165,9 @@ class ContraintesManager(QWidget):
         for c in self.contraintes:
             c.updateValeurs(valeurs)
 
-class Contrainte(QWidget):
+class ContrainteCreation(QWidget):
     def __init__(self, parent, valeurs):
-        super(Contrainte, self).__init__()
+        super(ContrainteCreation, self).__init__()
         self.parent = parent
         self.has_next = False
         self.layout = QHBoxLayout()

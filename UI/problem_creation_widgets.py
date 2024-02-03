@@ -56,7 +56,7 @@ class ProblemCreationWidget(QWidget):
         return self.entites.getAllValeurs()
 
     def addIndice(self, indice):
-        indice = Indice(self, indice, self.getAllValeurs())
+        indice = IndiceCreation(self, indice, self.getAllValeurs())
         for i in self.indices:
             if i.indice_text == indice.indice_text:
                 self.indice_creator.setIndiceValide(False)

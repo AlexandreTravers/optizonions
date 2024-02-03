@@ -19,17 +19,27 @@ class ProblemWindow(QMainWindow):
 
         
         
+        contraintes = [("Prenom", ["Martin", "Alexandre", "Marc", "Louis"]), ("Lettre", ["A", "B", "C", "D"]), 
+                       ("Chiffre", ["1", "2", "3", "4"]), ("Couleur", ["Rouge", "Bleu", "Vert", "Jaune"]),
+                       ("Vetement", ["Pull", "Polo", "Jean", "Cargo"]), ("Nationalite", ["EN", "FR", "AL", "ES"])
+                       ]
+        #contraintes = [("Prenom", ["Martin", "Alexandre", "Marc", "Louis"]), ("Lettre", ["A", "B", "C", "D"]), 
+        #               ("Chiffre", ["1", "2", "3", "4"]), ("Couleur", ["Rouge", "Bleu", "Vert", "Jaune"]),
+        #               ("Vetement", ["Pull", "Polo", "Jean", "Cargo"])]
         #contraintes = [("Nationalite", ["Anglais", "Francais", "Allemand", "Espagnol"]), ("Lettre", ["A", "B", "C", "D"]), 
         #               ("Chiffre", ["1", "2", "3", "4"]), ("Couleur", ["Rouge", "Bleu", "Vert", "Jaune"])]
-        #indices = ["Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
-        #           "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
-        #           "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
-        #           "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
-        #           "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
-        #           "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune"]
-        #mainWidget = ProblemSolvingWidget(self, contraintes, indices)
+        
+        #contraintes = [("Nationalite", ["Anglais", "Francais", "Allemand", "Espagnol"]), ("Lettre", ["A", "B", "C", "D"]), 
+        #               ("Chiffre", ["1", "2", "3", "4"])]
+        indices = ["Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
+                   "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
+                   "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
+                   "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
+                   "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
+                   "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune"]
+        mainWidget = ProblemSolvingWidget(self, contraintes, indices)
         #mainWidget = ZebraSolvingWidget(self, contraintes, indices)
-        mainWidget = ProblemCreationWidget(self)
+        #mainWidget = ProblemCreationWidget(self)
         #mainWidget = MainMenu(self)
         self.mainWidget = mainWidget
         self.container_layout = QHBoxLayout()

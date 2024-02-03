@@ -27,25 +27,47 @@ class Grid(QWidget):
         
         grid_layout = QGridLayout()
         self.grids = []
-        pb1 = ProblemGrid(self, contraintes[0], contraintes[1])
-        pb2 = ProblemGrid(self, contraintes[0], contraintes[2], has_left_grid = True)
-        pb3 = ProblemGrid(self, contraintes[3], contraintes[1], has_top_grid = True)
-        self.grids.append(pb1)
-        self.grids.append(pb2)
-        self.grids.append(pb3)
-        grid_layout.addWidget(pb1, 0, 0)
-        grid_layout.addWidget(pb2, 0, 1)
-        grid_layout.addWidget(pb3, 1, 0)
-        
+        x = 0
+        y = 0
 
+        for i in range(0, len(contraintes)):
+            if i == 0:
+                pb = ProblemGrid(self, contraintes[0], contraintes[1])
+                self.grids.append(pb)
+                grid_layout.addWidget(self.grids[i], 0, 0)
+                
+            elif i > 1:
+                if i % 2 == 0:
+                    x += 1
+                    print(f"GRILLE AJOUTEE A : (0, {x})")
+                    pb = ProblemGrid(self, contraintes[0], contraintes[i], has_left_grid=True)
+                    self.grids.append(pb)
+                    grid_layout.addWidget(self.grids[i - 1], 0, x)
+                else:
+                    y += 1
+                    pb = ProblemGrid(self, contraintes[i], contraintes[1], has_top_grid=True)
+                    self.grids.append(pb)
+                    grid_layout.addWidget(self.grids[i - 1], y, 0)
+
+        #pb1 = ProblemGrid(self, contraintes[0], contraintes[1])
+        #pb2 = ProblemGrid(self, contraintes[0], contraintes[2], has_left_grid = True)
+        #pb3 = ProblemGrid(self, contraintes[3], contraintes[1], has_top_grid = True)
+        #self.grids.append(pb1)
+        #self.grids.append(pb2)
+        #self.grids.append(pb3)
+        #grid_layout.addWidget(pb1, 0, 0)
+        #grid_layout.addWidget(pb2, 0, 1)
+        #grid_layout.addWidget(pb3, 1, 0)
+        
+        x += 1
         self.pos_label = QLabel()
-        grid_layout.addWidget(self.pos_label, 2, 2)
+        grid_layout.addWidget(self.pos_label, 0, x)
 
         self.indices_widget = IndicesWidget(self, indices)
-        grid_layout.addWidget(self.indices_widget, 3, 2)
+        grid_layout.addWidget(self.indices_widget, 3, x)
 
         self.check_button = CheckButton(self)
-        grid_layout.addWidget(self.check_button, 4, 2)
+        grid_layout.addWidget(self.check_button, 4, x)
 
         self.setLayout(grid_layout)
 

@@ -43,8 +43,14 @@ class ProblemCreationWidget(QWidget):
     def addEntite(self):
         self.entites.addEntite()
 
+    def deleteEntite(self):
+        self.entites.deleteEntite()
+
     def addValeur(self):
         self.entites.addValeur()
+
+    def deleteValeur(self):
+        self.entites.deleteValeur()
 
     def getAllValeurs(self):
         return self.entites.getAllValeurs()
@@ -106,21 +112,36 @@ class QuantityWidget(QWidget):
         self.layout = QHBoxLayout()
 
         self.layout.addStretch(1)
-        self.valeur_button = AddvaleurButton(self)
+        """self.valeur_button = AddvaleurButton(self)
         self.layout.addWidget(self.valeur_button)
         self.entite_button = AddEntiteButton(self)
+        self.layout.addWidget(self.entite_button)"""
+        
+        self.valeur_button = ValeurManagerButton(self, "Gérer valeurs", self.addValeur, self.deleteValeur)
+        self.layout.addWidget(self.valeur_button)
+        self.entite_button = ValeurManagerButton(self, "Gérer entités", self.addEntite, self.deleteEntite)
         self.layout.addWidget(self.entite_button)
+        
         self.problem_generation_button = GenerateProblemButton(self)
         self.layout.addWidget(self.problem_generation_button)
         
         self.setLayout(self.layout)
 
 
-    def addEntite(self):
+
+
+    def addEntite(self, event):
         self.parent.addEntite()
-    
-    def addValeur(self):
+
+    def deleteEntite(self, event):
+        self.parent.deleteEntite()
+
+    def addValeur(self, event):
         self.parent.addValeur()
+
+    def deleteValeur(self, event):
+        self.parent.deleteValeur()
+
 
     def generateProblem(self):
         self.parent.generateProblem()
@@ -130,13 +151,8 @@ class EntiteWidgets(QWidget):
     def __init__(self, parent):
         super(EntiteWidgets, self).__init__()
         self.parent = parent
-
         self.valeur_qty = 1
-        
-
         self.entites = []
-        #entite = CreationEntite(self, self.valeur_qty)
-        #self.entites.append(entite)
 
         self.entite_mere = CreationEntiteMere(self, self.valeur_qty)
 
@@ -163,20 +179,34 @@ class EntiteWidgets(QWidget):
     """### ENTITES ET VALEURS ###"""
     """##########################"""
     def addEntite(self):
-        #entite = CreationEntite(self, self.valeur_qty)
         entite = LayoutedEntiteWidget(self, self.valeur_qty)
         self.entites.append(entite)
         self.scroll_layout.addWidget(self.entites[len(self.entites) - 1])
         index = len(self.entites) - 1
-        #for e in self.entites:
-        #    e.addIndice(entite, index)
         self.entite_mere.addIndice(entite, index)
+
+    def deleteEntite(self):
+        if len(self.entites) >= 1:
+            last_index = len(self.entites) - 1
+            self.entites[last_index].setParent(None)
+            self.entites.pop()
+            self.entite_mere.deleteIndice()
+            #print(f"ON SUPPRIME {last_index}")
+
+
 
     def addValeur(self):
         self.valeur_qty += 1
         self.entite_mere.addValeurChamp()
         for e in self.entites:
             e.addValeurChamp()
+
+    def deleteValeur(self):
+        self.valeur_qty -= 1
+        self.entite_mere.deleteValeurChamp()
+        for e in self.entites:
+            e.deleteValeurChamp()
+
 
     def updateValeur(self, entite):
         index = 0
@@ -281,12 +311,18 @@ class CreationEntiteMere(QWidget):
     def addValeur(self):
         self.parent.addValeur()
 
+
     def addValeurChamp(self):
         index = len(self.valeurs)
         valeur = CreationValeurEntiteMere(self, self.parent.entites, index)
         self.valeurs.append(valeur)
         self.layout.setAlignment(Qt.AlignCenter)
         self.layout.addWidget(self.valeurs[index])
+
+    def deleteValeurChamp(self):
+        last_index = len(self.valeurs) - 1
+        self.valeurs[last_index].setParent(None)
+        self.valeurs.pop()
 
     def getValeursText(self):
         vals = []
@@ -323,6 +359,10 @@ class CreationEntiteMere(QWidget):
             for v in self.valeurs:
                 v.addIndice(entite, index)
 
+    def deleteIndice(self):
+        for v in self.valeurs:
+            v.deleteIndice()
+
     """def generateIndices(self):
         indices = []
         for v in self.valeurs:
@@ -358,6 +398,9 @@ class LayoutedEntiteWidget(QWidget):
 
     def addValeurChamp(self):
         self.entite.addValeurChamp()
+
+    def deleteValeurChamp(self):
+        self.entite.deleteValeurChamp()
 
     def entiteNom(self):
         return self.entite.entiteNom()
@@ -413,6 +456,11 @@ class CreationEntite(QWidget):
         self.valeurs.append(valeur)
         self.layout.setAlignment(Qt.AlignCenter)
         self.layout.insertWidget(self.layout.count() - 1, self.valeurs[index])
+
+    def deleteValeurChamp(self):
+        last_index = len(self.valeurs) - 1
+        self.valeurs[last_index].setParent(None)
+        self.valeurs.pop()
 
     def getValeursText(self):
         vals = []
@@ -514,6 +562,11 @@ class CreationValeurEntiteMere(QWidget):
         self.creations_indices.append(valeurs_entite_mere)
         self.layout.addWidget(self.creations_indices[len(self.creations_indices) - 1])
 
+    def deleteIndice(self):
+        if len(self.creations_indices) >= 1:
+            last_index = len(self.creations_indices) - 1
+            self.creations_indices[last_index].setParent(None)
+            self.creations_indices.pop()
 
     def updateIndice(self, verbe_entite, index_indice):
         for ci in self.creations_indices:

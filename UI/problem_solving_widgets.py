@@ -6,6 +6,7 @@ import sys
 from enum import Enum
 import stylesheets
 import state
+from modeles.mainSolver import ObjetMatrice
 
 class GridSolvingWidget(QWidget):
     def __init__(self, parent, contraintes, indices):
@@ -201,6 +202,25 @@ class CheckButton(QPushButton):
     def checkSolution(self, event):
         print("CHECK SOLUTION\n\n")
         grids = self.parent.allGridsToMatrix()
+        matrix = []
+
+        for i in grids:
+            for j in i:
+                oneR = []
+                for rows in j:
+                    oneM = []
+                    for elts in rows:
+                        if(elts == 'NONE'):
+                            oneM.append(0)
+                        elif(elts == 'FALSE'):
+                            oneM.append(-1)
+                        elif(elts == 'TRUE'):
+                            oneM.append(1)
+                    if(len(oneM) > 0):
+                        oneR.append(oneM)
+                if(len(oneR) > 0):
+                    matrix.append(oneR)
+        print(ObjetMatrice(matrix, 1).main())
         print("CHECK SOLUTION\n\n")
         
 

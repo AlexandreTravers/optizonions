@@ -1,6 +1,6 @@
-from al_pacinoPackage import contrainte1 as pacc1,contrainte2 as pacc2,contrainte3 as pacc3,contrainte4 as pacc4,contrainte5 as pacc5,contrainte6 as pacc6,contrainte7 as pacc7
-from computerPackage import contrainte1 as comc1, contrainte2 as comc2,contrainte3 as comc3, contrainte4 as comc4
-from pastaPackage import contrainte1, contrainte2, contrainte3, contrainte4, contrainte5, contrainte6, contrainte7, contrainte8, contrainte9, contrainte10, contrainte11, contrainte12, contrainte13, contrainte14, contrainte15, contrainte16, contrainte17, contrainte18, contrainte19, contrainte20, contrainte21, contrainte22
+from modeles.al_pacinoPackage import contrainte1 as pacc1,contrainte2 as pacc2,contrainte3 as pacc3,contrainte4 as pacc4,contrainte5 as pacc5,contrainte6 as pacc6,contrainte7 as pacc7
+from modeles.computerPackage import contrainte1 as comc1, contrainte2 as comc2,contrainte3 as comc3, contrainte4 as comc4
+from modeles.pastaPackage import contrainte1, contrainte2, contrainte3, contrainte4, contrainte5, contrainte6, contrainte7, contrainte8, contrainte9, contrainte10, contrainte11, contrainte12, contrainte13, contrainte14, contrainte15, contrainte16, contrainte17, contrainte18, contrainte19, contrainte20, contrainte21, contrainte22
 from pycsp3 import *
 """
 matrix = [[[-1, 1, -1, -1, -1],
@@ -181,9 +181,11 @@ matrice_exemple = [[[-1, 1, -1, -1, -1],
           [-1, -1, -1, 1, -1],
           [-1, -1, -1, -1, 1]]]
 
+"""
 pb_exemple = 2
 objet = ObjetMatrice(matrice_exemple,pb_exemple)
 objet.setMatrix(matrice_exemple)
 objet.setPb(pb_exemple)
 objet.main()
 print(objet.getResult)
+"""

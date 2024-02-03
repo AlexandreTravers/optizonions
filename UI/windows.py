@@ -40,7 +40,8 @@ class ProblemWindow(QMainWindow):
         #           "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
         #           "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
         #           "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune"]
-        jsonFile = "/home/etud/Documents/S1/Optimisation Appliquee/MonJison.json"
+        #jsonFile = "/home/etud/Documents/S1/Optimisation Appliquee/MonJison.json"
+        jsonFile = "/home/alexandre/Desktop/Optimisation appliquée/Projet/MonJison.json"
         jsonH = JsonHandler()  
         contraintes = jsonH.loadConstraintsFromFile(jsonFile)
         indices = jsonH.loadCluesFromFiles(jsonFile)

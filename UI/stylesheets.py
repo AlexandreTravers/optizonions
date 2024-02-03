@@ -78,11 +78,12 @@ class MainStylesheets():
     def __init__(self):
         self.text_edit_style_sheet = """
         QTextEdit {
-            background-color: #EEEEEE; 
+            background: rgba(250, 235, 200, 255);
+            background-color: rgba(250, 235, 200, 255); 
             border: 2px solid #DB6A23; 
             border-radius: 4px; 
             padding: 2px; 
-            font: 16px; 
+            font: 18px; 
         }
 
         QTextEdit:hover {
@@ -101,7 +102,7 @@ class MainStylesheets():
                 border: 2px solid #DB6A23;
                 border-radius: 8px;
                 padding: 0px;
-                font: bold 20px;
+                font: bold 24px;
             }
             
             QPushButton:hover {
@@ -163,16 +164,15 @@ class MainStylesheets():
         
         self.combobox_style_sheet = """
         QComboBox {
-            background: #EEEEEE;
+            background: rgba(250, 235, 200, 255);
+            background-color: rgba(250, 235, 200, 255);
             border: 2px solid #DB6A23; 
             border-radius: 4px; 
             font: 16px; 
         }
 
         QComboBox::drop-down {
-            subcontrol-origin: padding;
-            subcontrol-position: top right;
-            width: 20px; 
+            width: 24px; 
             border-left: 2px solid #DB6A23; 
             border-top-right-radius: 8px; 
             border-bottom-right-radius: 8px;
@@ -181,7 +181,21 @@ class MainStylesheets():
         QComboBox:hover {
             border: 2px solid #EE7224; 
         }
+        
+        QComboBox::down-arrow {
+            image: url(./Ressources/Images/dropdown.png);
+        }
+ 
+        QComboBox::down-arrow:on { /* shift the arrow when popup is open */
+            image: url(./Ressources/Images/dropdown_reverse.png);
+        }
         """
+
+        self.indice_neutral = """QLabel {font:16px;color:black;}"""
+
+        self.indice_okay = """QLabel {font:16px;color:green;}}"""
+
+        self.indice_not_okay = """QLabel {font:16px;color:red;}"""
 
     def getTextEditStylesheet(self):
         return self.text_edit_style_sheet
@@ -194,4 +208,13 @@ class MainStylesheets():
     
     def getComboboxStylesheet(self):
         return self.combobox_style_sheet
+    
+    def getIndiceNeutralStylesheet(self):
+        return self.indice_neutral
+
+    def getIndiceOkayStylesheet(self):
+        return self.indice_okay
+
+    def getIndiceNotOkayStylesheet(self):
+        return self.indice_not_okay
     

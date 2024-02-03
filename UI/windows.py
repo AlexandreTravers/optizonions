@@ -17,7 +17,8 @@ class ProblemWindow(QMainWindow):
         self.initUI()
 
     def initUI(self):
-        self.setStyleSheet("background-color: rgba(240,230,215,255); ") 
+
+        self.setStyleSheet("background-color: rgba(250,220,155,255); ") 
         self.setWindowTitle("OPTIZONIONS - Des problemes et des solutions")
 
         
@@ -40,7 +41,7 @@ class ProblemWindow(QMainWindow):
         #           "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
         #           "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
         #           "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune"]
-        jsonFile = "/home/etud/Documents/S1/Optimisation Appliquee/MonJison.json"
+        jsonFile = "../jsonFiles/MonJison.json"
         jsonH = JsonHandler()  
         contraintes = jsonH.loadConstraintsFromFile(jsonFile)
         indices = jsonH.loadCluesFromFiles(jsonFile)

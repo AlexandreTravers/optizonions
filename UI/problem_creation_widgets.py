@@ -6,6 +6,7 @@ import sys
 from json_handler import *
 from enum import Enum
 import stylesheets
+import fonts
 
 from indices_widgets import *
 from problem_creation_buttons_widgets import *
@@ -17,8 +18,10 @@ class ProblemCreationWidget(QWidget):
         self.layout = QVBoxLayout()
 
         window_label = QLabel()
-        window_label.setText("TU VEUX UN PROBLEME ?")
-        window_label.setStyleSheet("QLabel{font-size:72px}")
+        window_label.setText("Tu veux un probleme ?")
+        window_label.setStyleSheet("QLabel{font-size:120px}")
+        window_label.setFont(fonts.Fonts().titleFont())
+        window_label.setAlignment(Qt.AlignCenter)
         self.layout.addWidget(window_label)
 
         self.entites = EntiteWidgets(self)
@@ -30,7 +33,7 @@ class ProblemCreationWidget(QWidget):
         self.layout.addWidget(self.indice_creator)
         self.indices = []
         self.indices_display = IndicesDisplay(self)
-        self.layout.addWidget(self.indices_display, 3)
+        self.layout.addWidget(self.indices_display, 2)
 
 
 
@@ -280,7 +283,8 @@ class CreationEntiteMere(QWidget):
 
         label = QLabel()
         label.setText("Entite")
-        label.setStyleSheet("QLabel{font:16px;}")
+        label.setStyleSheet("QLabel{font:24px;}")
+        label.setFont(fonts.Fonts().subtitleFont())
         self.entite_nom = QTextEdit()
         self.entite_nom.setMinimumHeight(40)
         self.entite_nom.setMaximumHeight(40)
@@ -288,6 +292,7 @@ class CreationEntiteMere(QWidget):
         self.entite_nom.setMaximumWidth(150)
         self.entite_nom.setAlignment(Qt.AlignVCenter)
         self.entite_nom.setStyleSheet(stylesheets.MainStylesheets().getTextEditStylesheet())
+        self.entite_nom.setFont(fonts.Fonts().mainFontBold())
         
         self.indice = VerbeEntite(self)
 
@@ -418,7 +423,8 @@ class CreationEntite(QWidget):
 
         label = QLabel()
         label.setText("Entite")
-        label.setStyleSheet("QLabel{font:16px;}")
+        label.setStyleSheet("QLabel{font:24px;}")
+        label.setFont(fonts.Fonts().subtitleFont())
         self.entite_nom = QTextEdit()
         self.entite_nom.setMinimumHeight(40)
         self.entite_nom.setMaximumHeight(40)
@@ -426,7 +432,8 @@ class CreationEntite(QWidget):
         self.entite_nom.setMaximumWidth(150)
         self.entite_nom.setAlignment(Qt.AlignVCenter)
         self.entite_nom.setStyleSheet(stylesheets.MainStylesheets().getTextEditStylesheet())
-        
+        self.entite_nom.setFont(fonts.Fonts().mainFontBold())
+
         self.indice = VerbeEntite(self)
 
         self.layout.addWidget(label)
@@ -617,7 +624,8 @@ class ChampValeur(QWidget):
         self.layout = QHBoxLayout()
         label = QLabel()
         label.setText("Champ")
-        label.setStyleSheet("QLabel{font:16px;}")
+        label.setStyleSheet("QLabel{font:24px;}")
+        label.setFont(fonts.Fonts().subtitleFont())
         self.valeur_nom = QTextEdit()
         self.valeur_nom.setText(default_text)
         self.valeur_nom.setMinimumHeight(40)
@@ -626,6 +634,7 @@ class ChampValeur(QWidget):
         self.valeur_nom.setMaximumWidth(200)
         self.valeur_nom.setAlignment(Qt.AlignVCenter)
         self.valeur_nom.setStyleSheet(stylesheets.MainStylesheets().getTextEditStylesheet())
+        self.valeur_nom.setFont(fonts.Fonts().mainFontBold())
         self.valeur_nom.textChanged.connect(self.updateSelfValeur)        
 
         self.layout.addWidget(label)

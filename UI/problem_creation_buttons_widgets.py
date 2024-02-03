@@ -3,15 +3,17 @@ from PyQt5 import QtCore, QtGui
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 import stylesheets
+import fonts
 
 
 class GenerateProblemButton(QPushButton):
     def __init__(self, parent):
         super(GenerateProblemButton, self).__init__()
         self.parent = parent
-        self.setMinimumSize(256, 48)
-        self.setMaximumSize(256, 48)
+        self.setMinimumSize(256, 60)
+        self.setMaximumSize(256, 60)
         self.setText("Générer problème")
+        self.setFont(fonts.Fonts().mainFontBold())
         self.setStyleSheet(stylesheets.MainStylesheets().getProblemButtonStylesheet())
 
         self.mousePressEvent = self.generateProblem
@@ -23,9 +25,10 @@ class AddEntiteButton(QPushButton):
     def __init__(self, parent):
         super(AddEntiteButton, self).__init__()
         self.parent = parent
-        self.setMinimumSize(192, 48)
-        self.setMaximumSize(192, 48)
+        self.setMinimumSize(192, 60)
+        self.setMaximumSize(192, 60)
         self.setText("Ajouter entite")
+        self.setFont(fonts.Fonts().mainFontBold())
         self.setStyleSheet(stylesheets.MainStylesheets().getProblemButtonStylesheet())
 
         self.mousePressEvent = self.addEntite
@@ -37,9 +40,10 @@ class AddvaleurButton(QPushButton):
     def __init__(self, parent):
         super(AddvaleurButton, self).__init__()
         self.parent = parent        
-        self.setMinimumSize(192, 48)
-        self.setMaximumSize(192, 48)
+        self.setMinimumSize(192, 60)
+        self.setMaximumSize(192, 60)
         self.setText("Ajouter valeur")
+        self.setFont(fonts.Fonts().mainFontBold())
         self.setStyleSheet(stylesheets.MainStylesheets().getProblemButtonStylesheet())
 
         self.mousePressEvent = self.addValeur
@@ -55,9 +59,10 @@ class ValeurManagerButton(QWidget):
         layout = QHBoxLayout()
         self.delButton = QtyButton(self, "-", del_func)
         self.descButton = QPushButton()
-        self.descButton.setMinimumSize(192, 48)
-        self.descButton.setMaximumSize(192, 48)
+        self.descButton.setMinimumSize(192, 60)
+        self.descButton.setMaximumSize(192, 60)
         self.descButton.setText(text)
+        self.descButton.setFont(fonts.Fonts().mainFontBold())
         self.descButton.setStyleSheet(stylesheets.MainStylesheets().getProblemButtonStylesheet())
         self.addButton = QtyButton(self, "+", add_func)
 
@@ -70,9 +75,10 @@ class QtyButton(QPushButton):
     def __init__(self, parent, text, func):
         super(QtyButton, self).__init__()
         self.parent = parent
-        self.setMinimumSize(48, 48)
-        self.setMaximumSize(48, 48)
+        self.setMinimumSize(60, 60)
+        self.setMaximumSize(60, 60)
         self.setText(text)
+        self.setFont(fonts.Fonts().mainFontBold())
         self.setStyleSheet(stylesheets.MainStylesheets().getProblemButtonStylesheet())
         self.mousePressEvent = func
 
@@ -82,9 +88,10 @@ class CheckSolvabiliteButton(QPushButton):
     def __init__(self, parent):
         super(CheckSolvabiliteButton, self).__init__()
         self.parent = parent
-        self.setMinimumSize(192, 48)
-        self.setMaximumSize(192, 48)
-        self.setText("Check solvabilité")
+        self.setMinimumSize(192, 60)
+        self.setMaximumSize(192, 60)
+        self.setText("Check solutions")
+        self.setFont(fonts.Fonts().mainFontBold())
         self.setStyleSheet(stylesheets.MainStylesheets().getProblemButtonStylesheet())
 
         self.mousePressEvent = self.addValeur

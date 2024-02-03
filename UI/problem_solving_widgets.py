@@ -12,13 +12,48 @@ class GridSolvingWidget(QWidget):
         super(GridSolvingWidget, self).__init__()
 
         self.parent = parent
-        self.layout = QVBoxLayout()
+        self.layout = QHBoxLayout()
 
 
-        grid = Grid(self, contraintes, indices)
-        self.layout.addWidget(grid)
-        self.setLayout(self.layout)
+        self.grid = Grid(self, contraintes, indices)
+        self.layout.addWidget(self.grid)
     
+        self.utils = UtilsWidget(self, indices)
+        self.layout.addWidget(self.utils)
+    
+        self.setLayout(self.layout)
+
+    def updatePosLabel(self, row, col):
+        self.utils.updatePosLabel(row, col)
+
+    def allGridsToMatrix(self):
+        self.grid.allGridsToMatrix()
+
+class UtilsWidget(QWidget):
+    def __init__(self, parent, indices):
+        super(UtilsWidget, self).__init__()
+        self.parent = parent
+        layout = QVBoxLayout()
+
+        self.pos_label = QLabel()
+        self.indices_widget = IndicesWidget(self, indices)
+        self.check_button = CheckButton(self)
+
+        layout.addStretch()
+        layout.addWidget(self.pos_label)
+        layout.addWidget(self.indices_widget)
+        layout.addWidget(self.check_button)
+        self.setLayout(layout)
+
+    def updatePosLabel(self, row, col):
+        self.pos_label.setText(f"({row},{col})")
+
+    def allGridsToMatrix(self):
+        self.parent.allGridsToMatrix()
+
+    def changeIndicesColors(self):
+        self.indices_widget.changeIndicesColors()    
+
 
 class Grid(QWidget):
     def __init__(self, parent, contraintes, indices):
@@ -30,49 +65,57 @@ class Grid(QWidget):
         x = 0
         y = 0
 
-        for i in range(0, len(contraintes)):
-            if i == 0:
-                pb = ProblemGrid(self, contraintes[0], contraintes[1])
-                self.grids.append(pb)
-                grid_layout.addWidget(self.grids[i], 0, 0)
-                
-            elif i > 1:
-                if i % 2 == 0:
-                    x += 1
-                    print(f"GRILLE AJOUTEE A : (0, {x})")
-                    pb = ProblemGrid(self, contraintes[0], contraintes[i], has_left_grid=True)
-                    self.grids.append(pb)
-                    grid_layout.addWidget(self.grids[i - 1], 0, x)
-                else:
-                    y += 1
-                    pb = ProblemGrid(self, contraintes[i], contraintes[1], has_top_grid=True)
-                    self.grids.append(pb)
-                    grid_layout.addWidget(self.grids[i - 1], y, 0)
+        if len(contraintes) == 2:
+            pb1 = ProblemGrid(self, contraintes[0], contraintes[1])
+            self.grids.append(pb1)
+            grid_layout.addWidget(self.grids[0], 0, 0)
 
-        #pb1 = ProblemGrid(self, contraintes[0], contraintes[1])
-        #pb2 = ProblemGrid(self, contraintes[0], contraintes[2], has_left_grid = True)
-        #pb3 = ProblemGrid(self, contraintes[3], contraintes[1], has_top_grid = True)
-        #self.grids.append(pb1)
-        #self.grids.append(pb2)
-        #self.grids.append(pb3)
-        #grid_layout.addWidget(pb1, 0, 0)
-        #grid_layout.addWidget(pb2, 0, 1)
-        #grid_layout.addWidget(pb3, 1, 0)
-        
-        x += 1
-        self.pos_label = QLabel()
-        grid_layout.addWidget(self.pos_label, 0, x)
+        elif len(contraintes) == 3:
+            pb1 = ProblemGrid(self, contraintes[0], contraintes[1])
+            self.grids.append(pb1)
+            grid_layout.addWidget(self.grids[0], 0, 0)
 
-        self.indices_widget = IndicesWidget(self, indices)
-        grid_layout.addWidget(self.indices_widget, 3, x)
+            pb2 = ProblemGrid(self, contraintes[0], contraintes[2], has_left_grid=True)
+            self.grids.append(pb2)
+            grid_layout.addWidget(self.grids[1], 0, 1)
 
-        self.check_button = CheckButton(self)
-        grid_layout.addWidget(self.check_button, 4, x)
+            pb3 = ProblemGrid(self, contraintes[1], contraintes[2], has_top_grid=True)
+            self.grids.append(pb3)
+            grid_layout.addWidget(self.grids[2], 1, 1)
+
+        elif len(contraintes) == 4:
+            pb1 = ProblemGrid(self, contraintes[0], contraintes[1])
+            self.grids.append(pb1)
+            grid_layout.addWidget(self.grids[0], 0, 0)
+
+            pb2 = ProblemGrid(self, contraintes[0], contraintes[2], has_left_grid=True)
+            self.grids.append(pb2)
+            grid_layout.addWidget(self.grids[1], 0, 1)
+
+            pb3 = ProblemGrid(self, contraintes[0], contraintes[3], has_left_grid=True)
+            self.grids.append(pb3)
+            grid_layout.addWidget(self.grids[2], 0, 2)
+
+            pb4 = ProblemGrid(self, contraintes[3], contraintes[1], has_top_grid=True)
+            self.grids.append(pb4)
+            grid_layout.addWidget(self.grids[3], 1, 0)
+
+            pb5 = ProblemGrid(self, contraintes[3], contraintes[2], has_left_grid=True, has_top_grid=True)
+            self.grids.append(pb5)
+            grid_layout.addWidget(self.grids[4], 1, 1)
+
+            pb6 = ProblemGrid(self, contraintes[2], contraintes[1], has_top_grid=True)
+            self.grids.append(pb6)
+            grid_layout.addWidget(self.grids[5], 2, 0)
+
+            grid_layout.addWidget(QLabel(), 0, 3)
+            grid_layout.addWidget(QLabel(), 0, 4)
+            grid_layout.addWidget(QLabel(), 3, 0)
 
         self.setLayout(grid_layout)
 
     def updatePosLabel(self, row, col):
-        self.pos_label.setText(f"({row},{col})")
+        self.parent.updatePosLabel(row, col)
 
     def allGridsToMatrix(self):
         grids = []
@@ -80,7 +123,8 @@ class Grid(QWidget):
             grids.append(g.toMatrix())
 
         return grids
-        
+
+
 
 
 class ProblemGrid(QWidget):
@@ -88,6 +132,7 @@ class ProblemGrid(QWidget):
         super(ProblemGrid, self).__init__()
         self.parent = parent
         self.buttons = []
+        
         self.nom_contrainte1 = contrainte1[0]
         self.nom_contrainte2 = contrainte2[0]
         self.contrainte1 = contrainte1[1]
@@ -99,15 +144,23 @@ class ProblemGrid(QWidget):
         self.authorize_simulation = True
 
         grid_layout = QGridLayout()
+        font_id = QFontDatabase.addApplicationFont("Ressources/Fonts/LatoWeb-Regular.ttf")
+        font_family = QFontDatabase.applicationFontFamilies(font_id)[0]
+        font = QFont(font_family)
         for j in range(0, len(self.contrainte1)):
             if not has_left_grid:
                 label_contrainte_1 = QLabel()
+                label_contrainte_1.setFont(font)
                 label_contrainte_1.setText(contrainte1[1][j])
+                label_contrainte_1.setStyleSheet("""QLabel{font-size:14px;}""")
                 grid_layout.addWidget(label_contrainte_1, j + 1, 0)
             for k in range(0, len(self.contrainte2)):
                 if not has_top_grid:
                     label_contrainte_2 = QLabel()
-                    label_contrainte_2.setText(contrainte2[1][k])
+                    label_contrainte_2.setFont(font)
+                    label_contrainte_2.setText(self.tiltText(contrainte2[1][k]))
+                    label_contrainte_2.setAlignment(Qt.AlignBottom)
+                    label_contrainte_2.setStyleSheet("""QLabel{font-size:14px;}""")
                     grid_layout.addWidget(label_contrainte_2, 0, k + 1)
 
                 button = GridButton(self, k + 1, j + 1)
@@ -117,7 +170,12 @@ class ProblemGrid(QWidget):
         print(f"{len(self.buttons)}")
         self.setLayout(grid_layout)
 
-    
+    def tiltText(self, text):
+        str = text[0]
+        for char in text[1:]:
+            str += "\n" + char
+        return str
+
     def setButtonState(self, button, button_state):
         if button_state == state.State.FALSE or button_state == state.State.NONE:
             for b in self.buttons:
@@ -185,7 +243,19 @@ class ProblemGrid(QWidget):
 
         return contraintes, matrix
         
-        
+
+class CenteredQLabel(QWidget):
+    def __init__(self):
+        super(CenteredQLabel, self).__init__()
+        self.label = QLabel()
+        self.label.setAlignment(Qt.AlignCenter)
+        layout = QHBoxLayout()
+        layout.addStretch()
+        layout.addWidget(self.label)
+        layout.addStretch()
+        layout.setAlignment(Qt.AlignBottom)
+        self.setLayout(layout)
+
 class CheckButton(QPushButton):
     def __init__(self, parent):
         super(CheckButton, self).__init__()
@@ -201,6 +271,7 @@ class CheckButton(QPushButton):
     def checkSolution(self, event):
         print("CHECK SOLUTION\n\n")
         grids = self.parent.allGridsToMatrix()
+        self.parent.changeIndicesColors()
         print("CHECK SOLUTION\n\n")
         
 
@@ -369,6 +440,7 @@ class IndicesWidget(QWidget):
     def __init__(self, parent, indices):
         super(IndicesWidget, self).__init__()
         self.parent = parent
+        self.indices = indices
         self.layout = QVBoxLayout(self)
         self.setLayout(self.layout)
 
@@ -380,12 +452,11 @@ class IndicesWidget(QWidget):
         self.scroll_layout = QVBoxLayout(self.scroll_content)
         self.scroll_layout.setAlignment(Qt.AlignTop)
         self.scroll_content.setLayout(self.scroll_layout)
-        print(indices)
-        for i in indices:
+        for i in self.indices:
             indice = QLabel()
-            indice.setStyleSheet("QLabel{font:16px;}")
+            indice.setStyleSheet(stylesheets.MainStylesheets().getIndiceNeutralStylesheet())
             indice.setText(i.text)
-            self.scroll_layout.addWidget(indice)            
+            self.scroll_layout.addWidget(indice)
             """for i_ in i:
                 if len(i_) > 0:
                     indice = QLabel()
@@ -396,7 +467,14 @@ class IndicesWidget(QWidget):
         self.scroll.setStyleSheet(stylesheets.MainStylesheets().getScrollerStylesheet())
         self.setLayout(self.layout)
 
-
+    def changeIndicesColors(self):
+        for i in range(0, self.scroll_layout.count()):
+            if i % 2 == 0:
+                print("PAIR")
+                self.scroll_layout.itemAt(i).widget().setStyleSheet(stylesheets.MainStylesheets().getIndiceOkayStylesheet())
+            else:
+                print("IMPAIR")
+                self.scroll_layout.itemAt(i).widget().setStyleSheet(stylesheets.MainStylesheets().getIndiceNotOkayStylesheet())
 
 
 

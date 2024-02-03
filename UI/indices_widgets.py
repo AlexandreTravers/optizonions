@@ -3,6 +3,7 @@ from PyQt5 import QtCore, QtGui
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 import stylesheets
+import fonts
 
 class IndiceCreator(QWidget):
     def __init__(self, parent):
@@ -12,7 +13,9 @@ class IndiceCreator(QWidget):
         label = QLabel()
         label.setText("Indice :")
         label.setStyleSheet("QLabel{font:20px;}")
+        label.setFont(fonts.Fonts().mainFontBold())
         self.indice = QTextEdit()
+        self.indice.setFont(fonts.Fonts().mainFontBold())
         self.indice.setMinimumHeight(40)
         self.indice.setMaximumHeight(40)
         self.indice.setMinimumWidth(500)
@@ -26,12 +29,15 @@ class IndiceCreator(QWidget):
         self.add_bouton.setMaximumSize(256, 40)
         self.add_bouton.setText("Ajouter indice")
         self.add_bouton.setStyleSheet(stylesheets.MainStylesheets().getProblemButtonStylesheet())
+        self.add_bouton.setFont(fonts.Fonts().mainFontBold())
 
         self.add_bouton.mousePressEvent = self.addIndice
 
         self.label_valide = QLabel()
         self.label_valide.setText("")
         self.label_valide.setStyleSheet("QLabel{font:20px;}")
+        self.label_valide.setFont(fonts.Fonts().mainFontBold())
+
 
 
         self.layout.addWidget(label)
@@ -94,7 +100,8 @@ class IndiceCreation(QWidget):
         self.indice_text = indice_text
         label = QLabel()
         label.setText(self.indice_text)
-        label.setStyleSheet("QLabel{font:15px;}")
+        label.setStyleSheet("QLabel{font:18px;}")
+        label.setFont(fonts.Fonts().mainFontBold())
 
         self.contraintes_manager = ContraintesManager(self, valeurs)
         
@@ -104,6 +111,7 @@ class IndiceCreation(QWidget):
         self.remove_bouton.setText("-")
         self.remove_bouton.setStyleSheet(stylesheets.MainStylesheets().getProblemButtonStylesheet())
         self.remove_bouton.mousePressEvent = self.removeIndice
+        self.remove_bouton.setFont(fonts.Fonts().mainFontBold())
 
         self.layout.addWidget(self.remove_bouton)
         self.layout.addWidget(label)
@@ -176,6 +184,7 @@ class ContrainteCreation(QWidget):
         self.layout = QHBoxLayout()
         self.lvalue = QComboBox()
         self.lvalue.setStyleSheet(stylesheets.MainStylesheets().getComboboxStylesheet())
+        self.lvalue.setFont(fonts.Fonts().mainFontBold())
         self.lvalue.setMinimumHeight(30)
         self.lvalue.setMaximumHeight(30)
         self.lvalue.setMinimumWidth(120)
@@ -187,6 +196,7 @@ class ContrainteCreation(QWidget):
 
         self.operation = QComboBox()
         self.operation.setStyleSheet(stylesheets.MainStylesheets().getComboboxStylesheet())
+        self.operation.setFont(fonts.Fonts().mainFontBold())
         self.operation.setMinimumHeight(30)
         self.operation.setMaximumHeight(30)
         self.operation.setMinimumWidth(120)
@@ -197,6 +207,7 @@ class ContrainteCreation(QWidget):
 
         self.rvalue = QComboBox()
         self.rvalue.setStyleSheet(stylesheets.MainStylesheets().getComboboxStylesheet())
+        self.rvalue.setFont(fonts.Fonts().mainFontBold())
         self.rvalue.setMinimumHeight(30)
         self.rvalue.setMaximumHeight(30)
         self.rvalue.setMinimumWidth(120)
@@ -214,6 +225,9 @@ class ContrainteCreation(QWidget):
         self.add_bouton.setMinimumSize(30, 30)
         self.add_bouton.setMaximumSize(30, 30)
         self.add_bouton.setText("+")
+        self.add_bouton.setFont(fonts.Fonts().mainFontBold())
+
+
         self.add_bouton.setStyleSheet(stylesheets.MainStylesheets().getProblemButtonStylesheet())
         self.add_bouton.mousePressEvent = self.addContrainte
         self.layout.addWidget(self.add_bouton)
@@ -256,7 +270,9 @@ class VerbeEntite(QWidget):
         self.layout_indice = QHBoxLayout()
         label_indice = QLabel()
         label_indice.setText("Verbe indice")
-        label_indice.setStyleSheet("QLabel{font:16px;}")
+        label_indice.setStyleSheet("QLabel{font:22px;}")
+        label_indice.setFont(fonts.Fonts().mainFontBold())
+
         self.entite_indice = QTextEdit()
         self.entite_indice.setMinimumHeight(40)
         self.entite_indice.setMaximumHeight(40)
@@ -264,6 +280,7 @@ class VerbeEntite(QWidget):
         self.entite_indice.setMaximumWidth(100)
         self.entite_indice.setAlignment(Qt.AlignVCenter)
         self.entite_indice.setStyleSheet(stylesheets.MainStylesheets().getTextEditStylesheet())
+        self.entite_indice.setFont(fonts.Fonts().mainFontBold())
         self.entite_indice.setText("Action")
         self.entite_indice.textChanged.connect(self.modifSelfVerbe)        
         self.layout_indice.addWidget(label_indice)
@@ -287,9 +304,11 @@ class ValeursEntiteMere(QWidget):
         self.layout_indice = QHBoxLayout()
         self.label_indice = QLabel()
         self.label_indice.setText(verbe)
-        self.label_indice.setStyleSheet("QLabel{font:16px;}")
+        self.label_indice.setStyleSheet("QLabel{font:20px;}")
+        self.label_indice.setFont(fonts.Fonts().mainFontBold())
         self.entite_indice = QComboBox()
         self.entite_indice.setStyleSheet(stylesheets.MainStylesheets().getComboboxStylesheet())
+        self.entite_indice.setFont(fonts.Fonts().mainFontBold())
         self.entite_indice.setMinimumHeight(30)
         self.entite_indice.setMaximumHeight(30)
         self.entite_indice.setMinimumWidth(120)

@@ -124,6 +124,9 @@ class IndiceSolving():
     def __init__(self, texte, contraintes):
         self.texte = texte
         self.contraintes = contraintes
+    
+    def __init__(self):
+        pass
 
 class ContrainteSolving():
     def __init__(self, lvalue, equals, rvalue):

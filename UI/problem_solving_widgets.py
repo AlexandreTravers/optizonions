@@ -384,7 +384,7 @@ class IndicesWidget(QWidget):
         for i in indices:
             indice = QLabel()
             indice.setStyleSheet("QLabel{font:16px;}")
-            indice.setText(i)
+            indice.setText(i.text)
             self.scroll_layout.addWidget(indice)            
             """for i_ in i:
                 if len(i_) > 0:

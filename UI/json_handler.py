@@ -1,5 +1,5 @@
 import json
-
+from indices_widgets import *
 
 class JsonHandler():
     def __init__(self):
@@ -100,12 +100,14 @@ class JsonHandler():
 
     def loadCluesFromFiles(self, json_file):
         data = self.loadFromFile(json_file) 
-        problem = data['problem']  
+        problem = data['problem'] 
+        indicesSolved = []
         indices = []
         if "indices" in problem:  # Vérifier si 'indices' existe pour éviter KeyError
             for indice in problem["indices"]:
+                indiceSolving = IndiceSolving()
                 nomIndice = indice["nomIndice"]
-                '''
+                indiceSolving.text = nomIndice
                 contraintes = []
                 for contrainte in indice["contraintes"]:
                     lvalue = contrainte["lvalue"]
@@ -113,9 +115,13 @@ class JsonHandler():
                     rvalue = contrainte["rvalue"]
                     relation = "=" if equal else "!="
                     contraintes.append(f"{lvalue} {relation} {rvalue}")
-                '''
+                
                 #indices.append(f"{nomIndice}: {' & '.join(contraintes)}")
                 indices.append(f"{nomIndice}")
+                
+                indiceSolving.contraintes = contraintes
+                indicesSolved.append(indiceSolving)
+
         else:
             print("Aucun indice trouvé dans le fichier JSON.")
-        return indices
+        return indicesSolved

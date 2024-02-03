@@ -5,6 +5,7 @@ from problem_creation_widgets import *
 from problem_solving_widgets import *
 from zebra_solving_widgets import *
 from main_menu_widgets import *
+from json_handler import *
 import problem_generator
 import json
 
@@ -20,10 +21,10 @@ class ProblemWindow(QMainWindow):
 
         
         
-        contraintes = [("Prenom", ["Martin", "Alexandre", "Marc", "Louis"]), ("Lettre", ["A", "B", "C", "D"]), 
-                       ("Chiffre", ["1", "2", "3", "4"]), ("Couleur", ["Rouge", "Bleu", "Vert", "Jaune"]),
-                       ("Vetement", ["Pull", "Polo", "Jean", "Cargo"]), ("Nationalite", ["EN", "FR", "AL", "ES"])
-                       ]
+        #contraintes = [("Prenom", ["Martin", "Alexandre", "Marc", "Louis"]), ("Lettre", ["A", "B", "C", "D"]), 
+        #               ("Chiffre", ["1", "2", "3", "4"]), ("Couleur", ["Rouge", "Bleu", "Vert", "Jaune"]),
+        #               ("Vetement", ["Pull", "Polo", "Jean", "Cargo"]), ("Nationalite", ["EN", "FR", "AL", "ES"])
+        #              ]
         #contraintes = [("Prenom", ["Martin", "Alexandre", "Marc", "Louis"]), ("Lettre", ["A", "B", "C", "D"]), 
         #               ("Chiffre", ["1", "2", "3", "4"]), ("Couleur", ["Rouge", "Bleu", "Vert", "Jaune"]),
         #               ("Vetement", ["Pull", "Polo", "Jean", "Cargo"])]
@@ -32,12 +33,17 @@ class ProblemWindow(QMainWindow):
         
         #contraintes = [("Nationalite", ["Anglais", "Francais", "Allemand", "Espagnol"]), ("Lettre", ["A", "B", "C", "D"]), 
         #               ("Chiffre", ["1", "2", "3", "4"])]
-        indices = ["Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
-                   "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
-                   "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
-                   "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
-                   "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
-                   "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune"]
+        #indices = ["Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
+        #           "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
+        #           "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
+        #           "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
+        #           "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
+        #           "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune"]
+        jsonFile = "/home/etud/Documents/S1/Optimisation Appliquee/MonJison.json"
+        jsonH = JsonHandler()  
+        contraintes = jsonH.loadConstraintsFromFile(jsonFile)
+        indices = jsonH.loadCluesFromFiles(jsonFile)
+
         mainWidget = problem_generator.ProblemGenerator().CreateProblem(self, contraintes, indices)
         #GridSolvingWidget(self, contraintes, indices)
         #mainWidget = ZebraSolvingWidget(self, contraintes, indices)

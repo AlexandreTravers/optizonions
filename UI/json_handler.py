@@ -125,3 +125,6 @@ class JsonHandler():
         else:
             print("Aucun indice trouvé dans le fichier JSON.")
         return indicesSolved
+    
+
+        

@@ -1,0 +1,97 @@
+{
+    "problem": {
+        "Vehicule": {
+            "verbe": "Conduit",
+            "champs": {
+                "champ1": "Mercedes",
+                "champ2": "Opel",
+                "champ3": "Fiat",
+                "champ4": "Toyota"
+            }
+        },
+        "Tenue": {
+            "verbe": "Porte",
+            "champs": {
+                "champ1": "Jaune",
+                "champ2": "Rouge",
+                "champ3": "Noir",
+                "champ4": "Bleu"
+            }
+        },
+        "Religion": {
+            "verbe": "Venere",
+            "champs": {
+                "champ1": "Musulman",
+                "champ2": "Chretien",
+                "champ3": "Boudhiste",
+                "champ4": "Agnostique"
+            }
+        },
+        "Prenom": {
+            "intitule": "principale",
+            "champs": {
+                "champ1": {
+                    "nom": "Richard",
+                    "Vehicule": "Mercedes",
+                    "Tenue": "Jaune",
+                    "Religion": "Musulman"
+                },
+                "champ2": {
+                    "nom": "Bernard",
+                    "Vehicule": "Lamborghini",
+                    "Tenue": "Rouge",
+                    "Religion": "Chretien"
+                },
+                "champ3": {
+                    "nom": "Anonymousse",
+                    "Vehicule": "Fiat",
+                    "Tenue": "Noir",
+                    "Religion": "Boudhiste"
+                },
+                "champ4": {
+                    "nom": "Jane",
+                    "Vehicule": "Toyota",
+                    "Tenue": "Bleu",
+                    "Religion": "Agnostique"
+                }
+            }
+        },
+        "indices": [
+            {
+                "nomIndice": "Jane ne conduit pas de mercedes",
+                "contraintes": [
+                    {
+                        "lvalue": "Jane",
+                        "equal": false,
+                        "rvalue": "Mercedes"
+                    }
+                ]
+            },
+            {
+                "nomIndice": "La personne portant une tenue rouge n'est pas musulmane",
+                "contraintes": [
+                    {
+                        "lvalue": "Rouge",
+                        "equal": false,
+                        "rvalue": "Musulman"
+                    }
+                ]
+            },
+            {
+                "nomIndice": "La personne ayant une toyota porte une tenue bleue et n'est pas boudhiste",
+                "contraintes": [
+                    {
+                        "lvalue": "Toyota",
+                        "equal": true,
+                        "rvalue": "Bleu"
+                    },
+                    {
+                        "lvalue": "Toyota",
+                        "equal": false,
+                        "rvalue": "Boudhiste"
+                    }
+                ]
+            }
+        ]
+    }
+}

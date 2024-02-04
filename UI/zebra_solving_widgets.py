@@ -8,14 +8,14 @@ import stylesheets
 import state
 
 class ZebraSolvingWidget(QWidget):
-    def __init__(self, parent, contraintes, indices):
+    def __init__(self, parent, contraintes, indices, numPb):
         super(ZebraSolvingWidget, self).__init__()
 
         self.parent = parent
         self.layout = QVBoxLayout()
 
 
-        zebre = Zebre(self, contraintes)
+        zebre = Zebre(self, contraintes, numPb)
         indices_widget = IndicesWidget(self, indices)
         self.layout.addWidget(zebre)
         self.layout.addWidget(indices_widget)
@@ -23,7 +23,7 @@ class ZebraSolvingWidget(QWidget):
     
 
 class Zebre(QWidget):
-    def __init__(self, parent, contraintes):
+    def __init__(self, parent, contraintes, numPb):
         super(Zebre, self).__init__() 
         self.parent = parent
         
@@ -41,7 +41,7 @@ class Zebre(QWidget):
             self.entites.append(z)
             layout.addWidget(z)
         
-        self.check_button = CheckButton(self)
+        self.check_button = CheckButton(self, numPb)
         layout.addWidget(self.check_button)
 
         self.setLayout(layout)
@@ -130,9 +130,10 @@ class EntiteZebre(QWidget):
         
         
 class CheckButton(QPushButton):
-    def __init__(self, parent):
+    def __init__(self, parent, numPb):
         super(CheckButton, self).__init__()
         self.parent = parent
+        self.numPb = numPb
 
         self.setMinimumSize(QSize(192, 48))
         self.setMaximumSize(QSize(192, 48))

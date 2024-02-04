@@ -9,7 +9,7 @@ from modeles.mainSolver import ObjetMatrice
 
 
 class GridSolvingWidget(QWidget):
-    def __init__(self, parent, contraintes, indices):
+    def __init__(self, parent, contraintes, indices, numPb):
         super(GridSolvingWidget, self).__init__()
 
         self.parent = parent
@@ -19,7 +19,7 @@ class GridSolvingWidget(QWidget):
         self.grid = Grid(self, contraintes, indices)
         self.layout.addWidget(self.grid)
     
-        self.utils = UtilsWidget(self, indices)
+        self.utils = UtilsWidget(self, indices, numPb)
         self.layout.addWidget(self.utils)
     
         self.setLayout(self.layout)
@@ -31,7 +31,7 @@ class GridSolvingWidget(QWidget):
         return self.grid.allGridsToMatrix()
 
 class UtilsWidget(QWidget):
-    def __init__(self, parent, indices):
+    def __init__(self, parent, indices, numPb):
         super(UtilsWidget, self).__init__()
         self.parent = parent
         layout = QVBoxLayout()
@@ -40,7 +40,7 @@ class UtilsWidget(QWidget):
         self.pos_label.setStyleSheet("QLabel{font-size:16px;}")
         self.pos_label.setFont(fonts.Fonts().mainFontBold())
         self.indices_widget = IndicesWidget(self, indices)
-        self.check_button = CheckButton(self)
+        self.check_button = CheckButton(self, numPb)
 
         layout.addStretch()
         layout.addWidget(self.pos_label)
@@ -266,9 +266,10 @@ class CenteredQLabel(QWidget):
         self.setLayout(layout)
 
 class CheckButton(QPushButton):
-    def __init__(self, parent):
+    def __init__(self, parent, numPb):
         super(CheckButton, self).__init__()
         self.parent = parent
+        self.numPb = numPb
 
         self.setMinimumSize(QSize(256, 60))
         self.setMaximumSize(QSize(256, 60))
@@ -303,7 +304,7 @@ class CheckButton(QPushButton):
                 if (len(oneR) > 0):
                     matrix.append(oneR)
         print(matrix)
-        resultat = ObjetMatrice(matrix, 1).getResult()
+        resultat = ObjetMatrice(matrix, self.numPb).getResult()
         resultat.append(allIsMarked)
         print(resultat)
         print("CHECK SOLUTION\n\n")

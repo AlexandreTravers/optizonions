@@ -9,9 +9,9 @@ import json
 
 
 class ProblemGenerator():
-    def CreateProblem(self, parent, contraintes, indices):
+    def CreateProblem(self, parent, contraintes, indices, numPb):
         if len(contraintes) > 4: 
-            return ZebraSolvingWidget(parent, contraintes, indices)
+            return ZebraSolvingWidget(parent, contraintes, indices, numPb)
         
         else:
-            return GridSolvingWidget(parent, contraintes, indices)
+            return GridSolvingWidget(parent, contraintes, indices, numPb)

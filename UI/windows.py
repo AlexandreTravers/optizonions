@@ -81,7 +81,7 @@ class ProblemWindow(QMainWindow):
             jsonH = JsonHandler()
             contraintes = jsonH.loadConstraintsFromFile(jsonFile)
             indices = jsonH.loadCluesFromFiles(jsonFile)
-            mainWidget = problem_generator.ProblemGenerator().CreateProblem(self, contraintes, indices)
+            mainWidget = problem_generator.ProblemGenerator().CreateProblem(self, contraintes, indices, num_probleme)
             self.mainWidget = mainWidget
             self.container_layout = QHBoxLayout()
             #self.mainWidget = None
@@ -194,7 +194,7 @@ class ProblemWindow(QMainWindow):
     def switchToSolving(self, contraintes, indices):
         self.menubar.destroy()
         print(contraintes)
-        mainWidget = GridSolvingWidget(self, contraintes, indices)
+        mainWidget = GridSolvingWidget(self, contraintes, indices, 4)
         self.mainWidget = mainWidget
 
         container = QWidget()

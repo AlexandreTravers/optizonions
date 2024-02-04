@@ -1,0 +1,91 @@
+{
+    "problem": {
+        "Processor": {
+            "verbe": "Equipé",
+            "champs": {
+                "champ1": "2.0 Mhz",
+                "champ2": "2.3 Mhz",
+                "champ3": "2.5 Mhz",
+                "champ4": "2.7 Mhz",
+                "champ5": "3.1 Mhz"
+            }
+        },
+        "HDD": {
+            "verbe": "Stock",
+            "champs": {
+                "champ1": "250 Gb",
+                "champ2": "320 Gb",
+                "champ3": "500 Gb",
+                "champ4": "750 Gb",
+                "champ5": "1024 Gb"
+            }
+        },
+        "Price": {
+            "verbe": "Coûte",
+            "champs": {
+                "champ1": "699€",
+                "champ2": "999€",
+                "champ3": "1149€",
+                "champ4": "1349€",
+                "champ5": "1649€"
+            }
+        },
+        "Monitor": {
+            "intitule": "principale",
+            "champs": {
+                "champ1": {
+                    "nom": "13'",
+                    "Processor": "",
+                    "HDD": "",
+                    "Price": ""
+                },
+                "champ2": {
+                    "nom": "15'",
+                    "Processor": "",
+                    "HDD": "",
+                    "Price": ""
+                },
+                "champ3": {
+                    "nom": "15.6'",
+                    "Processor": "",
+                    "HDD": "",
+                    "Price": ""
+                },
+                "champ4": {
+                    "nom": "21.5'",
+                    "Processor": "",
+                    "HDD": "",
+                    "Price": ""
+                },
+                "champ5": {
+                    "nom": "27'",
+                    "Processor": "",
+                    "HDD": "",
+                    "Price": ""
+                }
+            }
+        },
+        "indices": [
+            {
+                "nomIndice": "Andrew a acheté l'ordinateur qui coûtait 300€ de moins que le PC qui a un processeur de 0.4 Mhz plus puissant que celui qui a un écran de 21.5'.",
+                "contraintes": [
+                ]
+            },
+            {
+                "nomIndice": "Les cinq ordinateurs sont : Celui choisi par Andrew (qui n'a pas l'écran de 27'), celui qui a le processeur de 2.0 Mhz, celui qui a un dique dur de 250Go, celui qui coûte 1149€ et celui qui a le disque dur plus grand que celui d'Andrew mais plus petit que celui qui a le processeur de 2.7 Mhz (qui n'a pas l'écran de 15').",
+                "contraintes": [
+                ]
+            },
+            {
+                "nomIndice": "L'ordinateur équipé du HDD de 320Go est équipé d'un processeur 2.0 ou 2.3 Mhz. Le processeur de l'ordinateur qui a l'écran de 15' est plus puissant que celui de l'ordinateur qui coûte 999€, mais moins puissant que le processeur de l'ordinateur à 1349€.",
+                "contraintes": [
+                ]
+            },
+            {
+                "nomIndice": "L'ordinateur doté d'un écran de 27 pouces n'a pas le disque dur de 320Go. Le dique dur de 500Go est inclus dans l'ordinateur qui dispose d'un processeur plus puissant et d'un écran plus grand que celui qui coute 699€ (ce qui n'inclut pas le disque dur de 320Go).",
+                "contraintes": [
+                ]
+            }
+        ]
+    }
+}

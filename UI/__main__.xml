@@ -1,0 +1,16 @@
+<instance format="XCSP3" type="CSP">
+  <variables>
+    <array id="name" size="[5]"> 0..4 </array>
+    <array id="time" size="[5]"> 0..4 </array>
+    <array id="day" size="[5]"> 0..4 </array>
+    <array id="film" size="[5]"> 0..4 </array>
+  </variables>
+  <constraints>
+    <allDifferent> name[] </allDifferent>
+    <allDifferent> time[] </allDifferent>
+    <allDifferent> day[] </allDifferent>
+    <allDifferent> film[] </allDifferent>
+    <intension> eq(film[0],time[2]) </intension>
+    <intension> eq(day[3],time[1]) </intension>
+  </constraints>
+</instance>

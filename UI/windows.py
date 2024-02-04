@@ -9,6 +9,7 @@ from json_handler import *
 import problem_generator
 import json
 import os
+import re
 
 
 
@@ -131,6 +132,19 @@ class ProblemWindow(QMainWindow):
         if jsonFile != "":
             contraintes = jsonH.loadConstraintsFromFile(jsonFile)
             indices = jsonH.loadCluesFromFiles(jsonFile)
+            indexContraintes = []
+            print(contraintes)
+            for i in indices:
+                for c in i.contraintes:
+                    element1, element2 = self.extraire_elements(c)
+                    print(c)
+                    print(self.trouver_indices(element1,element2,contraintes))
+                    indexContraintes.append(self.trouver_indices(element1,element2,contraintes))
+            
+                i.indexContraintes = indexContraintes
+                print(i.text)
+                print(i.indexContraintes)
+                
             mainWidget = problem_generator.ProblemGenerator().CreateProblem(self, contraintes, indices, -1)
             self.mainWidget = mainWidget
             self.container_layout = QHBoxLayout()
@@ -148,6 +162,27 @@ class ProblemWindow(QMainWindow):
         else :
             print("Pas de fichier trouvé")
 
+
+    def extraire_elements(self,phrase):
+        
+        elements = re.split(r' = | != ', phrase)
+        return elements[0], elements[1] if len(elements) == 2 else (None, None)
+        
+    def trouver_indices(self, element1, element2, contraintes):
+
+        index_entite1 = index_element1 = index_entite2 = index_element2 = None
+        
+
+        for index_entite, (entite, elements) in enumerate(contraintes):
+            if element1 in elements:
+                index_entite1, index_element1 = index_entite, elements.index(element1)
+            if element2 in elements:
+                index_entite2, index_element2 = index_entite, elements.index(element2)
+        
+        if None not in [index_entite1, index_element1, index_entite2, index_element2]:
+            return [index_entite1, index_element1], [index_entite2, index_element2]
+        else:
+            return None
         
     def importer(self):
         print("Action Importer triggered")

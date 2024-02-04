@@ -132,6 +132,7 @@ class IndiceSolving():
     def __init__(self, texte, contraintes):
         self.texte = texte
         self.contraintes = contraintes
+        self.indexContraintes = []
     
     def __init__(self):
         pass

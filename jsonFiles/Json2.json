@@ -38,10 +38,10 @@
         },
         "indices": [
             {
-                "nomIndice": "Jane conduit une mercedes",
+                "nomIndice": "Richard conduit une mercedes",
                 "contraintes": [
                     {
-                        "lvalue": "Jane",
+                        "lvalue": "Richard",
                         "equal": true,
                         "rvalue": "Mercedes"
                     }

@@ -306,7 +306,7 @@ class CheckButton(QPushButton):
                 if (len(oneR) > 0):
                     matrix.append(oneR)
         print(matrix)
-        if self.numPb <= 3:
+        if (self.numPb <= 3 and self.numPb >= 1):
             resultat = ObjetMatrice(matrix, self.numPb).getResult()
         else:
             resultat = check.check_test(matrix, self.parent.indices_widget.indices)

@@ -131,7 +131,7 @@ class ProblemWindow(QMainWindow):
         if jsonFile != "":
             contraintes = jsonH.loadConstraintsFromFile(jsonFile)
             indices = jsonH.loadCluesFromFiles(jsonFile)
-            mainWidget = problem_generator.ProblemGenerator().CreateProblem(self, contraintes, indices)
+            mainWidget = problem_generator.ProblemGenerator().CreateProblem(self, contraintes, indices, -1)
             self.mainWidget = mainWidget
             self.container_layout = QHBoxLayout()
             #self.mainWidget = None

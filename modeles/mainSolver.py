@@ -70,7 +70,7 @@ class ObjetMatrice:
         if(self.pb == 3):
             datas = []
             for i in self.matrice:
-                datas.append(self.transposée(i))
+                datas.append(i)
         else:
             datas = [self.matrice[0], self.matrice[1], self.matrice[2], self.transposée(self.matrice[5]), self.transposée(self.matrice[3]), self.transposée(self.matrice[4])]
         resultats= []

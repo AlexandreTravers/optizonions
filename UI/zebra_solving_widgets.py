@@ -17,11 +17,13 @@ class ZebraSolvingWidget(QWidget):
 
 
         zebre = Zebre(self, contraintes, numPb)
-        indices_widget = IndicesWidget(self, indices)
+        self.indices_widget = IndicesWidget(self, indices)
         self.layout.addWidget(zebre)
-        self.layout.addWidget(indices_widget)
+        self.layout.addWidget(self.indices_widget)
         self.setLayout(self.layout)
     
+    def changeIndicesColors(self, resultat):
+        self.indices_widget.changeIndicesColors(resultat)
 
 class Zebre(QWidget):
     def __init__(self, parent, contraintes, numPb):
@@ -74,7 +76,9 @@ class Zebre(QWidget):
         elif s == state.State.FALSE:
             return "FALSE"
 
-        
+    def changeIndicesColors(self, resultat):
+        self.parent.changeIndicesColors(resultat)
+
 class ContraintesZebre(QWidget):
     def __init__(self, parent, noms_contraintes):
         super(ContraintesZebre, self).__init__()
@@ -213,3 +217,10 @@ class IndicesWidget(QWidget):
         self.scroll.setWidget(self.scroll_content)
         self.scroll.setStyleSheet(stylesheets.MainStylesheets().getScrollerStylesheet())
         self.setLayout(self.layout)
+
+    def changeIndicesColors(self, resultat):
+        for i in range(0, len(resultat)-1):
+            if(resultat[i]):
+                self.scroll_layout.itemAt(i).widget().setStyleSheet(stylesheets.MainStylesheets().getIndiceOkayStylesheet())
+            else:
+                self.scroll_layout.itemAt(i).widget().setStyleSheet(stylesheets.MainStylesheets().getIndiceNotOkayStylesheet())

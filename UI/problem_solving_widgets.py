@@ -23,6 +23,15 @@ class GridSolvingWidget(QWidget):
     
         self.utils = UtilsWidget(self, indices, numPb)
         self.layout.addWidget(self.utils)
+
+
+        """label_contrainte_2 = VerticalTextWidget(self, "TEXTE DE TEST")
+        label_contrainte_2.setMinimumWidth(40)
+        label_contrainte_2.setMaximumWidth(40)
+        label_contrainte_2.show()
+        label_contrainte_2.update()
+        label_contrainte_2.repaint()
+        self.layout.addWidget(label_contrainte_2)"""
     
         self.setLayout(self.layout)
 
@@ -75,6 +84,10 @@ class Grid(QWidget):
             self.grids.append(pb1)
             grid_layout.addWidget(self.grids[0], 0, 0)
 
+            grid_layout.addWidget(QLabel(), 0, 1)
+            grid_layout.addWidget(QLabel(), 1, 0)
+
+
         elif len(contraintes) == 3:
             pb1 = ProblemGrid(self, contraintes[0], contraintes[1])
             self.grids.append(pb1)
@@ -87,6 +100,10 @@ class Grid(QWidget):
             pb3 = ProblemGrid(self, contraintes[1], contraintes[2], has_top_grid=True)
             self.grids.append(pb3)
             grid_layout.addWidget(self.grids[2], 1, 1)
+            
+            grid_layout.addWidget(QLabel(), 0, 2)
+            grid_layout.addWidget(QLabel(), 2, 0)
+
 
         elif len(contraintes) == 4:
             pb1 = ProblemGrid(self, contraintes[0], contraintes[1])
@@ -164,7 +181,9 @@ class ProblemGrid(QWidget):
                     label_contrainte_2.setText(self.tiltText(contrainte2[1][k]))
                     label_contrainte_2.setAlignment(Qt.AlignBottom)
                     label_contrainte_2.setStyleSheet("""QLabel{font-size:14px;}""")
+                    #label_contrainte_2 = VerticalTextWidget(self, contrainte2[1][k])
                     grid_layout.addWidget(label_contrainte_2, 0, k + 1)
+                    label_contrainte_2.repaint()
 
                 button = GridButton(self, k + 1, j + 1)
                 self.buttons.append(button)
@@ -518,17 +537,22 @@ class IndicesWidget(QWidget):
             else:
                 self.scroll_layout.itemAt(i).widget().setStyleSheet(stylesheets.MainStylesheets().getIndiceNotOkayStylesheet())
 
-class VerticalLabel(QWidget):
-    def __init__(self):
-        super(VerticalLabel, self).__init__()
-    
-    def setText(self, text):
+class VerticalTextWidget(QWidget):
+    def __init__(self, parent, text):
+        super().__init__(parent)
         self.text = text
 
-    def paintEvent(self):
-        painter = QtGui.QPainter(self)
-        painter.setPen(QtCore.Qt.black)
-        painter.translate(20, 100)
-        painter.rotate(-90)
+
+    def paintEvent(self, event):
+        print("Paint Event !")
+        painter = QPainter(self)
+        #painter.setRenderHint(QPainter.Antialiasing)  # Pour un rendu plus lisse
+
+        font = fonts.Fonts().mainFontBold()
+        font.setPixelSize(14)
+        painter.setFont(font)
+
+        # Définir la rotation pour afficher le texte à 90 degrés
+        painter.rotate(90)
+        # Dessiner le texte
         painter.drawText(0, 0, self.text)
-        painter.end()

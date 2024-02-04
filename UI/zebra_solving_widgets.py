@@ -2,11 +2,10 @@ from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-import sys
-from enum import Enum
 import stylesheets
 import state
 from modeles.mainSolver import ObjetMatrice
+import fonts
 
 
 class ZebraSolvingWidget(QWidget):
@@ -85,6 +84,9 @@ class ContraintesZebre(QWidget):
         for nc in noms_contraintes:
             label = QLabel()
             label.setText(nc)
+            label.setStyleSheet("QLabel{font-size:20px}")
+            label.setFont(fonts.Fonts().mainFontBold())
+
             #label.setStyleSheet()
             self.contraintes.append(label)
         for c in self.contraintes:
@@ -98,6 +100,8 @@ class EntiteZebre(QWidget):
         layout = QVBoxLayout()
         self.label_entite = QLabel()
         self.label_entite.setText(nom_entite)
+        self.label_entite.setStyleSheet("QLabel{font-size:20px}")
+        self.label_entite.setFont(fonts.Fonts().mainFontBold())
         layout.addWidget(self.label_entite)
 
         self.boxes = []
@@ -105,6 +109,7 @@ class EntiteZebre(QWidget):
             box = QComboBox()
             box.addItem("?")
             box.setStyleSheet(stylesheets.MainStylesheets().getComboboxStylesheet())
+            box.setFont(fonts.Fonts().mainFontBold())
             for c_ in c[1]:
                 box.addItem(c_)
             self.boxes.append(box)
@@ -137,11 +142,12 @@ class CheckButton(QPushButton):
         self.parent = parent
         self.numPb = numPb
 
-        self.setMinimumSize(QSize(192, 48))
-        self.setMaximumSize(QSize(192, 48))
+        self.setMinimumSize(QSize(192, 60))
+        self.setMaximumSize(QSize(192, 60))
         
         self.mousePressEvent = self.checkSolution
         self.setText("Check solution")
+        self.setFont(fonts.Fonts().mainFontBold())
         self.setStyleSheet(stylesheets.MainStylesheets().getProblemButtonStylesheet())
 
     def checkSolution(self, event):
@@ -194,7 +200,8 @@ class IndicesWidget(QWidget):
         print(indices)
         for i in indices:
             indice = QLabel()
-            indice.setStyleSheet("QLabel{font:16px;}")
+            indice.setStyleSheet("QLabel{font:20px;}")
+            indice.setFont(fonts.Fonts().mainFontBold())
             indice.setText(i.text)
             self.scroll_layout.addWidget(indice)            
             """for i_ in i:

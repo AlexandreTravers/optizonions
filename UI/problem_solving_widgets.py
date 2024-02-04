@@ -5,6 +5,7 @@ from PyQt5.QtGui import *
 import stylesheets
 import state
 import fonts
+import sys
 from modeles.mainSolver import ObjetMatrice
 
 

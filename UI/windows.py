@@ -10,6 +10,8 @@ import problem_generator
 import json
 import os
 
+
+
 class ProblemWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -41,10 +43,10 @@ class ProblemWindow(QMainWindow):
         #           "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
         #           "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune",
         #           "Anglais - A", "1 - Rouge", "B - 2", "A - Jaune"]
-        jsonFile = "../jsonFiles/MonJison.json"
-        jsonH = JsonHandler()  
-        contraintes = jsonH.loadConstraintsFromFile(jsonFile)
-        indices = jsonH.loadCluesFromFiles(jsonFile)
+        #jsonFile = "../jsonFiles/MonJison.json"
+        #jsonH = JsonHandler()  
+        #contraintes = jsonH.loadConstraintsFromFile(jsonFile)
+        #indices = jsonH.loadCluesFromFiles(jsonFile)
 
         #mainWidget = problem_generator.ProblemGenerator().CreateProblem(self, contraintes, indices)
         #GridSolvingWidget(self, contraintes, indices)
@@ -129,7 +131,7 @@ class ProblemWindow(QMainWindow):
         if jsonFile != "":
             contraintes = jsonH.loadConstraintsFromFile(jsonFile)
             indices = jsonH.loadCluesFromFiles(jsonFile)
-            mainWidget = problem_generator.ProblemGenerator().CreateProblem(self, contraintes, indices, 4)
+            mainWidget = problem_generator.ProblemGenerator().CreateProblem(self, contraintes, indices)
             self.mainWidget = mainWidget
             self.container_layout = QHBoxLayout()
             #self.mainWidget = None

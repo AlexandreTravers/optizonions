@@ -18,9 +18,9 @@ def pastaCon(datas):
         AllDifferent(age),
     )
 
-    # Andrea est juste a droite de la femme qui a 35 ans
+    # La personne qui aime le vin Argentin est en première position
     satisfy(
-        name[0] == age[1] + 1
+        wine[1] == 0
     )
 
     for i in range(len(datas)):

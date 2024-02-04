@@ -18,9 +18,9 @@ def pastaCon(datas):
         AllDifferent(age),
     )
 
-    # La femme qui aime les lasagnes est entre celle qui aime les vins Italien et celle qui aime les spaguetti
+    # Mme Brown est à la gauche de Julie
     satisfy(
-        (pasta[1] > wine[4]) & (pasta[1] < pasta[3])
+        surname[0] == name[2] - 1
     )
 
     for i in range(len(datas)):

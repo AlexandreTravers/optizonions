@@ -18,9 +18,9 @@ def pastaCon(datas):
         AllDifferent(age),
     )
 
-    # La femme qui aime les vins australien est entre victoria et la femme qui aime les vins français
+    # La femme avec un t-shirt jaune est juste à gauche de la femme qui a 35 ans
     satisfy(
-        (wine[0] > name[4]) & (wine[0] < wine[3])
+        shirt[4] == age[1] - 1
     )
 
     for i in range(len(datas)):

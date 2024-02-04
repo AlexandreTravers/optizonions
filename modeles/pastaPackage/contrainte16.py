@@ -18,9 +18,9 @@ def pastaCon(datas):
         AllDifferent(age),
     )
 
-    # La femme la plus jeune aime les Penne
+    # Mme Wilson porte le t-shirt blanc
     satisfy(
-        age[0] == pasta[2]
+        shirt[3] == surname[4]
     )
 
     for i in range(len(datas)):

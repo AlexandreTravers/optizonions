@@ -1,16 +1,39 @@
 <instance format="XCSP3" type="CSP">
   <variables>
-    <array id="name" size="[5]"> 0..4 </array>
-    <array id="time" size="[5]"> 0..4 </array>
-    <array id="day" size="[5]"> 0..4 </array>
-    <array id="film" size="[5]"> 0..4 </array>
+    <array id="var1" size="[3]"> 0..2 </array>
+    <array id="var2" size="[3]"> 0..2 </array>
+    <array id="var3" size="[3]"> 0..2 </array>
   </variables>
   <constraints>
-    <allDifferent> name[] </allDifferent>
-    <allDifferent> time[] </allDifferent>
-    <allDifferent> day[] </allDifferent>
-    <allDifferent> film[] </allDifferent>
-    <intension> eq(film[0],time[2]) </intension>
-    <intension> eq(day[3],time[1]) </intension>
+    <allDifferent> var1[] </allDifferent>
+    <allDifferent> var2[] </allDifferent>
+    <allDifferent> var3[] </allDifferent>
+    <intension> ne(var1[0],var2[0]) </intension>
+    <intension> ne(var1[0],var2[1]) </intension>
+    <intension> eq(var1[0],var2[2]) </intension>
+    <intension> ne(var1[1],var2[0]) </intension>
+    <intension> eq(var1[1],var2[1]) </intension>
+    <intension> ne(var1[1],var2[2]) </intension>
+    <intension> eq(var1[2],var2[0]) </intension>
+    <intension> ne(var1[2],var2[1]) </intension>
+    <intension> ne(var1[2],var2[2]) </intension>
+    <intension> ne(var1[0],var3[0]) </intension>
+    <intension> eq(var1[0],var3[1]) </intension>
+    <intension> ne(var1[0],var3[2]) </intension>
+    <intension> eq(var1[1],var3[0]) </intension>
+    <intension> ne(var1[1],var3[1]) </intension>
+    <intension> ne(var1[1],var3[2]) </intension>
+    <intension> ne(var1[2],var3[0]) </intension>
+    <intension> ne(var1[2],var3[1]) </intension>
+    <intension> eq(var1[2],var3[2]) </intension>
+    <intension> ne(var2[0],var3[0]) </intension>
+    <intension> ne(var2[0],var3[1]) </intension>
+    <intension> eq(var2[0],var3[2]) </intension>
+    <intension> eq(var2[1],var3[0]) </intension>
+    <intension> ne(var2[1],var3[1]) </intension>
+    <intension> ne(var2[1],var3[2]) </intension>
+    <intension> ne(var2[2],var3[0]) </intension>
+    <intension> eq(var2[2],var3[1]) </intension>
+    <intension> ne(var2[2],var3[2]) </intension>
   </constraints>
 </instance>

@@ -6,7 +6,7 @@ import sys
 from json_handler import *
 from enum import Enum
 import stylesheets
-import fonts
+#import fonts8
 
 from indices_widgets import *
 from problem_creation_buttons_widgets import *

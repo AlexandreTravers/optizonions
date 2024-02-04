@@ -5,6 +5,7 @@ from PyQt5.QtGui import *
 import stylesheets
 import state
 import fonts
+from modeles import check
 import sys
 from modeles.mainSolver import ObjetMatrice
 
@@ -307,6 +308,8 @@ class CheckButton(QPushButton):
         print(matrix)
         if self.numPb <= 3:
             resultat = ObjetMatrice(matrix, self.numPb).getResult()
+        else:
+            resultat = check.check_test(matrix, self.parent.indices_widget.indices)
         resultat.append(allIsMarked)
         print(resultat)
         print("CHECK SOLUTION\n\n")

@@ -1,0 +1,52 @@
+{
+    "problem": {
+        "Vehicule": {
+            "verbe": "Conduit",
+            "champs": {
+                "champ1": "Mercedes",
+                "champ2": "Opel",
+                "champ3": "Fiat"
+            }
+        },
+        "Tenue": {
+            "verbe": "Porte",
+            "champs": {
+                "champ1": "Jaune",
+                "champ2": "Rouge",
+                "champ3": "Noir"
+            }
+        },
+        "Prenom": {
+            "intitule": "principale",
+            "champs": {
+                "champ1": {
+                    "nom": "Richard",
+                    "Vehicule": "Mercedes",
+                    "Tenue": "Jaune"
+                },
+                "champ2": {
+                    "nom": "Bernard",
+                    "Vehicule": "Lamborghini",
+                    "Tenue": "Rouge"
+                },
+                "champ3": {
+                    "nom": "Anonymousse",
+                    "Vehicule": "Fiat",
+                    "Tenue": "Noir"
+                }
+            }
+        },
+        "indices": [
+            {
+                "nomIndice": "Jane conduit une mercedes",
+                "contraintes": [
+                    {
+                        "lvalue": "Jane",
+                        "equal": true,
+                        "rvalue": "Mercedes"
+                    }
+                ]
+            }
+        ]
+    }
+}

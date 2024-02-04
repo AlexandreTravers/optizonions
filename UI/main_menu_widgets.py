@@ -37,6 +37,10 @@ class MainMenu(QWidget):
     def initSolving(self):
         self.parent.initSolving()
 
+    def startPremadeProblem(self, num_probleme):
+        self.parent.startPremadeProblem(num_probleme)
+
+
 class SplitMenu(QWidget):
     def __init__(self, parent):
         super(SplitMenu, self).__init__()
@@ -54,6 +58,9 @@ class SplitMenu(QWidget):
 
     def initSolving(self):
         self.parent.initSolving()
+
+    def startPremadeProblem(self, num_probleme):
+        self.parent.startPremadeProblem(num_probleme)
 
 class PremadeProblemsMenu(QWidget):
     def __init__(self, parent):
@@ -76,6 +83,9 @@ class PremadeProblemsMenu(QWidget):
         self.layout.addWidget(zebre)
         self.layout.addStretch(1)
         self.setLayout(self.layout)
+
+    def startPremadeProblem(self, num_probleme):
+        self.parent.startPremadeProblem(num_probleme)
 
 class PremadeProblemButton(QWidget):
     def __init__(self, parent, nom_probleme, num_probleme):

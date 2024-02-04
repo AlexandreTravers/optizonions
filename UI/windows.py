@@ -64,6 +64,11 @@ class ProblemWindow(QMainWindow):
         self.setCentralWidget(container)
 
         self.show()
+
+    def startPremadeProblem(self, num_probleme):
+        print(num_probleme)
+        ###De là, il faudra charger le JSON du problème selon son numéro
+        ###Et il faudra le passer à la fenêtre de création de jeu
     
     def initProblemCreation(self):
         for i in range(self.container_layout.count()): 

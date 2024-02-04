@@ -74,7 +74,7 @@ class ObjetMatrice:
         else:
             datas = [self.matrice[0], self.matrice[1], self.matrice[2], self.transposée(self.matrice[5]), self.transposée(self.matrice[3]), self.transposée(self.matrice[4])]
         resultats= []
-        if self.pb == 1:
+        if self.pb == 2:
             resultats.append(pacc1.al_pacinoCon(datas))
             clear()
             resultats.append(pacc2.al_pacinoCon(datas))
@@ -88,7 +88,7 @@ class ObjetMatrice:
             resultats.append(pacc6.al_pacinoCon(datas))
             clear()
             resultats.append(pacc7.al_pacinoCon(datas))
-        elif self.pb == 2:
+        elif self.pb == 1:
             resultats.append(comc1.computerCon(datas))
             clear()
             resultats.append(comc2.computerCon(datas))

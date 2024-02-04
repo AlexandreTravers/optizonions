@@ -290,8 +290,8 @@ class GridButton(QPushButton):
         self.row = row
         self.col = col
 
-        self.setMinimumSize(QSize(50, 50))
-        self.setMaximumSize(QSize(50, 50))
+        self.setMinimumSize(QSize(40, 40))
+        self.setMaximumSize(QSize(40, 40))
 
         self.updateTimer = QTimer(self)
         self.updateTimer.setSingleShot(True)

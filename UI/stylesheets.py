@@ -40,7 +40,7 @@ class GridButtonStylesheets():
         {
             background-color: #00000000;
             color: #FFFFFF;
-            font: bold 24px;
+            font: bold 18px;
         }
 
         """
@@ -50,7 +50,7 @@ class GridButtonStylesheets():
         {
             background-color: #00000000;
             color: #DDDDDDDD;
-            font: bold 24px;
+            font: bold 18px;
         }
 
         """

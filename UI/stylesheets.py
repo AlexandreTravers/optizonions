@@ -191,11 +191,11 @@ class MainStylesheets():
         }
         """
 
-        self.indice_neutral = """QLabel {font:16px;color:black;}"""
+        self.indice_neutral = """QLabel {font:20px;color:black;}"""
 
-        self.indice_okay = """QLabel {font:16px;color:green;}}"""
+        self.indice_okay = """QLabel {font:20px;color:green;}}"""
 
-        self.indice_not_okay = """QLabel {font:16px;color:red;}"""
+        self.indice_not_okay = """QLabel {font:20px;color:red;}"""
 
     def getTextEditStylesheet(self):
         return self.text_edit_style_sheet

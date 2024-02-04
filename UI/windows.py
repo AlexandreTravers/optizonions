@@ -67,9 +67,36 @@ class ProblemWindow(QMainWindow):
 
     def startPremadeProblem(self, num_probleme):
         print(num_probleme)
-        ###De là, il faudra charger le JSON du problème selon son numéro
-        ###Et il faudra le passer à la fenêtre de création de jeu
-    
+        jsonFile = "";
+        if(num_probleme ==1):
+            jsonFile = self.importerNormal("New_Pc.json")
+        if(num_probleme ==2):
+            jsonFile = self.importerNormal("Al_Pacino.json")
+        if(num_probleme ==3):
+            jsonFile = self.importerNormal("Pasta.json")
+        else:
+            print("Problème normal non existant")
+
+        if jsonFile != "":
+            jsonH = JsonHandler()
+            contraintes = jsonH.loadConstraintsFromFile(jsonFile)
+            indices = jsonH.loadCluesFromFiles(jsonFile)
+            mainWidget = problem_generator.ProblemGenerator().CreateProblem(self, contraintes, indices)
+            self.mainWidget = mainWidget
+            self.container_layout = QHBoxLayout()
+            #self.mainWidget = None
+
+            #self.initProblemCreation()
+            container = QWidget()
+            self.container_layout.addWidget(self.mainWidget)
+            self.container_layout.setAlignment(Qt.AlignTop)
+            container.setLayout(self.container_layout)
+
+            self.setCentralWidget(container)
+
+            self.show()
+
+
     def initProblemCreation(self):
         for i in range(self.container_layout.count()): 
             self.container_layout.itemAt(i).widget().setParent(None) 
@@ -134,6 +161,25 @@ class ProblemWindow(QMainWindow):
             return file_name
         else:
             return ""
+        
+    import os
+
+    def importerNormal(self, jsonName):
+        print("Action ImporterNormal triggered")
+        
+        current_dir = os.path.dirname(__file__)
+        parent_dir = os.path.dirname(current_dir)
+        json_files_dir = os.path.join(parent_dir, "jsonFiles")
+        
+        json_file_path = os.path.join(json_files_dir, jsonName)
+        
+        if os.path.isfile(json_file_path):
+            print(f"Chemin du fichier JSON sélectionné : {json_file_path}")
+            return json_file_path
+        else:
+            print(f"Le fichier JSON spécifié n'existe pas : {json_file_path}")
+            return ""
+
 
     def exporter(self):
         options = QFileDialog.Options()

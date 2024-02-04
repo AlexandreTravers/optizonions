@@ -283,6 +283,7 @@ class CheckButton(QPushButton):
         grids = self.parent.allGridsToMatrix()
         self.parent.changeIndicesColors()
         matrix = []
+        allIsMarked = True
 
         for i in grids:
             for j in i:
@@ -292,6 +293,7 @@ class CheckButton(QPushButton):
                     for elts in rows:
                         if (elts == 'NONE'):
                             oneM.append(0)
+                            allIsMarked = False
                         elif (elts == 'FALSE'):
                             oneM.append(-1)
                         elif (elts == 'TRUE'):
@@ -302,6 +304,7 @@ class CheckButton(QPushButton):
                     matrix.append(oneR)
         print(matrix)
         resultat = ObjetMatrice(matrix, 1).getResult()
+        resultat.append(allIsMarked)
         print(resultat)
         print("CHECK SOLUTION\n\n")
         return resultat

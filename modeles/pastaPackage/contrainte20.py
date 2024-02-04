@@ -23,20 +23,13 @@ def pastaCon(datas):
         (surname[4] == age[0] - 1) | (surname[4] == age[0] + 1)
     )
 
-    count = 0
-    for i in range(5):
-        for j in range(i + 1, 6):
-            for matrixRow in range(len(datas[count])):
-                for matrixColumn in range(len(datas[count][matrixRow])):
-                    if datas[count][matrixRow][matrixColumn] == -1:
-                        satisfy(
-                            matrice[i][matrixRow] != matrice[j][matrixColumn]
-                        )
-                    if datas[count][matrixRow][matrixColumn] == 1:
-                        satisfy(
-                            matrice[i][matrixRow] == matrice[j][matrixColumn]
-                        )
-            count += 1
+    for i in range(len(datas)):
+        for j in range(len(datas[i])):
+            for k in range(len(datas[i][j])):
+                if datas[i][j][k] == -1:
+                    satisfy (matrice[j][k] != i)
+                elif datas[i][j][k] == 1:
+                    satisfy(matrice[j][k] == i  ) 
 
     if solve() is SAT:
         return True

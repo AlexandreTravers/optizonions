@@ -1,0 +1,106 @@
+{
+    "problem": {
+        "Film": {
+            "verbe": "Regarde",
+            "champs": {
+                "champ1": "88 minutes",
+                "champ2": "Donnie Brassco",
+                "champ3": "Scarecrow",
+                "champ4": "Scarface",
+                "champ5": "The Recruit"
+            }
+        },
+        "Day": {
+            "verbe": "Daté le",
+            "champs": {
+                "champ1": "Monday",
+                "champ2": "Tuesday",
+                "champ3": "Wednesday",
+                "champ4": "Thursday",
+                "champ5": "Friday"
+            }
+        },
+        "Time": {
+            "verbe": "à",
+            "champs": {
+                "champ1": "7:35 PM",
+                "champ2": "7:40 PM",
+                "champ3": "8:20 PM",
+                "champ4": "8:30 PM",
+                "champ5": "8:45 PM"
+            }
+        },
+        "Prenom": {
+            "intitule": "principale",
+            "champs": {
+                "champ1": {
+                    "nom": "Jessica",
+                    "Film": "Donnie Brassco",
+                    "Day": "Wednesday",
+                    "Time": "8:30 PM"
+                },
+                "champ2": {
+                    "nom": "Laurie",
+                    "Film": "The Recruit",
+                    "Day": "Friday",
+                    "Time": "7:35 PM"
+                },
+                "champ3": {
+                    "nom": "Mark",
+                    "Film": "Scarecrow",
+                    "Day": "Tuesday",
+                    "Time": "8:45 PM"
+                },
+                "champ4": {
+                    "nom": "Mary",
+                    "Film": "88 minutes",
+                    "Day": "Monday",
+                    "Time": "8:20 PM"
+                },
+                "champ5": {
+                    "nom": "Sally",
+                    "Film": "Scarface",
+                    "Day": "Thursday",
+                    "Time": "7:40 PM"
+                }
+            }
+        },
+        "indices": [
+            {
+                "nomIndice": "Parmis les sorties des années 2000, aucun n'ayant été choisi par Jessica, l'un a ouvert la semaine et un l'a clôturé.",
+                "contraintes": [
+                ]
+            },
+            {
+                "nomIndice": "Le dernier film sortie dans les année 1900 a été diffusé 30 minutes après l'heure.",
+                "contraintes": [
+                ]
+            },
+            {
+                "nomIndice": "Les sorties diffusées avant 20 heure étaient sur des jours consécutifs comme les sorties diffusées après 20 heure.",
+                "contraintes": [
+                ]
+            },
+            {
+                "nomIndice": "Un homme et une femme ont regardé avant 20 heure, mais aucun des deux l'ont regardé en milieu de semaine.",
+                "contraintes": [
+                ]
+            },
+            {
+                "nomIndice": "Mark, qui a choisi Scarecrow, a eu une diffusion 1 heure et 5 minutes après celle de Scarface.",
+                "contraintes": [
+                ]
+            },
+            {
+                "nomIndice": "Ni Mme. Farmer et Mme. Peters n'ont eu de diffusion un jour pair.",
+                "contraintes": [
+                ]
+            },
+            {
+                "nomIndice": "'88 minutes' a été diffusés 40 minutes après l'émission du jeudi.",
+                "contraintes": [
+                ]
+            }
+        ]
+    }
+}

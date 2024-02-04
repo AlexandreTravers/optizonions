@@ -1,0 +1,248 @@
+{
+    "problem": {
+        "t-shirt": {
+            "verbe": "Porte",
+            "champs": {
+                "champ1": "bleue",
+                "champ2": "vert",
+                "champ3": "bleue",
+                "champ4": "blanc",
+                "champ5": "jaune"
+            }
+        },
+        "Prénom": {
+            "verbe": "s’appelle",
+            "champs": {
+                "champs1": "Andréa",
+                "champs2": "Holly",
+                "champs3": "Julie",
+                "champs4": "Leslie",
+                "champs5": "Victoria"
+            }
+        },
+        "Nom": {
+            "verbe": "s’appelle",
+            "champs": {
+                "champs1": "Brown",
+                "champs2": "Davis",
+                "champs3": "Lopes",
+                "champs4": "Miller",
+                "champs5": "Wilson"
+            }
+        },
+        "Pâtes": {
+            "verbe": "mange",
+            "champs": {
+                "champs1": "farfalle",
+                "champs2": "lasagne",
+                "champs3": "penne",
+                "champs4": "spaguetti",
+                "champs5": "riavoli"
+            }
+        },
+        "Vin": {
+            "verbe": "boit",
+            "champs": {
+                "champs1": "australien",
+                "champs2": "argentin",
+                "champs3": "chilien",
+                "champs4": "français",
+                "champs5": "italien"
+            }
+        },
+        "Age": {
+            "verbe": "a",
+            "champs": {
+                "champs1": "30 ans",
+                "champs2": "35 ans",
+                "champs3": "40 ans",
+                "champs4": "45 ans",
+                "champs5": "50 ans"
+            }
+        },
+        "Femme": {
+            "intitule": "principale",
+            "champs": {
+                "champs1": {
+                    "nom": "Femme 1",
+                    "t-shirt": "jaune",
+                    "Prénom": "Victoria",
+                    "Nom": "Davis",
+                    "Pâtes": "ravioli",
+                    "Vin": "argentin",
+                    "Age": "50 ans"
+                },
+                "champs2": {
+                    "nom": "Femme 2",
+                    "t-shirt": "bleu",
+                    "Prénom": "Leslie",
+                    "Nom": "Miller",
+                    "Pâtes": "farfalle",
+                    "Vin": "chilien",
+                    "Age": "35 ans"
+                },
+                "champs3": {
+                    "nom": "Femme 3",
+                    "t-shirt": "rouge",
+                    "Prénom": "Andréa",
+                    "Nom": "Brown",
+                    "Pâtes": "penne",
+                    "Vin": "italien",
+                    "Age": "30 ans"
+                },
+                "champs4": {
+                    "nom": "Femme 4",
+                    "t-shirt": "blanc",
+                    "Prénom": "Julie",
+                    "Nom": "Wilson",
+                    "Pâtes": "lasagne",
+                    "Vin": "australien",
+                    "Age": "40 ans"
+                },
+                "champs5": {
+                    "nom": "Femme 5",
+                    "t-shirt": "vert",
+                    "Prénom": "Holly",
+                    "Nom": "Lopes",
+                    "Pâtes": "spagetti",
+                    "Vin": "français",
+                    "Age": "45 ans"
+                }
+            }
+        },
+        "indices": [
+            {
+                "nomIndice": "La femme portant un t-shirt blanc est à côté de celle qui aime les vint italiens.",
+                "contraintes": [
+
+                ]
+            },
+            {
+                "nomIndice": "Mme Miller est entre Mme Davis et Mme Brown",
+                "contraintes": [
+
+                ]
+            },
+            {
+                "nomIndice": "La troisième femme est la plus jeune",
+                "contraintes": [
+
+                ]
+            },
+            {
+                "nomIndice": "La femme qui a 45 ans se situe à la droite de celle qui a un t-shirt rouge",
+                "contraintes": [
+
+                ]
+            },
+            {
+                "nomIndice": "La femme qui aime le vin chilien aime aussi les farfalle",
+                "contraintes": [
+
+                ]
+            },
+            {
+                "nomIndice": "La première femme aime le vin argentinien",
+                "contraintes": [
+
+                ]
+            },
+            {
+                "nomIndice": "Andréa est juste à droite de la femme qui a 35 ans",
+                "contraintes": [
+
+                ]
+            },
+            {
+                "nomIndice": "La femme qui porte un t-shirt bleu se situe entre Mme Davis et Holly",
+                "contraintes": [
+
+                ]
+            },
+            {
+                "nomIndice": "Victoria est à côté de Leslie",
+                "contraintes": [
+
+                ]
+            },
+            {
+                "nomIndice": "La femme portant un t-shirt rouge est à la gauche de celle qui aime les vins australien",
+                "contraintes": [
+
+                ]
+            },
+            {
+                "nomIndice": "Mme Wilson est à côté de la femme qui a 30 ans",
+                "contraintes": [
+
+                ]
+            },
+            {
+                "nomIndice": "Leslie est juste à gauche de la femme qui a 30 ans",
+                "contraintes": [
+
+                ]
+            },
+            {
+                "nomIndice": "Holly est à droite de la femme qui porte un t-shirt rouge",
+                "contraintes": [
+
+                ]
+            },
+            {
+                "nomIndice": "Mme Brown est juste à gauche de Julie",
+                "contraintes": [
+
+                ]
+            },
+            {
+                "nomIndice": "La plus jeune femme aime les penne",
+                "contraintes": [
+
+                ]
+            },
+            {
+                "nomIndice": "Mme Wilson porte le t-shirt blanc",
+                "contraintes": [
+
+                ]
+            },
+            {
+                "nomIndice": "La femme qui aime les lasagnes est entre celle qui aime les vins italiens et celle qui aime les spaguetti",
+                "contraintes": [
+
+                ]
+            },
+            {
+                "nomIndice": "La deuxième femme porte un t-shirt bleu",
+                "contraintes": [
+
+                ]
+            },
+            {
+                "nomIndice": "La femme qui a 40 ans aime les lasagnes",
+                "contraintes": [
+
+                ]
+            },
+            {
+                "nomIndice": "Mme Lopes est en dernière position",
+                "contraintes": [
+
+                ]
+            },
+            {
+                "nomIndice": "La femme qui aime les vins australien est entre Victoria et la femme qui aime les vins français",
+                "contraintes": [
+
+                ]
+            },
+            {
+                "nomIndice": "La femme portant un t-shirt jaune est juste à gauche de celle qui a 35 ans",
+                "contraintes": [
+
+                ]
+            }
+        ]
+    }
+}

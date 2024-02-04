@@ -65,6 +65,38 @@ class ProblemWindow(QMainWindow):
 
         self.show()
     
+    def startPremadeProblem(self, num_probleme):
+        jsonFile = ""
+        if num_probleme == 1:
+            jsonFile = self.importerNormal("Al_Pacino")
+            pass
+        elif num_probleme == 2:
+            jsonFile = self.importerNormal("New_PC")
+            pass
+        elif num_probleme == 3:
+            jsonFile = self.importerNormal("Pasta")
+            pass
+        else:
+            print("Probleme de base non existant")
+        if jsonFile != "":
+            contraintes = jsonH.loadConstraintsFromFile(jsonFile)
+            indices = jsonH.loadCluesFromFiles(jsonFile)
+            mainWidget = problem_generator.ProblemGenerator().CreateProblem(self, contraintes, indices)
+            self.mainWidget = mainWidget
+            self.container_layout = QHBoxLayout()
+            #self.mainWidget = None
+
+            #self.initProblemCreation()
+            container = QWidget()
+            self.container_layout.addWidget(self.mainWidget)
+            self.container_layout.setAlignment(Qt.AlignTop)
+            container.setLayout(self.container_layout)
+
+            self.setCentralWidget(container)
+
+            self.show()
+        
+
     def initProblemCreation(self):
         for i in range(self.container_layout.count()): 
             self.container_layout.itemAt(i).widget().setParent(None) 
@@ -129,7 +161,25 @@ class ProblemWindow(QMainWindow):
             return file_name
         else:
             return ""
+        
+    def importerNormal(self, jsonName):
+        print("Action ImporterNormal triggered")
+        options = QFileDialog.Options()
+        options |= QFileDialog.ReadOnly
 
+        current_dir = os.path.dirname(__file__)
+        parent_dir = os.path.dirname(current_dir)
+        json_files_dir = os.path.join(parent_dir, "JsonFiles")
+
+        file_name, _ = QFileDialog.getOpenFileName(self, "Sélectionnez un fichier JSON", json_files_dir, "JSON Files (*.json);;Tous les fichiers (*)", options=options)
+
+        if file_name:
+            print(f"Chemin du fichier JSON sélectionné : {file_name}")
+            return file_name
+        else:
+            return ""
+        
+    
     def exporter(self):
         options = QFileDialog.Options()
         file_name, _ = QFileDialog.getSaveFileName(self, "Enregistrer le fichier", "", "Tous les fichiers (*);;Text Files (*.txt)", options=options)

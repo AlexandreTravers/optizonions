@@ -5,6 +5,8 @@ from PyQt5.QtGui import *
 import stylesheets
 import state
 import fonts
+from modeles.mainSolver import ObjetMatrice
+
 
 class GridSolvingWidget(QWidget):
     def __init__(self, parent, contraintes, indices):
@@ -26,7 +28,7 @@ class GridSolvingWidget(QWidget):
         self.utils.updatePosLabel(row, col)
 
     def allGridsToMatrix(self):
-        self.grid.allGridsToMatrix()
+        return self.grid.allGridsToMatrix()
 
 class UtilsWidget(QWidget):
     def __init__(self, parent, indices):
@@ -50,7 +52,7 @@ class UtilsWidget(QWidget):
         self.pos_label.setText(f"({row},{col})")
 
     def allGridsToMatrix(self):
-        self.parent.allGridsToMatrix()
+        return self.parent.allGridsToMatrix()
 
     def changeIndicesColors(self):
         self.indices_widget.changeIndicesColors()    
@@ -280,7 +282,32 @@ class CheckButton(QPushButton):
         print("CHECK SOLUTION\n\n")
         grids = self.parent.allGridsToMatrix()
         self.parent.changeIndicesColors()
+        matrix = []
+        allIsMarked = True
+
+        for i in grids:
+            for j in i:
+                oneR = []
+                for rows in j:
+                    oneM = []
+                    for elts in rows:
+                        if (elts == 'NONE'):
+                            oneM.append(0)
+                            allIsMarked = False
+                        elif (elts == 'FALSE'):
+                            oneM.append(-1)
+                        elif (elts == 'TRUE'):
+                            oneM.append(1)
+                    if (len(oneM) > 0):
+                        oneR.append(oneM)
+                if (len(oneR) > 0):
+                    matrix.append(oneR)
+        print(matrix)
+        resultat = ObjetMatrice(matrix, 1).getResult()
+        resultat.append(allIsMarked)
+        print(resultat)
         print("CHECK SOLUTION\n\n")
+        return resultat
         
 
 class GridButton(QPushButton):

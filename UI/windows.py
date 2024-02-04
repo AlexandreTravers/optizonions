@@ -136,10 +136,8 @@ class ProblemWindow(QMainWindow):
             print(contraintes)
             for i in indices:
                 for c in i.contraintes:
-                    element1, element2 = self.extraire_elements(c)
-                    print(c)
-                    print(self.trouver_indices(element1,element2,contraintes))
-                    indexContraintes.append(self.trouver_indices(element1,element2,contraintes))
+                    element1, operateur, element2 = self.extraire_elements(c)
+                    indexContraintes.append(self.trouver_indices(element1,operateur,element2,contraintes))
             
                 i.indexContraintes = indexContraintes
                 print(i.text)
@@ -164,15 +162,21 @@ class ProblemWindow(QMainWindow):
 
 
     def extraire_elements(self,phrase):
-        
-        elements = re.split(r' = | != ', phrase)
-        return elements[0], elements[1] if len(elements) == 2 else (None, None)
-        
-    def trouver_indices(self, element1, element2, contraintes):
 
+        if " = " in phrase:
+            elements = phrase.split(" = ")
+            operateur = True 
+        elif " != " in phrase:
+            elements = phrase.split(" != ")
+            operateur = False 
+        else:
+            return None, None, None  
+        
+        return elements[0], operateur, elements[1]
+
+    def trouver_indices(self,element1, operateur, element2, contraintes):
         index_entite1 = index_element1 = index_entite2 = index_element2 = None
         
-
         for index_entite, (entite, elements) in enumerate(contraintes):
             if element1 in elements:
                 index_entite1, index_element1 = index_entite, elements.index(element1)
@@ -180,7 +184,7 @@ class ProblemWindow(QMainWindow):
                 index_entite2, index_element2 = index_entite, elements.index(element2)
         
         if None not in [index_entite1, index_element1, index_entite2, index_element2]:
-            return [index_entite1, index_element1], [index_entite2, index_element2]
+            return [index_entite1, index_element1], operateur, [index_entite2, index_element2]
         else:
             return None
         

@@ -166,12 +166,12 @@ class CheckButton(QPushButton):
             for j in i:
                 oneM = []
                 for elts in j:
-                    if (elts == 'NONE'):
+                    if (elts == state.State.NONE):
                         oneM.append(0)
                         allIsMarked = False
-                    elif (elts == 'FALSE'):
+                    elif (elts == state.State.FALSE):
                         oneM.append(-1)
-                    elif (elts == 'TRUE'):
+                    elif (elts == state.State.TRUE):
                         oneM.append(1)
                 if (len(oneM) > 0):
                     oneR.append(oneM)

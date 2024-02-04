@@ -18,9 +18,9 @@ def pastaCon(datas):
         AllDifferent(age),
     )
 
-    # Leslie est exactement à la gauche de le femme qui a 30 ans
+    # La femme la plus jeune aime les Penne
     satisfy(
-        name[3] == age[0] - 1
+        age[0] == pasta[2]
     )
 
     for i in range(len(datas)):

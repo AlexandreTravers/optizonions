@@ -18,11 +18,12 @@ def pastaCon(datas):
         AllDifferent(age),
     )
 
-    # La femme avec un t-shirt rouge est juste à gauche de la femme qui a 35 ans
+    # Victoria est à côté de Leslie
     satisfy(
-        shirt[4] == age[1] - 1
+        (name[4] - name[3] == 1) | (name[3] - name[4] == 1)
     )
 
+    
     for i in range(len(datas)):
         for j in range(len(datas[i])):
             for k in range(len(datas[i][j])):

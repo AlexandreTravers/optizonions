@@ -18,12 +18,11 @@ def pastaCon(datas):
         AllDifferent(age),
     )
 
-    # Victoria est à côté de Leslie
+    # Mme Wilson est à côté de la femme qui a 30 ans
     satisfy(
-        (name[4] - name[3] == 1) | (name[3] - name[4] == 1)
+        (surname[4] == age[0] - 1) | (surname[4] == age[0] + 1)
     )
 
-    
     for i in range(len(datas)):
         for j in range(len(datas[i])):
             for k in range(len(datas[i][j])):

@@ -18,9 +18,9 @@ def pastaCon(datas):
         AllDifferent(age),
     )
 
-    # La femme au t-shirt bleue est entre Mme Davis et Holly
+    # Andrea est juste a droite de la femme qui a 35 ans
     satisfy(
-        (shirt[0] > surname[1]) & (shirt[0] < name[1])
+        name[0] == age[1] + 1
     )
 
     for i in range(len(datas)):

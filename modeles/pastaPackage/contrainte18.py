@@ -18,9 +18,9 @@ def pastaCon(datas):
         AllDifferent(age),
     )
 
-    # La femme qui a 45 ans est à la droite de la femme avec un tshirt rouge
+    # La femme avec un t-shirt bleu est en deuxième position
     satisfy(
-        age[3] > shirt[2]
+        shirt[0] == 1
     )
 
     for i in range(len(datas)):

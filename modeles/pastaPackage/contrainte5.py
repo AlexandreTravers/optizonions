@@ -18,9 +18,9 @@ def pastaCon(datas):
         AllDifferent(age),
     )
 
-    # La personne qui aime le vin Argentin est en première position
+    # La femme qui aime le vin Chilien aime aussi les farfalle
     satisfy(
-        wine[1] == 0
+        wine[2] == pasta[0]
     )
 
     for i in range(len(datas)):

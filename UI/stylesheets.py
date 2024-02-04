@@ -183,11 +183,11 @@ class MainStylesheets():
         }
         
         QComboBox::down-arrow {
-            image: url(./Ressources/Images/dropdown.png);
+            image: url(UI/Ressources/Images/dropdown.png);
         }
  
         QComboBox::down-arrow:on { /* shift the arrow when popup is open */
-            image: url(./Ressources/Images/dropdown_reverse.png);
+            image: url(UI/Ressources/Images/dropdown_reverse.png);
         }
         """
 

@@ -6,6 +6,7 @@ import stylesheets
 import state
 import fonts
 from modeles import check
+import sys
 from modeles.mainSolver import ObjetMatrice
 
 

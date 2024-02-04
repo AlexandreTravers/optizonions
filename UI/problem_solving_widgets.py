@@ -176,7 +176,7 @@ class ProblemGrid(QWidget):
                 label_contrainte_1 = QLabel()
                 label_contrainte_1.setFont(fonts.Fonts().mainFontBold())
                 label_contrainte_1.setText(contrainte1[1][j])
-                label_contrainte_1.setStyleSheet("""QLabel{font-size:14px;}""")
+                label_contrainte_1.setStyleSheet("""QLabel{font-size:16px;}""")
                 grid_layout.addWidget(label_contrainte_1, j + 1, 0)
             for k in range(0, len(self.contrainte2)):
                 if not has_top_grid:
@@ -548,8 +548,11 @@ class VerticalTextWidget(QWidget):
 
         self.parent = parent
         self.text = text
+        self.setMinimumWidth(40)
+        self.setMaximumWidth(40)
         self.setMinimumHeight(100)
         self.setMaximumHeight(100)
+
         self.setLayout(layout)
 
     def paintEvent(self, event):
@@ -557,7 +560,7 @@ class VerticalTextWidget(QWidget):
         painter.setRenderHint(QPainter.Antialiasing)  # Pour un rendu plus lisse
 
         font = fonts.Fonts().mainFontBold()
-        font.setPixelSize(14)
+        font.setPixelSize(16)
         painter.setFont(font)
 
         painter.rotate(90)

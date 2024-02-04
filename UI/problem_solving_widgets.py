@@ -303,7 +303,8 @@ class CheckButton(QPushButton):
                 if (len(oneR) > 0):
                     matrix.append(oneR)
         print(matrix)
-        resultat = ObjetMatrice(matrix, self.numPb).getResult()
+        if self.numPb == 1 | self.numPb == 2 | self.numPb == 3:
+            resultat = ObjetMatrice(matrix, self.numPb).getResult()
         resultat.append(allIsMarked)
         print(resultat)
         print("CHECK SOLUTION\n\n")

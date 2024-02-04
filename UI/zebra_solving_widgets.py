@@ -146,27 +146,27 @@ class CheckButton(QPushButton):
 
     def checkSolution(self, event):
         print("CHECK SOLUTION\n\n")
-        grids = self.parent.allGridsToMatrix()
+        grids = self.parent.allEntitesToMatrix()
         matrix = []
         allIsMarked = True
-
+        print("grids : ")
         for i in grids:
+            print(i)
+            oneR = []
             for j in i:
-                oneR = []
-                for rows in j:
-                    oneM = []
-                    for elts in rows:
-                        if (elts == 'NONE'):
-                            oneM.append(0)
-                            allIsMarked = False
-                        elif (elts == 'FALSE'):
-                            oneM.append(-1)
-                        elif (elts == 'TRUE'):
-                            oneM.append(1)
-                    if (len(oneM) > 0):
-                        oneR.append(oneM)
-                if (len(oneR) > 0):
-                    matrix.append(oneR)
+                oneM = []
+                for elts in j:
+                    if (elts == 'NONE'):
+                        oneM.append(0)
+                        allIsMarked = False
+                    elif (elts == 'FALSE'):
+                        oneM.append(-1)
+                    elif (elts == 'TRUE'):
+                        oneM.append(1)
+                if (len(oneM) > 0):
+                    oneR.append(oneM)
+            if (len(oneR) > 0):
+                matrix.append(oneR)
         print(matrix)
         resultat = ObjetMatrice(matrix, self.numPb).getResult()
         resultat.append(allIsMarked)
@@ -195,7 +195,7 @@ class IndicesWidget(QWidget):
         for i in indices:
             indice = QLabel()
             indice.setStyleSheet("QLabel{font:16px;}")
-            indice.setText(i)
+            indice.setText(i.text)
             self.scroll_layout.addWidget(indice)            
             """for i_ in i:
                 if len(i_) > 0:

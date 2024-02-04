@@ -6,6 +6,8 @@ import sys
 from enum import Enum
 import stylesheets
 import state
+from modeles.mainSolver import ObjetMatrice
+
 
 class ZebraSolvingWidget(QWidget):
     def __init__(self, parent, contraintes, indices, numPb):
@@ -144,8 +146,33 @@ class CheckButton(QPushButton):
 
     def checkSolution(self, event):
         print("CHECK SOLUTION\n\n")
-        grids = self.parent.allEntitesToMatrix()
+        grids = self.parent.allGridsToMatrix()
+        matrix = []
+        allIsMarked = True
+
+        for i in grids:
+            for j in i:
+                oneR = []
+                for rows in j:
+                    oneM = []
+                    for elts in rows:
+                        if (elts == 'NONE'):
+                            oneM.append(0)
+                            allIsMarked = False
+                        elif (elts == 'FALSE'):
+                            oneM.append(-1)
+                        elif (elts == 'TRUE'):
+                            oneM.append(1)
+                    if (len(oneM) > 0):
+                        oneR.append(oneM)
+                if (len(oneR) > 0):
+                    matrix.append(oneR)
+        print(matrix)
+        resultat = ObjetMatrice(matrix, self.numPb).getResult()
+        resultat.append(allIsMarked)
+        print(resultat)
         print("CHECK SOLUTION\n\n")
+        self.parent.changeIndicesColors(resultat)
         
 
 

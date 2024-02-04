@@ -54,8 +54,8 @@ class UtilsWidget(QWidget):
     def allGridsToMatrix(self):
         return self.parent.allGridsToMatrix()
 
-    def changeIndicesColors(self):
-        self.indices_widget.changeIndicesColors()    
+    def changeIndicesColors(self, resultats):
+        self.indices_widget.changeIndicesColors(resultats)
 
 
 class Grid(QWidget):
@@ -282,7 +282,6 @@ class CheckButton(QPushButton):
     def checkSolution(self, event):
         print("CHECK SOLUTION\n\n")
         grids = self.parent.allGridsToMatrix()
-        self.parent.changeIndicesColors()
         matrix = []
         allIsMarked = True
 
@@ -308,7 +307,7 @@ class CheckButton(QPushButton):
         resultat.append(allIsMarked)
         print(resultat)
         print("CHECK SOLUTION\n\n")
-        return resultat
+        self.parent.changeIndicesColors(resultat)
         
 
 class GridButton(QPushButton):
@@ -506,18 +505,12 @@ class IndicesWidget(QWidget):
         self.scroll.setStyleSheet(stylesheets.MainStylesheets().getScrollerStylesheet())
         self.setLayout(self.layout)
 
-    def changeIndicesColors(self):
-        for i in range(0, self.scroll_layout.count()):
-            if i % 2 == 0:
-                print("PAIR")
+    def changeIndicesColors(self, resultat):
+        for i in range(0, len(resultat)-1):
+            if(resultat[i]):
                 self.scroll_layout.itemAt(i).widget().setStyleSheet(stylesheets.MainStylesheets().getIndiceOkayStylesheet())
             else:
-                print("IMPAIR")
                 self.scroll_layout.itemAt(i).widget().setStyleSheet(stylesheets.MainStylesheets().getIndiceNotOkayStylesheet())
-
-
-
-
 
 class VerticalLabel(QWidget):
     def __init__(self):

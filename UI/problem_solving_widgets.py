@@ -2,10 +2,9 @@ from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
-import sys
-from enum import Enum
 import stylesheets
 import state
+import fonts
 
 class GridSolvingWidget(QWidget):
     def __init__(self, parent, contraintes, indices):
@@ -36,6 +35,8 @@ class UtilsWidget(QWidget):
         layout = QVBoxLayout()
 
         self.pos_label = QLabel()
+        self.pos_label.setStyleSheet("QLabel{font-size:16px;}")
+        self.pos_label.setFont(fonts.Fonts().mainFontBold())
         self.indices_widget = IndicesWidget(self, indices)
         self.check_button = CheckButton(self)
 
@@ -108,8 +109,9 @@ class Grid(QWidget):
             self.grids.append(pb6)
             grid_layout.addWidget(self.grids[5], 2, 0)
 
+            #Servent à centrer la grille, et occuper la place que la grille 
+            #s'amuserait à occuper sinon
             grid_layout.addWidget(QLabel(), 0, 3)
-            grid_layout.addWidget(QLabel(), 0, 4)
             grid_layout.addWidget(QLabel(), 3, 0)
 
         self.setLayout(grid_layout)
@@ -144,20 +146,17 @@ class ProblemGrid(QWidget):
         self.authorize_simulation = True
 
         grid_layout = QGridLayout()
-        font_id = QFontDatabase.addApplicationFont("Ressources/Fonts/LatoWeb-Regular.ttf")
-        font_family = QFontDatabase.applicationFontFamilies(font_id)[0]
-        font = QFont(font_family)
         for j in range(0, len(self.contrainte1)):
             if not has_left_grid:
                 label_contrainte_1 = QLabel()
-                label_contrainte_1.setFont(font)
+                label_contrainte_1.setFont(fonts.Fonts().mainFontBold())
                 label_contrainte_1.setText(contrainte1[1][j])
                 label_contrainte_1.setStyleSheet("""QLabel{font-size:14px;}""")
                 grid_layout.addWidget(label_contrainte_1, j + 1, 0)
             for k in range(0, len(self.contrainte2)):
                 if not has_top_grid:
                     label_contrainte_2 = QLabel()
-                    label_contrainte_2.setFont(font)
+                    label_contrainte_2.setFont(fonts.Fonts().mainFontBold())
                     label_contrainte_2.setText(self.tiltText(contrainte2[1][k]))
                     label_contrainte_2.setAlignment(Qt.AlignBottom)
                     label_contrainte_2.setStyleSheet("""QLabel{font-size:14px;}""")
@@ -176,13 +175,16 @@ class ProblemGrid(QWidget):
             str += "\n" + char
         return str
 
-    def setButtonState(self, button, button_state):
+    def setButtonState(self, button, button_state, old_true=False):
         if button_state == state.State.FALSE or button_state == state.State.NONE:
             for b in self.buttons:
-                if (b.row == button.row and not b.col == button.col) or (not b.row == button.row and b.col == button.col) :
-                    b.clear()
-                    b.manualSwitchState(state.State.NONE)
-
+                if old_true:
+                    if (b.row == button.row and not b.col == button.col) or (not b.row == button.row and b.col == button.col):
+                        if self.canBeErased(b):
+                            b.clear()
+                            b.manualSwitchState(state.State.NONE)
+                b.clear()
+                b.resetLabel()
         elif button_state == state.State.TRUE:
             self.checkRow(button)
             self.checkCol(button)
@@ -223,6 +225,11 @@ class ProblemGrid(QWidget):
                 else:
                     b.clear(clear_state=True)
 
+    def canBeErased(self, button):
+        for b in self.buttons:
+            if ((b.col != button.col and b.row == button.row) or (b.col == button.col and b.row != button.row)) and b.state == state.State.TRUE:
+                return False
+        return True
 
     def updatePosLabel(self, row, col):
         self.parent.updatePosLabel(row, col)    
@@ -261,11 +268,12 @@ class CheckButton(QPushButton):
         super(CheckButton, self).__init__()
         self.parent = parent
 
-        self.setMinimumSize(QSize(192, 48))
-        self.setMaximumSize(QSize(192, 48))
+        self.setMinimumSize(QSize(256, 60))
+        self.setMaximumSize(QSize(256, 60))
         
         self.mousePressEvent = self.checkSolution
         self.setText("Check solution")
+        self.setFont(fonts.Fonts().mainFontBold())
         self.setStyleSheet(stylesheets.MainStylesheets().getProblemButtonStylesheet())
 
     def checkSolution(self, event):
@@ -329,9 +337,12 @@ class GridButton(QPushButton):
                 text = "V"
                 self.parent.setButtonState(self, self.state)
         elif event.button() == Qt.RightButton:
+                old_true = False
+                if self.state == state.State.TRUE:
+                    old_true = True
                 self.state = state.State.FALSE
                 text = "X"
-                self.parent.setButtonState(self, self.state)       
+                self.parent.setButtonState(self, self.state, old_true=old_true)
         elif event.button() == Qt.MiddleButton:
             self.state = state.State.NONE
             text = ""
@@ -393,19 +404,17 @@ class GridButton(QPushButton):
     def createLabel(self, text, simulated):
         self.label = HoverableQLabel(self)
         self.sim_Label = HoverableQLabel(self)
+        if self.layout().itemAt(0) != None:
+            self.layout().itemAt(0).widget().setParent(None)
         if(simulated):
             self.sim_Label.setStyleSheet(stylesheets.GridButtonStylesheets().getSimulatedLabelStylesheet())        
             self.sim_Label.setText(text)
-            self.sim_Label.setAlignment(Qt.AlignCenter)
-            self.layout().removeWidget(self.label)
-            self.layout().removeWidget(self.sim_Label)
+            self.sim_Label.setAlignment(Qt.AlignCenter)            
             self.layout().addWidget(self.sim_Label, alignment=Qt.AlignCenter)
         else:    
             self.label.setStyleSheet(stylesheets.GridButtonStylesheets().getLabelStylesheet())        
             self.label.setText(text)
             self.label.setAlignment(Qt.AlignCenter)
-            self.layout().removeWidget(self.label)
-            self.layout().removeWidget(self.sim_Label)
             self.layout().addWidget(self.label, alignment=Qt.AlignCenter)
         
 
@@ -425,6 +434,7 @@ class HoverableQLabel(QLabel):
     def __init__(self, parent):
         super(HoverableQLabel, self).__init__()
         self.parent = parent
+        self.setFont(fonts.Fonts().mainFontBold())
         self.installEventFilter(self)
     def eventFilter(self, obj, event):
         if event.type() == QtCore.QEvent.Enter:
@@ -455,6 +465,7 @@ class IndicesWidget(QWidget):
         for i in self.indices:
             indice = QLabel()
             indice.setStyleSheet(stylesheets.MainStylesheets().getIndiceNeutralStylesheet())
+            indice.setFont(fonts.Fonts().mainFontBold())
             indice.setText(i.text)
             self.scroll_layout.addWidget(indice)
             """for i_ in i:

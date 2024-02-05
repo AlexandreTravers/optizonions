@@ -50,14 +50,18 @@ def check2(datas, contraintes):
     satisfy(
         AllDifferent(var[2])
     )
-    for contrainte in contraintes.contraintes:
-        if contrainte[2] == "!=":
+    #for c in contraintes.indexContraintes:
+    #    for contrainte in c:
+            
+           
+    for contrainte in contraintes:
+        if contrainte[1] == False:
             satisfy(
-                var[contrainte[0]][contrainte[1]] != var[contrainte[3]][contrainte[4]]
+                var[contrainte[0][0]][contrainte[0][1]] != var[contrainte[2][0]][contrainte[2][1]]
             )
-        elif contrainte[2] == "==":
+        elif contrainte[1] == True:
             satisfy(
-                var[contrainte[0]][contrainte[1]] == var[contrainte[3]][contrainte[4]]
+                var[contrainte[0][0]][contrainte[0][1]] == var[contrainte[2][0]][contrainte[2][1]]
             )
 
     count = 0
@@ -84,7 +88,9 @@ def check2(datas, contraintes):
 def check_test(datas, contraintes):
     result = []
     for c in contraintes:
-        clear()
-        result.append(check2(datas, c))
-        clear()
-    return result
+        for c_ in c.indexContraintes:
+            clear()
+            result.append(check2(datas, c_))
+            clear()
+        return result
+    #return result

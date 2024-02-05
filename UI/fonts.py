@@ -7,19 +7,19 @@ from PyQt5.QtGui import *
 
 class Fonts():
     def __init__(self):
-        font_id = QFontDatabase.addApplicationFont("UI/Ressources/Fonts/AANTARADISTANCE.TTF")
+        font_id = QFontDatabase.addApplicationFont("Ressources/Fonts/AANTARADISTANCE.TTF")
         font_family = QFontDatabase.applicationFontFamilies(font_id)[0]
         self.title_font = QFont(font_family)
 
-        font_id = QFontDatabase.addApplicationFont("UI/Ressources/Fonts/QUICKSAND_BOLD_OBLIQUE.OTF")
+        font_id = QFontDatabase.addApplicationFont("Ressources/Fonts/QUICKSAND_BOLD_OBLIQUE.OTF")
         font_family = QFontDatabase.applicationFontFamilies(font_id)[0]
         self.subtitle_font = QFont(font_family)
 
-        font_id = QFontDatabase.addApplicationFont("UI/Ressources/Fonts/QUICKSAND_BOOK.OTF")
+        font_id = QFontDatabase.addApplicationFont("Ressources/Fonts/QUICKSAND_BOOK.OTF")
         font_family = QFontDatabase.applicationFontFamilies(font_id)[0]
         self.main_font = QFont(font_family)
 
-        font_id = QFontDatabase.addApplicationFont("UI/Ressources/Fonts/QUICKSAND_BOLD.OTF")
+        font_id = QFontDatabase.addApplicationFont("Ressources/Fonts/QUICKSAND_BOLD.OTF")
         font_family = QFontDatabase.applicationFontFamilies(font_id)[0]
         self.main_font_bold = QFont(font_family)
 

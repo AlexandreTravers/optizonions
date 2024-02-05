@@ -46,6 +46,30 @@
                         "rvalue": "Mercedes"
                     }
                 ]
+            },
+            {
+            "nomIndice": "Bernard ne porte pas du rouge",
+                "contraintes": [
+                    {
+                        "lvalue": "Bernard",
+                        "equal": false,
+                        "rvalue": "Rouge"
+                    }
+                ]
+            },{
+                "nomIndice": "La personne ayant une opel porte du noir, et n'est pas Anonymousse",
+                "contraintes": [
+                    {
+                        "lvalue": "Opel",
+                        "equal": true,
+                        "rvalue": "Noir"
+                    },
+                    {
+                        "lvalue": "Opel",
+                        "equal": false,
+                        "rvalue": "Anonymousse"
+                    }
+                ]
             }
         ]
     }

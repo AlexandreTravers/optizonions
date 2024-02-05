@@ -1,39 +1,114 @@
 <instance format="XCSP3" type="CSP">
   <variables>
-    <array id="var1" size="[3]"> 0..2 </array>
-    <array id="var2" size="[3]"> 0..2 </array>
-    <array id="var3" size="[3]"> 0..2 </array>
+    <array id="monitor" size="[5]"> 0..4 </array>
+    <array id="processor" size="[5]"> 0..4 </array>
+    <array id="hdd" size="[5]"> 0..4 </array>
+    <array id="price" size="[5]"> 0..4 </array>
+    <array id="x6" size="[2]"> 0..4 </array>
+    <array id="aux_gb" note="aux_gb[i] is the ith auxiliary variable having been automatically introduced" size="[1]"> 0..4 </array>
   </variables>
   <constraints>
-    <allDifferent> var1[] </allDifferent>
-    <allDifferent> var2[] </allDifferent>
-    <allDifferent> var3[] </allDifferent>
-    <intension> ne(var1[0],var2[0]) </intension>
-    <intension> ne(var1[0],var2[1]) </intension>
-    <intension> eq(var1[0],var2[2]) </intension>
-    <intension> ne(var1[1],var2[0]) </intension>
-    <intension> eq(var1[1],var2[1]) </intension>
-    <intension> ne(var1[1],var2[2]) </intension>
-    <intension> eq(var1[2],var2[0]) </intension>
-    <intension> ne(var1[2],var2[1]) </intension>
-    <intension> ne(var1[2],var2[2]) </intension>
-    <intension> ne(var1[0],var3[0]) </intension>
-    <intension> eq(var1[0],var3[1]) </intension>
-    <intension> ne(var1[0],var3[2]) </intension>
-    <intension> eq(var1[1],var3[0]) </intension>
-    <intension> ne(var1[1],var3[1]) </intension>
-    <intension> ne(var1[1],var3[2]) </intension>
-    <intension> ne(var1[2],var3[0]) </intension>
-    <intension> ne(var1[2],var3[1]) </intension>
-    <intension> eq(var1[2],var3[2]) </intension>
-    <intension> ne(var2[0],var3[0]) </intension>
-    <intension> ne(var2[0],var3[1]) </intension>
-    <intension> eq(var2[0],var3[2]) </intension>
-    <intension> eq(var2[1],var3[0]) </intension>
-    <intension> ne(var2[1],var3[1]) </intension>
-    <intension> ne(var2[1],var3[2]) </intension>
-    <intension> ne(var2[2],var3[0]) </intension>
-    <intension> eq(var2[2],var3[1]) </intension>
-    <intension> ne(var2[2],var3[2]) </intension>
+    <allDifferent> monitor[] </allDifferent>
+    <allDifferent> processor[] </allDifferent>
+    <allDifferent> hdd[] </allDifferent>
+    <allDifferent> price[] </allDifferent>
+    <intension> ne(hdd[1],4) </intension>
+    <intension> ne(price[0],hdd[1]) </intension>
+    <intension> and(eq(aux_gb[0],hdd[2]),eq(x6[1],hdd[2])) </intension>
+    <element>
+      <list> processor[] </list>
+      <index> x6[0] </index>
+      <value> aux_gb[0] </value>
+    </element>
+    <group>
+      <intension> imp(eq(%0,price[0]),gt(x6[0],%1)) </intension>
+      <args> processor[0] 0 </args>
+      <args> processor[1] 1 </args>
+      <args> processor[2] 2 </args>
+      <args> processor[3] 3 </args>
+      <args> processor[4] 4 </args>
+    </group>
+    <group>
+      <intension> imp(eq(price[0],%0),gt(x6[1],%0)) </intension>
+      <args> 0 </args>
+      <args> 1 </args>
+      <args> 2 </args>
+      <args> 3 </args>
+      <args> 4 </args>
+    </group>
+    <intension> ne(monitor[0],price[0]) </intension>
+    <intension> ne(monitor[0],price[1]) </intension>
+    <intension> ne(monitor[0],price[2]) </intension>
+    <intension> eq(monitor[0],price[3]) </intension>
+    <intension> ne(monitor[0],price[4]) </intension>
+    <intension> ne(monitor[1],price[0]) </intension>
+    <intension> eq(monitor[1],price[1]) </intension>
+    <intension> ne(monitor[1],price[2]) </intension>
+    <intension> ne(monitor[1],price[3]) </intension>
+    <intension> ne(monitor[1],price[4]) </intension>
+    <intension> ne(monitor[2],price[0]) </intension>
+    <intension> ne(monitor[2],price[1]) </intension>
+    <intension> ne(monitor[2],price[2]) </intension>
+    <intension> ne(monitor[2],price[3]) </intension>
+    <intension> eq(monitor[2],price[4]) </intension>
+    <intension> ne(monitor[3],price[0]) </intension>
+    <intension> ne(monitor[3],price[1]) </intension>
+    <intension> eq(monitor[3],price[2]) </intension>
+    <intension> ne(monitor[3],price[3]) </intension>
+    <intension> ne(monitor[3],price[4]) </intension>
+    <intension> eq(monitor[4],price[0]) </intension>
+    <intension> ne(monitor[4],price[1]) </intension>
+    <intension> ne(monitor[4],price[2]) </intension>
+    <intension> ne(monitor[4],price[3]) </intension>
+    <intension> ne(monitor[4],price[4]) </intension>
+    <intension> eq(monitor[0],hdd[0]) </intension>
+    <intension> ne(monitor[0],hdd[1]) </intension>
+    <intension> ne(monitor[0],hdd[2]) </intension>
+    <intension> ne(monitor[0],hdd[3]) </intension>
+    <intension> ne(monitor[0],hdd[4]) </intension>
+    <intension> ne(monitor[1],hdd[0]) </intension>
+    <intension> eq(monitor[1],hdd[1]) </intension>
+    <intension> ne(monitor[1],hdd[2]) </intension>
+    <intension> ne(monitor[1],hdd[3]) </intension>
+    <intension> ne(monitor[1],hdd[4]) </intension>
+    <intension> ne(monitor[2],hdd[0]) </intension>
+    <intension> ne(monitor[2],hdd[1]) </intension>
+    <intension> eq(monitor[2],hdd[2]) </intension>
+    <intension> ne(monitor[2],hdd[3]) </intension>
+    <intension> ne(monitor[2],hdd[4]) </intension>
+    <intension> ne(monitor[3],hdd[0]) </intension>
+    <intension> ne(monitor[3],hdd[1]) </intension>
+    <intension> ne(monitor[3],hdd[2]) </intension>
+    <intension> eq(monitor[3],hdd[3]) </intension>
+    <intension> ne(monitor[3],hdd[4]) </intension>
+    <intension> ne(monitor[4],hdd[0]) </intension>
+    <intension> ne(monitor[4],hdd[1]) </intension>
+    <intension> ne(monitor[4],hdd[2]) </intension>
+    <intension> ne(monitor[4],hdd[3]) </intension>
+    <intension> eq(monitor[4],hdd[4]) </intension>
+    <intension> ne(monitor[0],processor[1]) </intension>
+    <intension> ne(monitor[0],processor[2]) </intension>
+    <intension> ne(monitor[0],processor[3]) </intension>
+    <intension> ne(monitor[0],processor[4]) </intension>
+    <intension> ne(monitor[1],processor[0]) </intension>
+    <intension> eq(monitor[1],processor[1]) </intension>
+    <intension> ne(monitor[1],processor[2]) </intension>
+    <intension> ne(monitor[1],processor[3]) </intension>
+    <intension> ne(monitor[1],processor[4]) </intension>
+    <intension> ne(monitor[2],processor[0]) </intension>
+    <intension> ne(monitor[2],processor[1]) </intension>
+    <intension> ne(monitor[2],processor[2]) </intension>
+    <intension> eq(monitor[2],processor[3]) </intension>
+    <intension> ne(monitor[2],processor[4]) </intension>
+    <intension> ne(monitor[3],processor[0]) </intension>
+    <intension> ne(monitor[3],processor[1]) </intension>
+    <intension> eq(monitor[3],processor[2]) </intension>
+    <intension> ne(monitor[3],processor[3]) </intension>
+    <intension> ne(monitor[3],processor[4]) </intension>
+    <intension> ne(monitor[4],processor[0]) </intension>
+    <intension> ne(monitor[4],processor[1]) </intension>
+    <intension> ne(monitor[4],processor[2]) </intension>
+    <intension> ne(monitor[4],processor[3]) </intension>
+    <intension> eq(monitor[4],processor[4]) </intension>
   </constraints>
 </instance>

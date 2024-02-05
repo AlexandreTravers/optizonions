@@ -135,13 +135,15 @@ class ProblemWindow(QMainWindow):
             indexContraintes = []
             print(contraintes)
             for i in indices:
-                for c in i.contraintes:
-                    element1, operateur, element2 = self.extraire_elements(c)
-                    indexContraintes.append(self.trouver_indices(element1,operateur,element2,contraintes))
-            
-                i.indexContraintes = indexContraintes
+                theConst = []
                 print(i.text)
-                print(i.indexContraintes)
+                for c in i.contraintes:
+                    print(c)
+                    element1, operateur, element2 = self.extraire_elements(c)
+                    theConst.append(self.trouver_indices(element1,operateur,element2,contraintes))
+                indexContraintes.append(theConst)
+                i.indexContraintes = indexContraintes
+            print(i.indexContraintes)
                 
             mainWidget = problem_generator.ProblemGenerator().CreateProblem(self, contraintes, indices, -1)
             self.mainWidget = mainWidget
